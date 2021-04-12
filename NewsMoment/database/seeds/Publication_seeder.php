@@ -18,7 +18,7 @@ class Publication_seeder extends Seeder
 	for ($i=0; $i < 25; $i++)
 	{
 		\DB::table('publications')->insert(array(
-			'id' => $faker-> firstNameFemale,
+			'id',
 			'slugname' => $faker-> firstNameFemale,
 			'title' => $faker-> firstNameFemale,
 			'subtitle' => $faker-> firstNameFemale,
@@ -26,8 +26,8 @@ class Publication_seeder extends Seeder
 			'image_url' => $faker-> firstNameFemale,
 			'video_url' => $faker-> firstNameFemale,
 			'category' => $faker-> firstNameFemale,
-			'active' => $faker-> $faker->randomElement(['1','0']),
-			'has_video' => $faker-> randomElement(['1','0']),
+			'active' => $faker-> $faker->random_int(0, 1),
+			'has_video' => $faker-> random_int(0, 1),
 			'views_counter' => $faker-> randomElement([]),
 			'created' => $faker-> date('Y-m-d H:m:s'),
 			'modified' => $faker-> date('Y-m-d H:m:s')

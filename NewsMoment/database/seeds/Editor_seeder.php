@@ -17,7 +17,7 @@ class Editor_seeder extends Seeder
 	for ($i=0; $i < 25; $i++)
 	{
 		\DB::table('editors')->insert(array(
-			'id' => $faker-> firstNameFemale,
+			'id',
 			'description' => $faker-> firstNameFemale,
 			'profile_image_url' => $faker-> firstNameFemale,
 			'facebook' => $faker-> firstNameFemale,
@@ -25,7 +25,7 @@ class Editor_seeder extends Seeder
 			'twitter' => $faker-> firstNameFemale,
 			'created' => $faker-> date('Y-m-d H:m:s'),
 			'modified' => $faker-> date('Y-m-d H:m:s'),
-			'is_admin' => $faker-> $faker->randomElement(['1','0']),
+			'is_admin' => $faker-> $faker->random_int(0, 1),
 			'is_active' => $faker-> randomElement(['1','0'])
 		));
 	}
