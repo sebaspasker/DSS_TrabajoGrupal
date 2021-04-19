@@ -6,14 +6,14 @@ use PHPUnit\Framework\TestCase;
 
 // TODO
 
-class ExampleTest extends TestCase
+class PublicationTest extends TestCase
 {
     /**
-     * A basic test example.
+     * A basic unit test example.
      *
      * @return void
      */
-    public function testBasicTest()
+    public function testExample()
     {
         $this->assertTrue(true);
     }
