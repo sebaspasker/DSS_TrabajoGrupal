@@ -1,34 +1,37 @@
 <?php
-// TODO: Correct folder implementation
-namespace App\Models;
 
-class Publication {
-	private $title = string;
-	private $subtitle = string;
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Publication extends Model
+{
+	protected $title = string;
+	protected $subtitle = string;
 
 	// Special format title
-	private $slugname = string;
+	protected $slugname = string;
 
-	private $active = bool;
+	protected $active = bool;
 
 	// Link to the source
-	private $source = string;
+	protected $source = string;
 
 	// Link to the image
-	private $image = string;
+	protected $image = string;
 
 	// Link to the video
-	private $video_url = string;
-	private $has_video = bool;
+	protected $video_url = string;
+	protected $has_video = bool;
 
-	private $views_counter = int;
+	protected $views_counter = int;
 
 	// Publication data 
-	private $created = date;
-	private $modified = date;
+	protected $created = date;
+	protected $modified = date;
 
 	// Publication category
-	private $category;
+	protected $category;
 
 	public function __construct($title = "", $subtitle = "", 
 																$active = false, $source = "", $image = "", 
@@ -53,4 +56,3 @@ class Publication {
 		if($views_counter >= 0) $this->views_counter = $views_counter;
 	}
 }
-

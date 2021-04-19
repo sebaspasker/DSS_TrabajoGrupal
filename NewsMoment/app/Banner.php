@@ -1,17 +1,19 @@
 <?php
-// TODO: correct folder implementation
-namespace App\Models;
 
+namespace App;
 
-class Banner {
-	private $title = string;
-	private $url = string;
-	private $image = string;
-	private $views_counter = int;
-	private $ranking_type = int;
-	private $created = string;
-	private $modified = string;
-	private $is_active = bool;
+use Illuminate\Database\Eloquent\Model;
+
+class Banner extends Model
+{
+	protected $title = string;
+	protected $url = string;
+	protected $image = string;
+	protected $views_counter = int;
+	protected $ranking_type = int;
+	protected $created = string;
+	protected $modified = string;
+	protected $is_active = bool;
 
 	public function __construct($title = "", $url = "", $image = "",
 																$ranking_type = 0, $is_active = false) {
@@ -25,4 +27,3 @@ class Banner {
 		if ($ranking_type > 0) $this->ranking_type = $ranking;
 	}
 }
-
