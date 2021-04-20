@@ -23,9 +23,7 @@ class BannerSeeder extends Seeder
 					'ranking_type' => random_int(0, 100),
 					'is_active' => false,
 					'views_counter' => random_int(0, 100),
-					'created' => now(),
-					'modified' => now(),
-					'company_name' => "company$i",
+					'company_name' => "_company$i",
 				));
 					 //
 				}

@@ -14,7 +14,7 @@ class CompanySeeder extends Seeder
 			for ($i=0; $i < 25; $i++)
 			{
 				\DB::table('companies')->insert(array(
-					'name' => "company$i",
+					'name' => "_company$i",
 				));
 			}
     }

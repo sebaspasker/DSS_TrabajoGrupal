@@ -30,8 +30,6 @@ class PublicationSeeder extends Seeder
 					'active' => false,
 					'has_video' => false,
 					'views_counter' => random_int(0, 100),
-					'created' => now(),
-					'modified' => now(),
 					'editor_email' => $email,
 				));
 			}
