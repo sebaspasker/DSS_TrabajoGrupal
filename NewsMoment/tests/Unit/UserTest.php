@@ -12,15 +12,22 @@ class UserTest extends TestCase
 	/** @test */
 	public function correct_user_save()
 	{
+		$user_exist = User::where('name', 'JuanPrueba')->first();
+		if($user_exist != null) { 
+		 	$user_exist->delete(); 
+		} 
+
 		$user = new User();
 		$user->name = 'JuanPrueba';
+		$user->email = 'emailJuan@gmail.com';
+		$user->password = 'hola123';
 		$user->save();
 
-		$this->assertEquals('hoal', 'hoal');
-		/* $user = DB::table('users')->where('name', 'JuanPrueba')->first(); */
-		/* $this->assertEquals($user->name, 'JuanPrueba'); */
-		/* $this->assertEquals($user->email, 'emailJuan@gmail.com'); */
-		/* $this->assertEquals($user->password, 'Password1234'); */
-			
+		$user_find = User::where('name', 'JuanPrueba')->first();
+
+		$this->assertEquals($user_find->name, 'JuanPrueba');
+		$this->assertEquals($user_find->email, 'emailJuan@gmail.com'); 
+		$this->assertEquals($user_find->password, 'hola123');
+		$user->delete();
 	}
 }
