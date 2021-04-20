@@ -25,8 +25,6 @@ class CreatePublicationsTable extends Migration
             $table->boolean('active');
             $table->boolean('has_video');
             $table->integer('views_counter')->unsigned();
-            $table->date('created');
-            $table->date('modified');
             $table->timestamps();
         });
     }
