@@ -19,7 +19,9 @@
     <server name="CACHE_DRIVER" value="array"/>
     <server name="DB_CONNECTION" value="mysql"/>
     <!-- Especificar correcta base de datos -->
-    <server name="DB_DATABASE" value=":memory:"/>
+    <server name="DB_DATABASE" value="newsmoment"/>
+    <!-- <server name="DB_USERNAME" value="sebaspasker"/> -->
+    <!-- <server name="DB_PASSWORD" value="sebaspasker"/> -->
     <server name="MAIL_DRIVER" value="array"/>
     <server name="QUEUE_CONNECTION" value="sync"/>
     <server name="SESSION_DRIVER" value="array"/>

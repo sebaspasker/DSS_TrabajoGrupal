@@ -11,7 +11,14 @@ class Editor extends Model
 		'instagram', 'twitter', 'is_admin', 'is_active',
 	];
 
-	public function user() {
-		return $this->hasOne(User::class);
+	/**
+	 * Relation 1 to 1 User
+	 */
+	public function get_user() {
+		return $this->belongsTo(User::class);
+	}
+
+	public function get_publications() {
+		return $this->hasMany(Publication::class);
 	}
 }
