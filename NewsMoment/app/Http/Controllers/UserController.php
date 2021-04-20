@@ -21,11 +21,11 @@ class UserController extends Controller
 			$user->name = $name;
 		}
 
-		if($email = "") {
+		if($email != "") {
 			$user->email = $email;
 		}
 
-		if($password = "") {
+		if($password != "") {
 			$user->password = $password;
 		}
 
@@ -42,11 +42,11 @@ class UserController extends Controller
 	 * @var in_user - user, default null
 	 */
 	public function insert_user($in_user = null, $name = "", $email = "", $password = "") : bool {
-		if($in_user != null && $in_user === User::class) $user = $in_user;
-		else $user = insert_data_user($name, $email, $password);
+		if($in_user != null) $user = $in_user;
+		else $user = $this->insert_data_user($name, $email, $password);
 			
 		try {
-			$user.save();
+			$user->save();
 		} catch(exception $e) {
 			return false;
 		}
@@ -63,7 +63,7 @@ class UserController extends Controller
 	 */
 	public function delete_user($in_user = null, $email = "") : bool {
 		if($in_user != null && $in_user === User::class) $user = $in_user;
-		else $user = insert_data_user("", $email, "");
+		else $user = $this->insert_data_user("", $email, "");
 
 		try {
 			$user = User::where('email', $email)->first();
@@ -86,9 +86,10 @@ class UserController extends Controller
 	 */
 	public function modify_user($in_user = null, $name = "", $email = "", $password = "") : bool {
 		if($in_user != null && $in_user === User::class) $user = $in_user;
-		else $user = insert_data_user($name, $email, $password);
+		else $user = $this->insert_data_user($name, $email, $password);
 
 		try {
+			$old_user = new User();
 			$old_user = User::where('email', $email)->first();
 			if($old_user == null) throw new Exception();
 			else {
