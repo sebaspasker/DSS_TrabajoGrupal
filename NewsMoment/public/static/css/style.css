@@ -1,0 +1,549 @@
+html,
+body{
+    background-color: #121212 !important;
+}
+
+form,
+input,
+textarea,
+select {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+}
+
+input:focus,
+button:focus,
+textarea:focus,
+select:focus {
+    outline: 0 !important;
+    box-shadow: 0 0 0 0 !important;
+}
+
+
+.movil {
+    display: none
+}
+
+.ordenador {
+    display: block
+}
+
+.remove {
+    display: none!important;
+}
+
+
+@media (max-width: 900px) {
+    .movil {
+        display: block
+    }
+
+    .ordenador {
+        display: none
+    }
+
+    .remove {
+        display: block;
+    }
+}
+
+
+/* --------------------------------
+= NAV
+--------------------------------- */
+
+.contenedorNav {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.bottomNav {
+    height: 1px;
+    background: rgb(61, 61, 61);
+    width: 100%;
+    position: fixed;
+    top: 100px;
+    z-index: 998;
+}
+
+.mainNav {
+    height: 100px;
+    background: #121212;
+    width: 100%;
+    padding: 25px 0px;
+    transition: all .3s;
+    z-index: 998;
+    position: absolute;
+    top: 0;
+}
+
+
+.leftNav {
+    width: calc(50%);
+    height: 100%;
+    float: left;
+    position: relative;
+}
+
+.leftNav>a {
+    padding: 15px 10px;
+    float: left;
+    height: 50px;
+    margin-right: 20px;
+    font-weight: 300;
+    color: #fff!important;
+}
+
+.leftNav>a:hover {
+    margin-top: 1px;
+    text-decoration: none;
+}
+
+.rightNav {
+    width: calc(50%);
+    height: 100%;
+    float: right;
+    padding: 10px 0;
+}
+
+.rightNav>button {
+    height: 100%;
+}
+
+
+.menuPalos {
+    width: 40px;
+    height: 50px;
+    padding: 15px 10px 10px 0;
+    float: left;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.menuPalo1 {
+    width: 16px;
+    height: 2px;
+    background: #fff;
+    margin-top: 3px;
+    float: right;
+    transition: all 0.3s;
+    position: absolute;
+    border-radius: 2px;
+}
+
+.menuPalo2 {
+    width: 10px;
+    height: 2px;
+    background: #fff;
+    margin-top: 10px;
+    transition: all 0.3s;
+    position: absolute;
+    border-radius: 2px;
+}
+
+.menuPalo3 {
+    width: 16px;
+    height: 2px;
+    background: #fff;
+    margin-top: 17px;
+    float: right;
+    transition: all 0.3s;
+    position: absolute;
+    border-radius: 2px;
+}
+
+.menuPalo1.active {
+    width: 16px;
+    transform: rotate(45deg);
+    transition: all 0.3s;
+    position: absolute;
+    margin-top: 10px;
+}
+
+.menuPalo2.active {
+    width: 16px !important;
+    transform: rotate(-45deg);
+    transition: all 0.3s;
+    position: absolute;
+    margin-top: 10px;
+}
+
+.menuPalo3.active {
+    width: 16px !important;
+    transform: rotate(-45deg);
+    transition: all 0.3s;
+    position: absolute;
+    margin-top: 10px;
+}
+
+
+.btn-primary {
+    background-color: #ff7c60;
+    border-color: #ff7c60;
+    color: #fff !important;
+}
+
+.btn-primary:hover {
+    background-color: #f05b3a;
+    border-color: #f05b3a;
+}
+
+
+.btn-outline-primary {
+    border-color: #ff7c60;
+    color: #ff7c60;
+}
+
+.btn-outline-primary:hover {
+    border-color: #f05b3a;
+    background-color: #f05b3a;
+}
+
+
+
+.centerNav {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 999;
+}
+
+.centerNav img {
+    width: 300px;
+    height: auto;
+    border-radius: 0px;
+}
+
+.centerNav.active {
+    position: fixed;
+    top: -102px;
+}
+
+.bottomNav.active1 {
+    position: absolute;
+    height: 61px;
+    background-color: #121212;
+    border-bottom: 1px solid rgb(61, 61, 61);
+    top: 112px;
+}
+
+
+.bottomNav.active2 {
+    position: fixed;
+    height: 61px;
+    background-color: #121212;
+    border-bottom: 1px solid rgb(61, 61, 61);
+    top: 0px;
+    z-index: 1;
+}
+
+.mainNav.active1 {
+    position: fixed;
+    top: -60px;
+    left: 0;
+    height: 60px;
+    width: 100%;
+    padding: 5px 0px;
+    transition: 0s;
+}
+
+.mainNav.active2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 60px;
+    width: 100%;
+    padding: 5px 0px;
+    transition: .3s;
+}
+
+.leftSecondMenu {
+    position: absolute;
+    width: calc(100%);
+    background-color: #121212;
+    top: 60px;
+    left: 0px;
+    z-index: 1000;
+    display: none;
+}
+
+.leftSecondMenu.active {
+    display: block;
+}
+
+
+.overlay1 {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: calc(100vh);
+    top: 0px;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 997;
+    opacity: 0;
+    transition: 1s;
+}
+
+.overlay1.active {
+    display: block;
+    opacity: 1;
+    transition: 1s;
+}
+
+.overlay2 {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: calc(100vh);
+    top: 0px;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    opacity: 0;
+    transition: 1s;
+}
+
+.overlay2.active {
+    display: block;
+    opacity: 1;
+    transition: 1s;
+}
+
+
+
+
+.tituloSubmenu {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #f05b3a !important;
+    float: left;
+}
+
+
+.enlaceSeccion {
+    width: 100%;
+    padding: 7.5px 0;
+    float: left;
+    font-size: 14px;
+    color: #fff;
+}
+
+.enlaceSeccion:hover {
+    color: #c0c0c0;
+    text-decoration: none;
+}
+
+.tituloSubmenu2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #f05b3a !important;
+}
+
+.particularImgMenu {
+    height: 220px;
+    width: auto;
+    margin-left: -18px;
+}
+
+
+
+.minicon {
+    height: 20px;
+    position: fixed;
+    left: calc(50% + 8px);
+    top: -50px;
+    z-index: 1000;
+    transition: .3s;
+}
+
+.minicon.active {
+    top: 22px;
+    transition: .3s;
+}
+
+
+.buscador {
+    position: fixed;
+    width: 100%;
+    background-color: #121212;
+    top: 0;
+    left: 0;
+    z-index: 1003;
+    display: none;
+}
+
+.buscador.active {
+    display: block;
+}
+
+
+.formularioContacto {
+    background: #fff;
+    background-clip: padding-box;
+    border: 1px solid #e7e7e7;
+    border-radius: 4px;
+    box-shadow: none;
+    box-sizing: border-box;
+    color: #19110b;
+    height: 3rem;
+    text-align: left;
+    font-family: "karla", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 2;
+    letter-spacing: .4px;
+    transition: border .3s cubic-bezier(0.39, 0.575, 0.565, 1);
+    padding: 0 1rem;
+    line-height: 3rem;
+    width: 100%;
+}
+
+.busquedaMotorCampo {
+    width: calc(100% - 112px - 10px);
+    margin-right: 10px;
+    height: 56px !important;
+    padding: 10px 1rem;
+}
+
+.separador {
+    display: block;
+}
+
+.separadorMovil {
+    display: none;
+}
+
+
+@media (max-width: 767px) {
+    .busquedaMotorCampo {
+        width: calc(100% - 48px - 5px);
+        margin-right: 5px;
+        height: 40px !important;
+    }
+
+    .separador {
+        display: none;
+    }
+
+    .separadorMovil {
+        display: block;
+    }
+}
+
+@media (max-width: 900px) {
+   .minicon,
+   .minicon.active {
+       height: 17px;
+       position: fixed;
+       left: auto;
+       right: 76px;
+       top: 17px;
+       z-index: 1000;
+       transition: .3s;
+   }
+
+    .mainNav,
+    .mainNav.active2,
+    .mainNav.active1 {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 50px;
+        background: #121212;
+        width: 100%;
+        padding: 0px 1rem;
+        transition: .3s;
+    }
+
+    .leftNav {
+        width: calc(100%);
+        height: 100%;
+        float: left;
+        position: relative;
+    }
+
+    .leftSecondMenu {
+        position: absolute;
+        width: calc((100%) + 20px);
+        background-color: #121212;
+        top: 50px;
+        left: -10px;
+        z-index: 1000;
+        display: none;
+    }
+
+
+    .centerNav,
+    .centerNav.active {
+        position: fixed;
+        top: -85px;
+        left: auto;
+        transform: none;
+        z-index: 999;
+        right: -25px;
+    }
+
+    .centerNav img {
+        width: 250px;
+        height: auto;
+        border-radius: 0px;
+    }
+
+
+    .bottomNav,
+    .bottomNav.active1,
+    .bottomNav.active2 {
+        height: 1px;
+        background-color: #121212;
+        width: 100%;
+        position: fixed;
+        top: 50px;
+        z-index: 998;
+         border-color: rgb(61, 61, 61) !important;
+    }
+
+    .menuPalos {
+        width: 30px;
+        height: 50px;
+        padding: 15px 10px 10px 0;
+        float: left;
+        cursor: pointer;
+        margin-right: 0px;
+    }
+
+    .particularImgMenu {
+        height: 150px;
+        width: auto;
+        margin-left: -12px;
+    }
+}
+
+
+
+
+
+/* --------------------------------
+= HOME
+--------------------------------- */
+
+
+.contenedorPrincipal {
+    margin-top: 175px;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: 0s;
+    font-family: 'EB Garamond', serif;
+    color: #aaa;
+}
+
+
+@media (max-width: 900px) {
+    .contenedorPrincipal {
+        margin-top: 70px;
+    }
+}
