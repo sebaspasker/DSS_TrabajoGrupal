@@ -103,4 +103,14 @@ class UserController extends Controller
 
 		return true;
 	}
+
+	public function list_users($in_user = null, $name = "") {
+		if($in_user != null) $name = $in_user->name;
+
+		$users = User::where('name', 'LIKE', "%$name%")->get();
+		if($users == null) return false;
+		return $users;
+	}
 }
+
+

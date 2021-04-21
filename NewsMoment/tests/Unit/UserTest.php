@@ -217,4 +217,88 @@ class UserTest extends TestCase
 		$val = $user_controller->modify_user($user);
 		$this->assertFalse($val);
 	}
+
+	private function delete_list_setup() {
+		$user_exist = user::where('email', 'juan_de_la_vega@gmail.com')->first();
+		if($user_exist != null) { 
+		 	$user_exist->delete(); 
+		} 
+
+		$user_exist = user::where('email', 'juan_de_la_torre@gmail.com')->first();
+		if($user_exist != null) { 
+		 	$user_exist->delete(); 
+		} 
+
+		$user_exist = user::where('email', 'juanito@gmail.com')->first();
+		if($user_exist != null) { 
+		 	$user_exist->delete(); 
+		} 
+	}
+
+	private function list_setup() {
+		$this->delete_list_setup();
+		// Create 3 new users
+		$user1 = new User();
+		$user1->name = "Juan De la Vega";
+		$user1->email = "juan_de_la_vega@gmail.com";
+		$user1->password = "juan123";
+		$user1->save();
+		$user2 = new User();
+		$user2->name = "Juan De la Torre";
+		$user2->email = "juan_de_la_torre@gmail.com";
+		$user2->password = "juan321";
+		$user2->save();
+		$user3 = new User();
+		$user3->name = "Juanito";
+		$user3->email = "juanito@gmail.com";
+		$user3->password = "juanito321";
+		$user3->save();
+		return array($user1, $user2, $user3);
+	}
+
+	private function find_in_list($list, $val, $name, $pass, $email) {
+		for($i=0; $i< $list->count(); $i++) {
+			if($name) {
+				if($list[$i]->name == $val) {
+					return true;
+				}
+			}
+
+			if($email) {
+				if($list[$i]->email == $val) {
+					return true;
+				}
+			}
+
+			if($pass) {
+				if($list[$i]->password == $val) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * @test
+	 */
+	public function list_users_controller() {
+		// Create 3 new users
+		$users_setup = $this->list_setup();
+		$user_controller = new UserController();
+		$users = $user_controller->list_users(null, "Juan");
+		if(is_bool($users)) $this->assertTrue(false); // Autofail
+		else {
+			$this->assertTrue($this->find_in_list($users, $users_setup[0]->name, true, false, false));
+			$this->assertTrue($this->find_in_list($users, $users_setup[1]->name, true, false, false));
+			$this->assertTrue($this->find_in_list($users, $users_setup[2]->name, true, false, false));
+			$this->assertTrue($this->find_in_list($users, $users_setup[0]->email, false, false, true));
+			$this->assertTrue($this->find_in_list($users, $users_setup[1]->email, false, false, true));
+			$this->assertTrue($this->find_in_list($users, $users_setup[2]->email, false, false, true));
+			$this->assertTrue($this->find_in_list($users, $users_setup[0]->password, false, true, false));
+			$this->assertTrue($this->find_in_list($users, $users_setup[1]->password, false, true, false));
+			$this->assertTrue($this->find_in_list($users, $users_setup[2]->password, false, true, false));
+		}
+	}
 }
