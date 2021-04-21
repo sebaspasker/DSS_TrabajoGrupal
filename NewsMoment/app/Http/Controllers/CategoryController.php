@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use Illuminate\Http\Request;
+use Exception;
 
 class CategoryController extends Controller
 {
@@ -30,7 +32,7 @@ class CategoryController extends Controller
 
 	public function insert_category($in_category = null, $name = "", $slugname = "", $imagen = "") : bool {
 		if($in_category != null) $category = $in_category;
-		else $category = $this->insert_data_category($name, $slugame, $imagen);
+		else $category = $this->insert_data_category($name, $slugname, $imagen);
 			
 		try {
 			if(empty($category->name)) throw new Exception("Name can't be empty");
@@ -81,8 +83,8 @@ class CategoryController extends Controller
 	public function list_category($in_category = null, $name = "") {
 		if($in_category != null) $name = $in_category->name;
 
-		$category = Category::where('name', 'LIKE', "%$name%")->get();
-		if($category == null) return false;
-		return $category;
+		$categories = Category::where('name', 'LIKE', "%$name%")->get();
+		if($categories == null) return false;
+		return $categories;
 	}
 }
