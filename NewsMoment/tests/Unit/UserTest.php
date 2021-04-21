@@ -102,7 +102,7 @@ class UserTest extends TestCase
 	 * @test
 	 */
 	public function delete_user_controller() {
-		$user_exist = user::where('email', 'juan_alberto@gmail.com')->first();
+		$user_exist = User::where('email', 'juan_alberto@gmail.com')->first();
 		if($user_exist != null) { 
 		 	$user_exist->delete(); 
 		} 
@@ -123,7 +123,7 @@ class UserTest extends TestCase
 	 * @test
 	 */
 	public function delete_user_controller_user_input() {
-		$user_exist = user::where('email', 'juan_alberto@gmail.com')->first();
+		$user_exist = User::where('email', 'juan_alberto@gmail.com')->first();
 		if($user_exist != null) { 
 		 	$user_exist->delete(); 
 		} 
@@ -157,7 +157,7 @@ class UserTest extends TestCase
 	 * @test
 	 */
 	public function modify_user_controller() {
-		$user_exist = user::where('email', 'juan_alberto@gmail.com')->first();
+		$user_exist = User::where('email', 'juan_alberto@gmail.com')->first();
 		if($user_exist != null) { 
 		 	$user_exist->delete(); 
 		} 
@@ -183,7 +183,7 @@ class UserTest extends TestCase
 	 * @test
 	 */
 	public function modify_user_controller_user_input() {
-		$user_exist = user::where('email', 'juan_alberto@gmail.com')->first();
+		$user_exist = User::where('email', 'juan_alberto@gmail.com')->first();
 		if($user_exist != null) { 
 		 	$user_exist->delete(); 
 		} 
@@ -219,17 +219,17 @@ class UserTest extends TestCase
 	}
 
 	private function delete_list_setup() {
-		$user_exist = user::where('email', 'juan_de_la_vega@gmail.com')->first();
+		$user_exist = User::where('email', 'juan_de_la_vega@gmail.com')->first();
 		if($user_exist != null) { 
 		 	$user_exist->delete(); 
 		} 
 
-		$user_exist = user::where('email', 'juan_de_la_torre@gmail.com')->first();
+		$user_exist = User::where('email', 'juan_de_la_torre@gmail.com')->first();
 		if($user_exist != null) { 
 		 	$user_exist->delete(); 
 		} 
 
-		$user_exist = user::where('email', 'juanito@gmail.com')->first();
+		$user_exist = User::where('email', 'juanito@gmail.com')->first();
 		if($user_exist != null) { 
 		 	$user_exist->delete(); 
 		} 
