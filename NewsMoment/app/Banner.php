@@ -12,4 +12,11 @@ class Banner extends Model
 		'title', 'url', 'ranking_type', 
 		'views_counter', 'is_active', 'image_url'
 	];
+
+	/**
+	 * Relation 1 to N Company
+	 */
+	public function get_company() {
+			return $this->belongsTo(Company::class);
+	}
 }
