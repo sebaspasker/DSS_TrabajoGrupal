@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Exception;
 
 class UserController extends Controller
 {
@@ -46,6 +47,7 @@ class UserController extends Controller
 		else $user = $this->insert_data_user($name, $email, $password);
 			
 		try {
+			if(empty($user->email)) throw new Exception("Email can't be empty");
 			$user->save();
 		} catch(exception $e) {
 			return false;
@@ -62,13 +64,11 @@ class UserController extends Controller
 	 * @var in_user - user, default null
 	 */
 	public function delete_user($in_user = null, $email = "") : bool {
-		if($in_user != null && $in_user === User::class) $user = $in_user;
-		else $user = $this->insert_data_user("", $email, "");
-
+		if(!empty($in_user->email)) $email = $in_user->email;
 		try {
-			$user = User::where('email', $email)->first();
-			if($user == null) throw new Exception();
-			else $user->delete();
+			$old_user = User::where('email', $email)->first();
+			if ($old_user == null) throw new Exception('None user to delete');
+			else $old_user->delete();
 		} catch(exception $e) {
 			return false;
 		}
@@ -85,13 +85,13 @@ class UserController extends Controller
 	 * @var in_user - user, default null
 	 */
 	public function modify_user($in_user = null, $name = "", $email = "", $password = "") : bool {
-		if($in_user != null && $in_user === User::class) $user = $in_user;
+		if($in_user != null) $user = $in_user;
 		else $user = $this->insert_data_user($name, $email, $password);
 
 		try {
 			$old_user = new User();
-			$old_user = User::where('email', $email)->first();
-			if($old_user == null) throw new Exception();
+			$old_user = User::where('email', $user->email)->first();
+			if($old_user == null) throw new Exception("None user to modify");
 			else {
 				$old_user->name = $user->name;
 				$old_user->password = $user->password;

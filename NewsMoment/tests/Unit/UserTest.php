@@ -88,45 +88,133 @@ class UserTest extends TestCase
 	 * @test
 	 */
 	public function insert_user_empty_values() {
-		// TODO
+		$user = new User();
+		$user->name = "";
+		$user->email = "";
+		$user->password = "";
+		$user_controller = new UserController();
+		$val = $user_controller->insert_user($user);
+																				 
+		$this->assertFalse($val);
 	}
 
 	/**
 	 * @test
 	 */
 	public function delete_user_controller() {
-		// TODO
+		$user_exist = user::where('email', 'juan_alberto@gmail.com')->first();
+		if($user_exist != null) { 
+		 	$user_exist->delete(); 
+		} 
+
+		$user = new User();
+		$user->name = "Juan Alberto3";
+		$user->email = "juan_alberto@gmail.com";
+		$user->password = "JuanJuanJuan";
+		$user->save();
+		$user_controller = new UserController();
+		$val = $user_controller->delete_user(null, $user->email);
+		$this->assertNull(User::where('name', 'Juan Alberto3')->first());
+		$this->assertTrue($val);
+		if($val == false) $user->delete();
 	}
 
 	/**
 	 * @test
 	 */
 	public function delete_user_controller_user_input() {
-		// TODO
+		$user_exist = user::where('email', 'juan_alberto@gmail.com')->first();
+		if($user_exist != null) { 
+		 	$user_exist->delete(); 
+		} 
+
+		$user = new User();
+		$user->name = "Juan Alberto3";
+		$user->email = "juan_alberto@gmail.com";
+		$user->password = "JuanJuanJuan";
+		$user->save();
+		$user_controller = new UserController();
+		$val = $user_controller->delete_user($user);
+		$this->assertNull(User::where('name', 'Juan Alberto3')->first());
+		$this->assertTrue($val);
+		if($val == false) $user->delete();
 	}
 
 	/**
 	 * @test
 	 */
 	public function delete_user_empty_values() {
-		// TODO
+		$user = new User();
+		$user->name = "";
+		$user->email = "";
+		$user->password = "";
+		$user_controller = new UserController();
+		$val = $user_controller->delete_user($user);
+		$this->assertFalse($val);
 	}
 
 	/**
 	 * @test
 	 */
 	public function modify_user_controller() {
-		// TODO
+		$user_exist = user::where('email', 'juan_alberto@gmail.com')->first();
+		if($user_exist != null) { 
+		 	$user_exist->delete(); 
+		} 
+
+		$user = new User();
+		$user->name = "Juan Alberto4";
+		$user->email = "juan_alberto@gmail.com";
+		$user->password = "JuanJuanJuan";
+		$user->save();
+		$user_controller = new UserController();
+		$user->name = "Juan Alberto5";
+		$user->password = "123pollito";
+		$val = $user_controller->modify_user(null, $user->name, $user->email, $user->password);
+		$this->assertTrue($val);
+		$user_modified = User::where('email', 'juan_alberto@gmail.com')->first();
+		$this->assertEquals($user_modified->name, $user->name);
+		$this->assertEquals($user_modified->email, $user->email);
+		$this->assertEquals($user_modified->password, $user->password);
+		$user_modified->delete();
 	}
 
 	/**
 	 * @test
 	 */
 	public function modify_user_controller_user_input() {
-		// TODO
+		$user_exist = user::where('email', 'juan_alberto@gmail.com')->first();
+		if($user_exist != null) { 
+		 	$user_exist->delete(); 
+		} 
+
+		$user = new User();
+		$user->name = "Juan Alberto4";
+		$user->email = "juan_alberto@gmail.com";
+		$user->password = "JuanJuanJuan";
+		$user->save();
+			
+		$user->name = "Juan Alberto5";
+		$user->password = "123pollito";
+		$user_controller = new UserController();
+		$val = $user_controller->modify_user($user);
+		$this->assertTrue($val);
+		$user_modified = User::where('email', 'juan_alberto@gmail.com')->first();
+		$this->assertEquals($user_modified->name, $user->name);
+		$this->assertEquals($user_modified->email, $user->email);
+		$this->assertEquals($user_modified->password, $user->password);
+		$user_modified->delete();
 	}
 
 	public function modify_user_empty_values() {
-		// TODO
+		$user = new User();
+		$user->name = "";
+		$user->email = "";
+		$user->password = "";
+			
+
+		$user_controller = new UserController();
+		$val = $user_controller->modify_user($user);
+		$this->assertFalse($val);
 	}
 }
