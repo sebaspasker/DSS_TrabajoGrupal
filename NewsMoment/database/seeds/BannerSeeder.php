@@ -12,7 +12,7 @@ class BannerSeeder extends Seeder
      */
     public function run()
     {
-         $faker = Faker::create();
+		 $faker = Faker::create();
 	
 			for ($i=0; $i < 25; $i++)
 			{
@@ -25,7 +25,6 @@ class BannerSeeder extends Seeder
 					'views_counter' => random_int(0, 100),
 					'company_name' => "_company$i",
 				));
-					 //
-				}
+			}
 		}
 }

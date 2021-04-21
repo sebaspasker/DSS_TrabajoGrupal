@@ -26,7 +26,7 @@ class PublicationSeeder extends Seeder
 					'source' => $faker-> firstNameFemale,
 					'image_url' => $faker-> firstNameFemale,
 					'video_url' => $faker-> firstNameFemale,
-					'category' => $faker-> firstNameFemale,
+					'category' => "Category$i",
 					'active' => false,
 					'has_video' => false,
 					'views_counter' => random_int(0, 100),
