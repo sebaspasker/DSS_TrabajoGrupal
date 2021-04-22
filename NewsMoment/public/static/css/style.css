@@ -1019,7 +1019,7 @@ footer a:hover {
         font-size: 25px;
         text-align: left;
         line-height: 1.1;
-        color: #000;
+        color: #fff;
         font-weight: 600;
         margin-bottom: 10px;
     }
@@ -1028,7 +1028,7 @@ footer a:hover {
         font-size: 20px;
         text-align: left;
         line-height: 1.1;
-        color: #424242;
+        color: #aaa;
     }
 
     .descripcionImagenLeft {
@@ -1044,7 +1044,278 @@ footer a:hover {
 }
 
 
+/* --------------------------------
+=  PUBLICACION
+--------------------------------- */
+
+
+.categoriaEtiqueta {
+    font-size: 25px;
+    color: #ff7c60;
+    margin-bottom: 0px;
+    font-family: Oswald, sans-serif;
+}
+
+
+.categoriaEtiqueta:hover {
+    color: #f05b3a;
+    text-decoration: none;
+}
+
+.tituloPublicacion {
+    font-size: 40px;
+    color: #fff;
+    line-height: 1.1;
+    font-weight: 600;
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+
+.subtituloPublicacion {
+    font-size: 22px;
+    color: #aaa;
+    line-height: 1.1;
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+.autorPublicacion {
+    font-weight: 600;
+}
+
+.visitasPublicacion {
+    font-weight: 600;
+    font-size: 14px;
+    color: #747474;
+}
+
+.visitasPublicacion span {
+    color: #f05b3a;
+    margin-left: 3px
+}
+
+.fechaPublicacion {
+    color: #c0c0c0;
+    font-size: 800;
+    font-size: 14px;
+}
+
+.imagenPublicacion,
+.videoPublicacion {
+    width: 100%;
+    height: 400px;
+}
+
+
+.cuerpoPublicacion {
+    font-size: 20px;
+    border-top: 1px solid #c0c0c0;
+    color: #aaa;
+}
+
+.anuncio {
+    float: left;
+    width: auto;
+    height: auto;
+}
+
+.anuncio p {
+    font-size: 14px;
+    color: #c0c0c0;
+    height: 17px;
+}
+
+.anuncio img {
+    width: auto;
+    height: calc(200px - .5rem);
+    float: left;
+}
+
+.anuncioSecundario img {
+    width: calc(50% - .5rem);
+    height: auto;
+    float: left;
+}
+
+.anuncioSecundario p {
+    font-size: 14px;
+    color: #747474;
+    height: 17px;
+    position: absolute;
+    top: 5px;
+    left: 0;
+    padding-right: 10px;
+    background-color: #fff;
+}
+
+
+
+.escritorPublicacion {
+    width: 100%;
+    height: auto;
+    float: left;
+}
+
+.imagenAutorPublicacion {
+    width: 70px;
+    height: 70px;
+    float: left;
+    border-radius: 50%;
+}
+
+.descripcionAutorPublicacion {
+    width: 300px;
+    float: left;
+    height: auto;
+}
+
+.descripcionAutorPublicacion h1 {
+    font-family: 'EB Garamond',
+        serif;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 900;
+}
+
+.descripcionAutorPublicacion h2 {
+    font-family: 'EB Garamond',
+        serif;
+    font-size: 14px;
+    color: #aaa;
+    font-weight: 400;
+    line-height: 1.25;
+}
+
+.fuenteImg {
+    font-size: 10px;
+}
+
+@media (max-width: 900px) {
+    .anuncio img {
+        width: calc(50% - .25rem);
+        height: auto;
+    }
+
+    .anuncio p {
+        font-size: 14px;
+        color: #747474;
+        height: 17px;
+        position: absolute;
+        top: -4px;
+        left: 0;
+        padding-right: 10px;
+        background-color: #121212;
+    }
+
+}
+
+@media (max-width: 767px) {
+
+    .anuncioSecundario img {
+        width: calc(50% - .25rem);
+        height: auto;
+        float: left;
+    }
+
+    .tituloPublicacion {
+        font-size: 30px;
+    }
+
+    .subtituloPublicacion {
+        font-size: 22px;
+    }
+
+    .imagenPublicacion,
+    .videoPublicacion {
+        height: 250px;
+        width: 100%;
+    }
+
+
+
+    .imagenAutorPublicacion {
+        width: 50px;
+        height: 50px;
+        float: left;
+        border-radius: 50%;
+    }
+
+    .descripcionAutorPublicacion {
+        width: calc(100% - 50px);
+        float: left;
+        height: auto;
+    }
+
+    .descripcionAutorPublicacion h1 {
+        font-family: 'EB Garamond',
+            serif;
+        font-size: 14px;
+        color: #fff;
+        font-weight: 900;
+    }
+
+    .descripcionAutorPublicacion h2 {
+        font-family: 'EB Garamond',
+            serif;
+        font-size: 12px;
+        color: #aaa;
+        font-weight: 400;
+        line-height: 1.25;
+    }
+
+
+}
+
 
 /* --------------------------------
-= LOGIN
---------------------------------- */
+=ULTIMAS PUBLICACIONES 
+--------------------------------- */ 
+
+.tituloUltimos {
+    font-size: 30px;
+    color: #fff;
+    border-bottom: 1px solid rgb(61, 61, 61) !important;
+}
+
+.imagenUltimos {
+    width: 100%;
+    height: 150px;
+}
+
+.tituloPublicacionUltimos {
+    font-size: 30px;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.subTituloPublicacionUltimos {
+    font-size: 18px;
+    color: #aaa;
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 900px) {
+    .contenedorPrincipal {
+        margin-top: 70px;
+    }
+
+    .imagenUltimos {
+        width: 100%;
+        height: 120px;
+    }
+
+    .tituloUltimos {
+        font-size: 25px;
+    }
+
+    .tituloPublicacionUltimos {
+        font-size: 22px;
+    }
+
+    .subTituloPublicacionUltimos {
+        display: none;
+    }
+}

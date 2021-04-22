@@ -23,6 +23,11 @@ Route::view('buscar', 'buscar')->name('buscar');
 // CATEGORIA
 Route::view('categoria', 'categoria')->name('categoria');
 
+
+// PUBLICACION
+Route::view('publicacion', 'publicacion')->name('publicacion');
+
+
 // LOGIN
 Route::view('login', 'login')->name('login');
 

@@ -4,7 +4,7 @@
     
 
 @section('cuerpo')
-    <div class="contenedorPrincipal pb-5 pt-5">
+    <div class="contenedorPrincipal pb-5 pt-md-5">
         <!-- 
         seccion principal
         -->
@@ -13,7 +13,7 @@
             <div class="col-md-3 border-sm-right order-md-1 order-2">
                 <!-- ejemplo de publicación 1 -->
                 <div class="leftInicio border-bottom">
-                    <a href="#" class="enlacePublicacion">
+                    <a href="{{route('publicacion')}}" class="enlacePublicacion">
                         <div class="imgLeftInicio" style="background: url('https://ep01.epimg.net/politica/imagenes/2016/06/29/actualidad/1467185738_087126_1467185863_noticia_normal_recorte1.jpg') no-repeat;background-size: cover; background-position: center !important;"></div>
                             <div class="descripcionImagenLeft">
                                 <b class="text-light">Raúl Sigüenza</b> - 22/4/2021
@@ -32,7 +32,7 @@
                 </div>
                 <!-- ejemplo de publicación 2 -->
                 <div class="leftInicio border-only-sm-bottom mb-md-0 pb-md-0">
-                    <a href="#" class="enlacePublicacion">
+                    <a href="{{route('publicacion')}}" class="enlacePublicacion">
                         <div class="imgLeftInicio" style="background: url('https://ep01.epimg.net/politica/imagenes/2016/06/29/actualidad/1467185738_087126_1467185863_noticia_normal_recorte1.jpg') no-repeat;background-size: cover; background-position: center !important;"></div>
                             <div class="descripcionImagenLeft">
                                 <b class="text-light">Raúl Sigüenza</b> - 22/4/2021
@@ -55,7 +55,7 @@
             -->
             <div class="col-md-6 pb-4  order-md-2 order-1 mb-md-0 pb-md-0">
                 <div class="centerInicio border-only-sm-bottom pb-md-0 pb-4">
-                    <a href="#" class="enlacePublicacion">
+                    <a href="{{route('publicacion')}}" class="enlacePublicacion">
                         <div class="imgCenterInicio mb-3"
                             style="background: url('https://ep01.epimg.net/politica/imagenes/2016/06/29/actualidad/1467185738_087126_1467185863_noticia_normal_recorte1.jpg') no-repeat;background-size: cover; background-position: center !important;">
                         </div>
