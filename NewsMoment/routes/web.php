@@ -33,8 +33,13 @@ Route::view('login', 'public/login')->name('login');
 /*
 Parte Privada que ven los administradores
 */
-// DASHBOARD MANAGER
-Route::view('manager', 'manager/dashboard')->name('manager_dashboard');
+// Publicaciones
+Route::view('manager', 'manager/publicaciones')->name('manager_publicaciones');
+// empresas
+Route::view('manager/empresas', 'manager/empresas')->name('manager_empresas');
+// categorias
+Route::view('manager/categorias', 'manager/categorias')->name('manager_categorias');
+
 
 
 

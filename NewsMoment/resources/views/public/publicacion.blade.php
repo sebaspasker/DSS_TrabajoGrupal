@@ -12,7 +12,7 @@
 			<div class="row m-0">
 				<div class="col-12 p-0">
 					<a href="{{route('categoria')}}" class="categoriaEtiqueta">
-					POLÍTICA<span class="icon-chevron-right"></span>
+					Política<span class="icon-chevron-right"></span>
 					</a>
 				</div>
 			</div>
