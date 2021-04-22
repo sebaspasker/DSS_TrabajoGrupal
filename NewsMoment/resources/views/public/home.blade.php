@@ -1,8 +1,7 @@
-@extends('base')
+@extends('public/base')
 
 @section('titulo', 'Página principal - NewsMoment')
     
-
 @section('cuerpo')
     <div class="contenedorPrincipal pb-5 pt-md-5">
         <!-- 
