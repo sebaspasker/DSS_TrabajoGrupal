@@ -108,20 +108,23 @@ class BannerController extends Controller
 	 * @val company_name 
 	 * @return bool or array
 	 */
-	public function list_banners($in_banner = null, $company_name = "") {
-		if($company_name == "") {
-			if($in_banner != null) $company_name = $in_banner->company_name;
-			else $company_name = $this->banner->company_name;
+	public function list_banners($in_banner = null, $title = "") {
+		if($title == "") {
+			if($in_banner != null) $title = $in_banner->title;
+			else $title = $this->banner->title;
 		}
 
-		$banners = false;
 		try {
 			// Search banners
-			$banners = Banner::where('company_name', 'LIKE', "%$company_name%")->get();
+			$banners = Banner::where('title', 'LIKE', "%$title%")->get();
 			if($banners == null) return false;
+			else {
+				return $banners;
+			}
 		} catch(exception $e) {
 			return false;
 		}
-		return $banners;
+
+		return false;
 	}
 }

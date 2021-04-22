@@ -75,14 +75,42 @@ class BannerTest extends TestCase
 		return $banner;
 	}
 
+	private function return_banner_2() : Banner {
+		$banner = new Banner();
+		$banner->title = "Banner2";
+		$banner->url = "banner_url2";
+		$banner->image_url = "image_url2";
+		$banner->ranking_type = 1;
+		$banner->views_counter = 0;
+		$banner->is_active = false;
+		$banner->company_name = "Automoviles serrano";
+		return $banner;
+	}
+
+	private function return_banner_3() : Banner {
+		$banner = new Banner();
+		$banner->title = "Banner3";
+		$banner->url = "banner_url3";
+		$banner->image_url = "image_url3";
+		$banner->ranking_type = 1;
+		$banner->views_counter = 0;
+		$banner->is_active = false;
+		$banner->company_name = "Automoviles serrano";
+		return $banner;
+	}
+
 	private function insert_values() {
 		$company = $this->return_company_1();
 		$company->save();
 	}
 
 	private function delete_values() {
-		$banner = Banner::where('title', $this->return_banner_1()->title)->first();
-		if($banner != null) $banner->delete();
+		$banner1 = Banner::where('title', $this->return_banner_2()->title)->first();
+		if($banner1 != null) $banner1->delete();
+		$banner2 = Banner::where('title', $this->return_banner_3()->title)->first();
+		if($banner2 != null) $banner2->delete();
+		$banner3 = Banner::where('title', $this->return_banner_1()->title)->first();
+		if($banner3 != null) $banner3->delete();
 		$company = Company::where('name', $this->return_company_1()->name)->first();
 		if($company != null) $company->delete();
 	}
@@ -149,5 +177,21 @@ class BannerTest extends TestCase
 		$this->assertEquals($banner->is_active, $search_banner->is_active);
 		$this->assertEquals($banner->company_name, $search_banner->company_name);
 		$this->assertEquals($banner->url, $search_banner->url);
+	}
+
+	/**
+	 * @test
+	 */
+	public function test_list_banners_controller() {
+
+		$banners = array($this->return_banner_1(), $this->return_banner_2(), $this->return_banner_3());
+		$banners[0]->save();
+		$banners[1]->save();
+		$banners[2]->save();
+
+		$banner_controller = new BannerController();
+		$list_banners = $banner_controller->list_banners(null, "Banner");
+		$this->assertTrue(!is_bool($list_banners));
+		$this->assertTrue($list_banners->count() >= 3);
 	}
 }
