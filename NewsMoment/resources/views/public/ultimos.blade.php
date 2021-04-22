@@ -1,4 +1,4 @@
-@extends('base')
+@extends('public/base')
 
 @section('titulo', 'Últimas publicaciones - NewsMoment')
     
@@ -41,7 +41,7 @@
 			<!-- 
 			ejemplo de publicacion
 			-->
-			<div class="col-md-8 px-0 border-bottom pb-4 mb-4">
+			<div class="col-md-8 px-0 pb-4 mb-4">
 				<a class="enlace" href="{{ route('publicacion') }}">
 					<div class="row m-0">
 						<div class="col-5 p-0">
