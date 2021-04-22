@@ -1,3 +1,7 @@
+/* --------------------------------
+= GLOBALES
+--------------------------------- */
+
 html,
 body{
     background-color: #121212 !important;
@@ -14,10 +18,32 @@ select {
 
 input:focus,
 button:focus,
-textarea:focus,
+textarea:focus, 
 select:focus {
     outline: 0 !important;
     box-shadow: 0 0 0 0 !important;
+}
+
+.contenedor {
+    margin-top: 60px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: 0s;
+    font-family: 'EB Garamond', serif;
+}
+
+.bg-dark{
+    background-color: #1d1d1d !important;
+}
+
+.enlace {
+    color: inherit;
+}
+
+.enlace:hover {
+    text-decoration: none;
+    color: inherit;
 }
 
 
@@ -46,6 +72,10 @@ select:focus {
     .remove {
         display: block;
     }
+    .contenedor {
+        margin-top: 50px;
+    }
+
 }
 
 
@@ -184,10 +214,27 @@ select:focus {
     color: #fff !important;
 }
 
-.btn-primary:hover {
+.btn-primary:hover{
     background-color: #f05b3a;
     border-color: #f05b3a;
 }
+
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #f05b3a;
+    border-color: #f05b3a;
+    box-shadow: none;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.show>.btn-primary.dropdown-toggle:focus,
+.btn-primary:focus {
+    box-shadow: none;
+}
+
 
 
 .btn-outline-primary {
@@ -350,16 +397,16 @@ select:focus {
 
 
 .minicon {
-    height: 20px;
+    height: 17px;
     position: fixed;
-    left: calc(50% + 8px);
+    left: calc(50% + 10px);
     top: -50px;
     z-index: 1000;
     transition: .3s;
 }
 
 .minicon.active {
-    top: 22px;
+    top: 24px;
     transition: .3s;
 }
 
@@ -367,7 +414,7 @@ select:focus {
 .buscador {
     position: fixed;
     width: 100%;
-    background-color: #121212;
+    background-color: #000;
     top: 0;
     left: 0;
     z-index: 1003;
@@ -379,14 +426,14 @@ select:focus {
 }
 
 
-.formularioContacto {
-    background: #fff;
+.formularioContacto{
+    background: #121212;
     background-clip: padding-box;
-    border: 1px solid #e7e7e7;
+    border: 1px solid #000;
     border-radius: 4px;
     box-shadow: none;
     box-sizing: border-box;
-    color: #19110b;
+    color: #fff;
     height: 3rem;
     text-align: left;
     font-family: "karla", sans-serif;
@@ -437,11 +484,11 @@ select:focus {
 @media (max-width: 900px) {
    .minicon,
    .minicon.active {
-       height: 17px;
+       height: 15px;
        position: fixed;
        left: auto;
-       right: 76px;
-       top: 17px;
+       right: 77px;
+       top: 19px;
        z-index: 1000;
        transition: .3s;
    }
@@ -523,6 +570,42 @@ select:focus {
 }
 
 
+/*
+
+===== FOOTER
+
+*/
+
+.text-sm-left {
+    text-align: center;
+}
+
+@media (max-width: 767px) {
+    .text-sm-left {
+        text-align: left;
+    }
+}
+
+
+
+footer {
+    color: #fff;
+    background: #000;
+}
+
+footer a {
+    color: #f2f2f2;
+    font-weight: 300;
+}
+
+
+
+footer a:hover {
+    color: #f2f2f2;
+    text-decoration: none;
+    opacity: .7
+}
+
 
 
 
@@ -547,3 +630,9 @@ select:focus {
         margin-top: 70px;
     }
 }
+
+
+
+/* --------------------------------
+= LOGIN
+--------------------------------- */

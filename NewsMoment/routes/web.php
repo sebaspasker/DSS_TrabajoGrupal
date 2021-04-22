@@ -12,19 +12,18 @@
 */
 
 // INICIO
-Route::get('/', function(){
-    return view('home');
-})->name('home');
+Route::view('/', 'home')->name('home');
 
+// ULTIMOS
+Route::view('ultimos', 'ultimos')->name('ultimos');
 
 // BUSCAR
-Route::get('buscar/{busqueda?}', function ($busqueda = "Busqueda por defecto") {
-    echo "Busqueda: " . $busqueda ;
-    echo "<br> <a href='" .  route('home') . "'>Volver a inicio</a>";
-})->name('buscar');
+Route::view('buscar', 'buscar')->name('buscar');
 
 // CATEGORIA
-Route::get('categoria', function () {
-    return 'vista de categoria';
-})->name('categoria');
+Route::view('categoria', 'categoria')->name('categoria');
+
+// LOGIN
+Route::view('login', 'login')->name('login');
+
 
