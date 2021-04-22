@@ -1,8 +1,7 @@
-@extends('base')
+@extends('public/base')
 
 @section('titulo', 'Publicacion - NewsMoment')
     
-
 @section('cuerpo') 
 <div class="contenedor pb-5">
 	<div class="row m-0 p-3">
@@ -39,17 +38,12 @@
 					</div>
 				</div>
 			</a>
-
 			<div class="fechaPublicacion">
 				Abr. 21, 2021, 3:06 p.m. 
 				<label class="visitasPublicacion mt-2 ml-3">
 					100 <span class="icon-eye ml-1"></span>
 				</label>
 			</div>
-			<!-- 
-				compartir en rede sociales
-			-->
-			
 		</div>
 		<!-- 
 			cuerpo de la publicación 
