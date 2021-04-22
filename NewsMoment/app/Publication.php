@@ -11,4 +11,11 @@ class Publication extends Model
 		'source', 'image_url', 'video_url', 'has_video', 
 		'views_counter', 'category', 'editor_email'
 	];
+
+	/**
+	 * Relation 1 to N Category
+	 */
+	public function get_category() {
+		return $this->belongsTo(Category::class);
+	}
 }

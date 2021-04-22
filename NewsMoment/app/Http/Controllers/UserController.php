@@ -16,7 +16,7 @@ class UserController extends Controller
 	 * @var email - users email
 	 * @var password - users password
 	 */
-	private function insert_data_user($name, $email, $password) : User {
+	protected function insert_data_user($name, $email, $password) : User {
 		$user = new User();
 		if($name != "") {
 			$user->name = $name;
@@ -89,12 +89,11 @@ class UserController extends Controller
 		else $user = $this->insert_data_user($name, $email, $password);
 
 		try {
-			$old_user = new User();
 			$old_user = User::where('email', $user->email)->first();
 			if($old_user == null) throw new Exception("None user to modify");
 			else {
-				$old_user->name = $user->name;
-				$old_user->password = $user->password;
+				if($user->name != "") $old_user->name = $user->name;
+				if($user->password != "") $old_user->password = $user->password;
 				$old_user->save();
 			}
 		} catch (Exception  $e) {
@@ -107,8 +106,14 @@ class UserController extends Controller
 	public function list_users($in_user = null, $name = "") {
 		if($in_user != null) $name = $in_user->name;
 
-		$users = User::where('name', 'LIKE', "%$name%")->get();
-		if($users == null) return false;
+		$users = false;
+		try {
+			$users = User::where('name', 'LIKE', "%$name%")->get();
+			if($users == null) return false;
+		} catch(exception $e) {
+			return false;
+		}
+
 		return $users;
 	}
 }
