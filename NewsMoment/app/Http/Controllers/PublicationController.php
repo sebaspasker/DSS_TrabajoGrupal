@@ -38,7 +38,6 @@ class PublicationController extends Controller
 			// Insert publication
 			$this->publication->save();
 		} catch(exception $e) {
-			print($e->getMessage());
 			return false;
 		}
 
@@ -132,7 +131,6 @@ class PublicationController extends Controller
 			$publications = Publication::where('category_name', 'LIKE', "%$category_name%")->get();
 			if($publications == null) return false;
 		} catch(exception $e) {
-			print("EXCEPTION: $e->getMessage()");
 			return false;
 		}
 		return $publications;
