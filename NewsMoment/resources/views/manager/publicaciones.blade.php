@@ -1,6 +1,6 @@
 @extends('manager/base')
 
-@section('titulo', 'Buscador - NewsMoment')
+@section('titulo', 'Manager - NewsMoment')
 @section('styles', 'publicaciones')
 
 @section('cuerpo')
@@ -10,7 +10,7 @@
 		<!-- title -->
 		<h1 class="pb-sm-2 pt-2 mb-0">
 			Todas tus publicaciones
-			<a role="button" href="#" class="btn btn-primary btn-sm float-right mt-1" style="font-size: .675rem;">Nueva</a>
+			<a role="button" href="{{ route('manager_nueva_publicacion')}}" class="btn btn-primary btn-sm float-right mt-1" style="font-size: .675rem;">Nueva</a>
 		</h1>
 		<!-- top -->
 		<div class="row m-0">

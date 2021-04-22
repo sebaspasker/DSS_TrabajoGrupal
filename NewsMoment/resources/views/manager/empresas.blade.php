@@ -13,7 +13,7 @@
 		<!-- title -->
 		<h1 class="pb-sm-2 pt-2 mb-4 pb-3 px-3 mt-3">
 			Todas tus empresas
-			<a role="button" href="#" class="btn btn-primary btn-sm float-right mt-1" style="font-size: .675rem;">Nueva</a>
+			<a role="button" href="{{ route('manager_nueva_empresa')}}" class="btn btn-primary btn-sm float-right mt-1" style="font-size: .675rem;">Nueva</a>
 		</h1>
 		<!-- empresas -->
 		<div class="row m-0 pb-3">

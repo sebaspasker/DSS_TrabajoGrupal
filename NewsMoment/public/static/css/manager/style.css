@@ -377,7 +377,7 @@ select:hover {
     margin: 0 auto;
 }
 
-
+ 
 .nombreEmpresa {
     padding: 0px 20px;
     background-color: #fff;
@@ -403,4 +403,185 @@ select:hover {
     .marginBotonEmpresa {
         margin-bottom: 25px;
     }
+}
+
+
+
+/* --------------------------------
+= NUEVA PUBLICACION
+--------------------------------- */
+
+
+.tituloPublicacion {
+    font-family: 'EB Garamond', serif;
+    font-size: 40px;
+    color: #000;
+    line-height: 1.1;
+    font-weight: 400;
+    margin-bottom: 0px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.subtituloPublicacion {
+    font-family: 'EB Garamond', serif;
+    font-size: 22px;
+    color: #000;
+    line-height: 1.1;
+    margin-bottom: 10px;
+    font-weight: 300;
+    width: 100%;
+}
+
+.cuerpoPublicacion textarea {
+    font-family: 'EB Garamond', serif;
+    width: 100%;
+}
+
+.tituloPublicacion:hover,
+.subtituloPublicacion:hover,
+.cuerpoPublicacion textarea:hover {
+    background-color: #f2f2f2;
+
+}
+
+.tituloPublicacion:focus,
+.subtituloPublicacion:focus,
+.cuerpoPublicacion textarea:focus {
+    outline: none;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0);
+    background-color: #f2f2f2;
+
+}
+
+.fechaPublicacion {
+    color: #c0c0c0;
+    font-size: 800;
+    font-size: 14px;
+}
+
+
+.publicacionImg {
+    height: 400px;
+    width: 100%;
+}
+
+.publicacionImg:hover {
+    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .25) !important;
+}
+
+.publicacionImg div {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#id_imagen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 996;
+    top: 0;
+    left: 0;
+}
+
+#id_imagen:hover {
+    cursor: pointer;
+}
+
+
+
+.radio strong {
+    font-size: 25px;
+}
+
+.radio label {
+    display: inline-block;
+    cursor: pointer;
+    color: #f05b3a;
+    position: relative;
+    padding: 5px 15px 5px 40px;
+    font-size: 1em;
+    border-radius: 5px;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    background: #f05b3a40;
+    margin-bottom: 0;
+}
+
+.radio label:hover {
+    background: #f05b3a60;
+}
+
+.radio label:before {
+    content: "";
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    position: absolute;
+    left: 15px;
+    border-radius: 50%;
+    background: none;
+    margin-top: 3px;
+    border: 3px solid #f05b3a;
+}
+
+.radio input[type="radio"] {
+    display: none;
+}
+
+.radio input[type="radio"]:checked+label:before {
+    display: none;
+}
+
+.radio input[type="radio"]:checked+label {
+    padding: 5px 15px;
+    background: #f05b3a;
+    border-radius: 2px;
+    color: #fff;
+}
+
+#videoIdentificador {
+    display: none;
+}
+
+#videoIdentificador.active {
+    display: block;
+}
+
+@media (max-width: 767px) {
+
+    .tituloPublicacion {
+        font-size: 35px;
+    }
+
+    .publicacionImg {
+        height: 250px;
+        width: 100%;
+    }
+}
+
+
+
+
+
+/* --------------------------------
+= NUEVA EMPRESA
+--------------------------------- */
+
+
+.bannerCreationImg {
+    width: 300px;
+    height: 250px;
+    position: relative;
+}
+
+.bannerCreationImg div {
+    width: 100%;
+    height: 100%;
+    background-color: #f2f2f2;
 }
