@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Company;
 use App\Banner;
+use Exception;
 
 class BannerController extends Controller
 {
