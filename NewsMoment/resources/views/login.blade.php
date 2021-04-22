@@ -1,6 +1,6 @@
 @extends('base')
 
-@section('titulo', 'Categoría - NewsMoment')
+@section('titulo', 'Login Manager')
     
 
 @section('cuerpo')

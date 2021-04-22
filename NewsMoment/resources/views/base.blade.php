@@ -39,7 +39,7 @@
             </div>
             <!-- parte derecha -->
             <div class="rightNav ordenador">
-                <a href="{{ route('home') }}" role="button" class="btn btn-sm  btn-primary  float-right mr-3">Contacto</a>
+                <a href="#" role="button" class="btn btn-sm  btn-primary  float-right mr-3">Contacto</a>
             </div>
         </div>
         <!-- menú secundario desplegable  -->
@@ -76,7 +76,7 @@
     <!-- logotipos centrales del nav-->
     <img src="static/img/favicon.png" alt="NM" class="minicon">
     <div class="centerNav">
-        <a href="#" id="darkLogo">
+        <a href="{{ route('home') }}" id="darkLogo">
             <img src="static/img/logoLetrasDark.png" alt="">
         </a>
     </div>
