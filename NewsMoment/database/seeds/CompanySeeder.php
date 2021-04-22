@@ -15,6 +15,8 @@ class CompanySeeder extends Seeder
 			{
 				\DB::table('companies')->insert(array(
 					'name' => "_company$i",
+					'image_url' => "_image$i",
+					'is_active' => false,
 				));
 			}
     }
