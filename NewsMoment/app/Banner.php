@@ -10,7 +10,7 @@ class Banner extends Model
 	
 	protected $fillable = [
 		'title', 'url', 'ranking_type', 
-		'views_counter', 'is_active', 'image_url'
+		'views_counter', 'is_active', 'image_url', 'company_name'
 	];
 
 	/**
