@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
 				$email = "email$i@email.com";
 				\DB::table('users')->insert(array(
 				'name' => $faker-> firstnamefemale,
-				'email' => $email,
+				'email' => "email$i@email.com",
 				'password' => $faker-> firstnamefemale,
 				));
 			}

@@ -20,8 +20,6 @@ class CreateBannersTable extends Migration
 						$table->string('image_url');
 						$table->integer('views_counter')->unsigned();
 						$table->integer('ranking_type')->unsigned();
-						$table->date('created');
-						$table->date('modified');
 						$table->boolean('is_active');
             $table->timestamps();
         });

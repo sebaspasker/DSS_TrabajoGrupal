@@ -16,12 +16,10 @@ class CreateEditorsTable extends Migration
         Schema::create('editors', function (Blueprint $table) {
             $table->bigIncrements('id');
 						$table->string('description');
-						$table->string('profile_image_url');
+						$table->string('profile_image');
 						$table->string('facebook');
 						$table->string('instagram');
 						$table->string('twitter');
-						$table->date('created');
-						$table->date('modified');
 						$table->boolean('is_admin');
 						$table->boolean('is_active');
 						$table->timestamps();

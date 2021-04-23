@@ -21,13 +21,13 @@ class CreatePublicationsTable extends Migration
             $table->string('source');
             $table->string('image_url');
             $table->string('video_url');
+            $table->longText('body');
             $table->string('category');
             $table->boolean('active');
             $table->boolean('has_video');
             $table->integer('views_counter')->unsigned();
-            $table->date('created');
-            $table->date('modified');
-            $table->timestamps();
+						$table->date('created_at');
+						$table->date('updated_at');
         });
     }
 

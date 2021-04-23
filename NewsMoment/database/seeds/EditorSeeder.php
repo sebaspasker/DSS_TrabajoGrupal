@@ -21,12 +21,10 @@ class EditorSeeder extends Seeder
 				\DB::table('editors')->insert(array(
 				'description' => $faker-> firstnamefemale,
 				'email' => $email,
-				'profile_image_url' => $faker-> firstnamefemale,
+				'profile_image' => $faker-> firstnamefemale,
 				'facebook' => $faker-> firstnamefemale,
 				'instagram' => $faker-> firstnamefemale,
 				'twitter' => $faker-> firstnamefemale,
-				'created' => now(),
-				'modified' => now(),
 				'is_admin' => false,
 				'is_active' => false,
 				));
