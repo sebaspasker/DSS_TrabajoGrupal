@@ -8,9 +8,9 @@
 	<meta name="theme-color" content="#000"/>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond|EB+Garamond&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="static/css/public/style.css" type="text/css"/>
-    <link rel="stylesheet" href="static/css/icomoon/style.css" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond|EB+Garamond|Oswald&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/static/css/public/style.css" type="text/css"/>
+    <link rel="stylesheet" href="/static/css/icomoon/style.css" type="text/css"/>
     <title>@yield('titulo', 'NewsMoment')</title>
   </head>
   <body id="start">

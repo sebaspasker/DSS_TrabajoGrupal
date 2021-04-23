@@ -5,7 +5,7 @@
 
 @section('cuerpo')
    		<div class="container mt-md-5 mt-4">
-			<form method="post" action="{{ route('manager_dashboard') }}">
+			<form method="post" action="{{ route('manager_publicaciones') }}">
 				<div class="row m-0 pt-5 pb-5">
 					<div class="col-md-3"></div>
 					<div class="col-md-6 rounded">

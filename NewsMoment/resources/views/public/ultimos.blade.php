@@ -14,56 +14,40 @@
 			<!-- 
 			ejemplo de publicacion
 			-->
-<!--			@foreach($params as $param)-->
-			<div class="col-md-8 px-0 border-bottom pb-4 mb-4">
-				<a class="enlace" href="{{ route('publicacion') }}">
-					<div class="row m-0">
-						<div class="col-5 p-0">
-							<div class="imagenUltimos" style="background: url('https://ep01.epimg.net/politica/imagenes/2016/06/29/actualidad/1467185738_087126_1467185863_noticia_normal_recorte1.jpg') no-repeat;background-size: cover; background-position: center !important;"></div>
-						</div>
-						<div class="col-7 pl-4 pr-0">
-							<div class="tituloPublicacionUltimos">
-								 {{ $params['count'] }} 
+			@foreach ($publications as $publication)
+				<div class="col-md-8 px-0 pb-4 mb-4">
+					<a class="enlace" href="{{ route('publicacion') }}">
+						<div class="row m-0">
+							<div class="col-5 p-0">
+								<div class="imagenUltimos" style="background: url('https://ep01.epimg.net/politica/imagenes/2016/06/29/actualidad/1467185738_087126_1467185863_noticia_normal_recorte1.jpg') no-repeat;background-size: cover; background-position: center !important;"></div>
 							</div>
-							<div class="subTituloPublicacionUltimos">
-							</div>
-							<div class="descripcionImagenLeft">
-								<b class="text-light"> </b> - 22/4/2021
-							</div>
-						</div>
-					</div>
-				</a>
-			</div>
-<!--			@endforeach -->
-			<!-- 
-			ejemplo de publicacion
-			-->
-			<div class="col-md-8 px-0 pb-4 mb-4">
-				<a class="enlace" href="{{ route('publicacion') }}">
-					<div class="row m-0">
-						<div class="col-5 p-0">
-							<div class="imagenUltimos" style="background: url('https://ep01.epimg.net/politica/imagenes/2016/06/29/actualidad/1467185738_087126_1467185863_noticia_normal_recorte1.jpg') no-repeat;background-size: cover; background-position: center !important;"></div>
-						</div>
-						<div class="col-7 pl-4 pr-0">
-							<div class="tituloPublicacionUltimos">
-								Unidas Podemos no tolerará el “pinkwashing” de Barcala con el Plan LGTBI 
-                            	y le exige “romper con la ultraderecha” para aplicarlo
-							</div>
-							<div class="subTituloPublicacionUltimos">
-								La coalición critica “la falta de palabra” de la concejala Mari Carmen Sánchez 
-								al no facilitar el documento ni a las entidades sociales ni a los grupos políticos, 
-								como se comprometió, antes de su aprobación en la junta de gobierno y critica 
-								que nazca sin presupuesto con la complacencia del Partido Socialista
-							</div>
-							<div class="descripcionImagenLeft">
-								<b class="text-light">Raúl Sigüenza</b> - 22/4/2021
+							<div class="col-7 pl-4 pr-0">
+								<div class="tituloPublicacionUltimos">
+									{{$publication->title}}
+								</div>
+								<div class="subTituloPublicacionUltimos">
+									{{$publication->subtitle}}
+								</div>
+								<div class="descripcionImagenLeft">
+									<b class="text-light">{{$publication->editor_email}}</b> - {{$publication->created_at}}
+								</div>
 							</div>
 						</div>
-					</div>
-				</a>
+					</a>
+				</div>
+			@endforeach
+
+
+
+			<div class="col-12">
+
+				{{ $publications->links() }}
 			</div>
 		</div>
 	</div>
+
+
+
 
 
 @endsection
