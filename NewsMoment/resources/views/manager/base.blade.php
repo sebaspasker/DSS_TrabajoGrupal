@@ -20,7 +20,7 @@
         }
     </style>
     <!-- nav top -->
-    <div class="top-nav shadow-sm">
+    <div class="top-nav shadow-sm movil">
         <img src="/static/img/favicon.png" alt="NewsMoment">
         <div class="movil activarMenu" id="activeNav">
             <span class="icon-menu"></span>
