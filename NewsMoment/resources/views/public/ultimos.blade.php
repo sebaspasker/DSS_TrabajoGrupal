@@ -42,7 +42,6 @@
 			<div class="col-12">
 
 				{{ $publications->links() }}
-
 			</div>
 		</div>
 	</div>

@@ -136,7 +136,22 @@ class PublicationController extends Controller
 		return $publications;
 	}
 
+	/**
+	 * Get x last publications id
+	 * @val number 
+	 */
+	public function get_last_publications($category_name = null, $number = 0) {
+		if($category_name == null) $publications = Publication::all();
+		else $publications = Publication::where('category', $category_name)->get();
+		$total = $publications->count();
+		array_reverse($publications->toArray());
+		$x_publication = array();
+		for($i=0; $i< $number; $i++) {
+			array_push($x_publication, $publications[$i]);
+		}
 
+		return $x_publication;
+	}
 
 	public function home() {
 		$publications = Publication::orderBy('id', 'desc')->limit(3)->get();
@@ -156,6 +171,4 @@ class PublicationController extends Controller
 		$publications = Publication::orderBy('id', 'desc')->paginate(10);
 		return view('public/ultimos', ['publications' => $publications]);
 	}
-
-
 }

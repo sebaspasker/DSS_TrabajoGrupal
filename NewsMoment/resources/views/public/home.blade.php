@@ -13,38 +13,32 @@
                 <!-- ejemplo de publicación 1 -->
                 <div class="leftInicio border-bottom">
                     <a href="{{route('publicacion')}}" class="enlacePublicacion">
-                        <div class="imgLeftInicio" style="background: url('https://ep01.epimg.net/politica/imagenes/2016/06/29/actualidad/1467185738_087126_1467185863_noticia_normal_recorte1.jpg') no-repeat;background-size: cover; background-position: center !important;"></div>
+                        <div class="imgLeftInicio" style="background: url({{ $pub_params['publication2']['image_url'] }}) no-repeat;background-size: cover; background-position: center !important;"></div>
                             <div class="descripcionImagenLeft">
-                                <b class="text-light">Raúl Sigüenza</b> - 22/4/2021
+                                <b class="text-light">{{ $pub_params['editor1'] }}<!--Raúl Sigüenza--></b> - {{ $pub_params['date2'] }}
                             </div>
                         <div class="tituloLeftInicio">
+														{{ $pub_params['publication2']['title'] }}
                             Unidas Podemos no tolerará el “pinkwashing” de Barcala con el Plan LGTBI 
                             y le exige “romper con la ultraderecha” para aplicarlo
                         </div> 
                         <div class="subtituloLeftInicio movil">
-                            La coalición critica “la falta de palabra” de la concejala Mari Carmen Sánchez 
-                            al no facilitar el documento ni a las entidades sociales ni a los grupos políticos, 
-                            como se comprometió, antes de su aprobación en la junta de gobierno y critica 
-                            que nazca sin presupuesto con la complacencia del Partido Socialista
+														{{ $pub_params['publication2']['subtitle'] }}
                         </div>
                     </a>
                 </div>
                 <!-- ejemplo de publicación 2 -->
                 <div class="leftInicio border-only-sm-bottom mb-md-0 pb-md-0">
                     <a href="{{route('publicacion')}}" class="enlacePublicacion">
-                        <div class="imgLeftInicio" style="background: url('https://ep01.epimg.net/politica/imagenes/2016/06/29/actualidad/1467185738_087126_1467185863_noticia_normal_recorte1.jpg') no-repeat;background-size: cover; background-position: center !important;"></div>
+                        <div class="imgLeftInicio" style="background: url({{ $pub_params['publication3']['image_url'] }}) no-repeat;background-size: cover; background-position: center !important;"></div>
                             <div class="descripcionImagenLeft">
-                                <b class="text-light">Raúl Sigüenza</b> - 22/4/2021
+                                <b class="text-light">{{ $pub_params['editor3'] }}</b> - {{ $pub_params['date3'] }}
                             </div>
                         <div class="tituloLeftInicio">
-                            Unidas Podemos no tolerará el “pinkwashing” de Barcala con el Plan LGTBI 
-                            y le exige “romper con la ultraderecha” para aplicarlo
+														{{ $pub_params['publication3']['title'] }}
                         </div>
                         <div class="subtituloLeftInicio movil">
-                            La coalición critica “la falta de palabra” de la concejala Mari Carmen Sánchez 
-                            al no facilitar el documento ni a las entidades sociales ni a los grupos políticos, 
-                            como se comprometió, antes de su aprobación en la junta de gobierno y critica 
-                            que nazca sin presupuesto con la complacencia del Partido Socialista
+														{{ $pub_params['publication3']['subtitle'] }}
                         </div>
                     </a>
                 </div>
@@ -52,28 +46,20 @@
             <!-- 
             columna central 
             -->
-           
-            
-
-                 
-                <div class="col-md-6 pb-4  order-md-2 order-1 mb-md-0 pb-md-0">
-                    <div class="centerInicio border-only-sm-bottom pb-md-0 pb-4">
-                        <a href="{{route('publicacion')}}" class="enlacePublicacion">
-                            <div class="imgCenterInicio mb-3"
-                                style="background: url('https://ep01.epimg.net/politica/imagenes/2016/06/29/actualidad/1467185738_087126_1467185863_noticia_normal_recorte1.jpg') no-repeat;background-size: cover; background-position: center !important;">
-                            </div>
-                            <div class="descripcionImagenLeft text-center">
-                                <b class="text-light">Raúl Sigüenza</b> - 22/4/2021</div>
-                            <div class="tituloCenterInicio">
-                                {{$publication1->title}}
-                            </div>
-                            <div class="subtituloCenterInicio">
-                                {{$publication1->subtitle}}
-                            </div>
-                        </a>
-                    </div>
-                    <a href="#" target="_blank">
-                        <img src="https://www.yonosoydiario.com/media/banners/bannercovid19ynsD.gif" alt="anuncio" class="w-100 movil mt-3 border-bottom pb-3">
+            <div class="col-md-6 pb-4  order-md-2 order-1 mb-md-0 pb-md-0">
+                <div class="centerInicio border-only-sm-bottom pb-md-0 pb-4">
+                    <a href="{{route('publicacion')}}" class="enlacePublicacion">
+                        <div class="imgCenterInicio mb-3"
+                            style="background: url({{ url($pub_params['publication1']['image_url']) }}) no-repeat;background-size: cover; background-position: center !important;">
+                        </div>
+                        <div class="descripcionImagenLeft text-center">
+                            <b class="text-light"> {{ $pub_params['editor1'] }}</b> - {{ $pub_params['date1'] }}</div>
+                        <div class="tituloCenterInicio">
+														{{ $pub_params['publication1']['title'] }}
+                        </div>
+                        <div class="subtituloCenterInicio">
+														{{ $pub_params['publication1']['subtitle'] }}
+                        </div>
                     </a>
                 </div>
             <!-- columna derecha -->
