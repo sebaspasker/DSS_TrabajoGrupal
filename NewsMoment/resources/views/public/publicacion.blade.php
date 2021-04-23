@@ -52,11 +52,11 @@
 				<div class="col-md-4 order-md-2 order-1 px-md-3 px-0">
 					<div class="anuncio ordenador mt-2">
 						<p class="mb-2">Anuncio</p>
-							<a href="#" target="_blank">
-								<img src="https://www.yonosoydiario.com/media/banners/Bannerpequenuevolilus.png" alt="titulo" class="mr-md-0 mr-2 mb-md-3">
+							<a href="{{ $banner1->url }}" target="_blank">
+								<img src="{{ $banner1->image_url }}" alt="titulo" class="mr-md-0 mr-2 mb-md-3">
 							</a>
-                            <a href="#" target="_blank">
-								<img src="https://www.yonosoydiario.com/media/banners/Bannerpequenuevolilus.png" alt="titulo">
+                            <a href="{{ $banner2->url }}" target="_blank">
+								<img src="{{ $banner2->image_url }}" alt="titulo">
 							</a>
 					</div>
 				</div>
@@ -71,7 +71,7 @@
 						<div class="col-12 p-0">
 							<div class="imagenPublicacion mb-1" style="background: url('{{ $publication->image_url }}') no-repeat;background-size: cover; background-position: center !important;"></div>
 							<!-- source de la publicacion -->
-                            <p class="text-right mb-0 fuenteImg text-light">Fuente de la imagen</p> 
+                            <p class="text-right mb-0 fuenteImg text-light">{{ $publication->source }}</p> 
 						</div>
 						<!-- 
 							anuncios iniciales movil
@@ -79,11 +79,11 @@
 						<div class="col-12 p-0">
 							<div class="anuncio mt-2 pt-3 border-top movil">
 								<p>Anuncio</p>
-                                <a href="#"target="_blank">
-                                    <img src="https://www.yonosoydiario.com/media/banners/Bannerpequenuevolilus.png" alt="titulo" class="mr-2 mb-3 ">
+                                <a href="{{ $banner1->url }}"target="_blank">
+                                    <img src="{{ $banner1->image_url }}" alt="titulo" class="mr-2 mb-3 ">
                                 </a>
-                                <a href="#"target="_blank">
-                                    <img src="https://www.yonosoydiario.com/media/banners/Bannerpequenuevolilus.png" alt="titulo">
+                                <a href="{{ $banner2->url }}"target="_blank">
+                                    <img src="{{ $banner2->image_url }}" alt="titulo">
                                 </a>
 							</div>	
 						</div>
@@ -91,10 +91,8 @@
 							body de la publicacion 
 						-->
 						<div class="col-12 p-0">
-							<div class="cuerpoPublicacion mt-2 pt-3 border-top">
-								Unidas Podemos ha valorado positivamente los pasos hacia adelante para la aprobación de un Plan Estratégico LGTBI para Alicante y ha felicitado a los colectivos y entidades vinculados a su lucha “por empujar hacia una ciudad más inclusiva y justa en derechos”, algo que también considera “una victoria propia al ser nuestro grupo quien ha puesto en el centro de la agenda política de esta ciudad las reivindicaciones sociales de las personas gais, lesbianas, bisexuales, intersexuales y trans, arrastrando a regañadientes a la concejala del área, Mari Carmen Sánchez, que ha demostrado de manera reiterada en los dos años de mandato su completo desconocimiento sobre esta cuestión”.
-                                La coalición de izquierdas recuerda que en los últimos meses del gobierno de Barcala “Alicante se ha quedado en su Pleno municipal sin declaración institucional por el día de los derechos LGTBI y sin el reconocimiento a las visibilidad de las personas trans, al votar reiteradamente en contra, el equipo de gobierno junto a la ultraderecha, de iniciativas que reivindicaban políticas locales específicas para el colectivo”. Un fracaso, en opinión de Unidas Podemos “exclusivo de Mari Carmen Sánchez, en guerra permanente con las entidades referentes en la ciudad y también con nuestro grupo político". “Sánchez intenta liderar un espacio que no le corresponde, con su gestión más que cuestionada por el activismo alicantino”.
-                                Para Xavier López, portavoz de Unidas Podemos en el ayuntamiento de Alicante, el Plan Estratégico LGTBI “se ha ocultado de manera deliberada a las entidades y a los grupos que estamos verdaderamente ejerciendo la oposición” como se había comprometido y recuerda “que solo se facilitó una presentación del estudio, sin entrar a profundizar en las medidas concretas que se plantean implementar”. 
+							<div class="cuerpoPublicacion mt-2 pt-3 border-top">    
+								{{ $publication->body }}
 							</div>
 						</div>
 					</div>

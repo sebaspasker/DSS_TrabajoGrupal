@@ -180,7 +180,7 @@ class PublicationController extends Controller
 		$query = $request->get('q');
 
 		$info = [
-			'publications' => Publication::orWhere('title', 'LIKE', "%$query%")->orWhere('subtitle', 'LIKE', "%$query%")->paginate(3),
+			'publications' => Publication::orWhere('title', 'LIKE', "%$query%")->orWhere('subtitle', 'LIKE', "%$query%")->orWhere('body', 'LIKE', "%$query%")->paginate(3),
 			'query' => $query,
 		];
 

@@ -56,6 +56,7 @@ class PublicationSeeder extends Seeder
 						'video_url' => "/static/video/$video_urls[$i]",
 						'category' => "$categories[$i]",
 						'active' => true,
+						'body' => "$lorem",
 						'has_video' => false,
 						'views_counter' => random_int(0, 100),
 						'editor_email' => "email$i@email.com",
