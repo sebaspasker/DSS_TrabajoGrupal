@@ -44,6 +44,7 @@ class PublicationSeeder extends Seeder
 				$image_urls = [$image_url1, $image_url2, $image_url3, $image_url4, $image_url5];
 				$video_urls = [$video_url1, $video_url2, $video_url3, $video_url4, $video_url5];
 				$categories = ['CATALÁN', 'VALENCIA', 'CULTURA', 'PODER', 'POLÍTICA'];
+				$lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Itaque nostrum est-quod nostrum dico, artis est-ad ea principia, quae accepimus. Ab his oratores, ab his imperatores ac rerum publicarum principes extiterunt. Quaero igitur, quo modo hae tantae commendationes a natura profectae subito a sapientia relictae sint. Est enim effectrix multarum et magnarum voluptatum. Conferam tecum, quam cuique verso rem subicias; Sed tamen intellego quid velit. Nam si quae sunt aliae, falsum est omnis animi voluptates esse e corporis societate. Duo Reges: constructio interrete. Bonum integritas corporis: misera debilitas. Si verbum sequimur, primum longius verbum praepositum quam bonum.';
 
 				for($i = 0; $i<count($titles); $i++) {
 					\DB::table('publications')->insert(array(
@@ -53,6 +54,7 @@ class PublicationSeeder extends Seeder
 						'source' => "Source $i",
 						'image_url' => "static/img/publication/$image_urls[$i].jpg",
 						'video_url' => "static/video/$video_urls[$i]",
+						'body' => $lorem,
 						'category' => "$categories[$i]",
 						'active' => true,
 						'has_video' => false,
