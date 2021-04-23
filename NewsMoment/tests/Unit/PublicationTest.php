@@ -205,5 +205,17 @@ class PublicationTest extends TestCase
 		$this->assertEquals($publication->video_url, $search_publication->video_url);
 	}
 
+	/**
+	 * @test
+	 */
+	public function get_last_publications_controller() {
+		$this->delete_values();
+		$this->insert_values();
+		$publication_controller = new PublicationController();
+		$list_pub = $publication_controller->get_last_publications(null, 2);
+		$this->assertEquals(2, count($list_pub));
+		print($list_pub[0]["title"]);
+	}
+
 }
 

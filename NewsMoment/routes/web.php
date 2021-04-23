@@ -15,7 +15,8 @@
 Parte publica que ve todo el mundo
 */
 // INICIO
-Route::view('/', 'public/home')->name('home');
+/* Route::view('/', 'public/home')->name('home'); */
+Route::get('/', 'HomeController')->name('home');
 // ULTIMOS
 Route::view('ultimos', 'public/ultimos')->name('ultimos');
 // BUSCAR

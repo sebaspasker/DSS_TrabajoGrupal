@@ -18,4 +18,11 @@ class Publication extends Model
 	public function get_category() {
 		return $this->belongsTo(Category::class);
 	}
+
+	/**
+	 * Relation 1 to N Editor
+	 */
+	public function get_editor() {
+		return $this->belongsTo(Editor::class);
+	}
 }
