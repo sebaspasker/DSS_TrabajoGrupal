@@ -20,10 +20,13 @@ Route::get('/', 'PublicationController@home')->name('home');
 Route::get('ultimos', 'PublicationController@ultimos')->name('ultimos');
 // BUSCAR
 Route::get('buscar', 'PublicationController@buscar')->name('buscar');
+
+// PUBLICACION
+Route::get('publicacion', 'PublicationController@publicacion')->name('publicacion');
+
 // CATEGORIA
 Route::view('categoria', 'public/categoria')->name('categoria');
-// PUBLICACION
-Route::view('publicacion', 'public/publicacion')->name('publicacion');
+
 // LOGIN
 Route::view('login', 'public/login')->name('login');
 

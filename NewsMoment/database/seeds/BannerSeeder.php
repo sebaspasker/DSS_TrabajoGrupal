@@ -21,7 +21,7 @@ class BannerSeeder extends Seeder
 				\DB::table('banners')->insert(array(
 					'title' => $titles[$i],
 					'url' => "$url[$i]",
-					'image_url' => "public/static/img/banner/$image_url[$i]",
+					'image_url' => "/static/img/banner/$image_url[$i]",
 					'ranking_type' => $ranking_type[$i],
 					'is_active' => true,
 					'views_counter' => 0,

@@ -15,7 +15,7 @@
                     <a href="{{route('publicacion')}}" class="enlacePublicacion">
                         <div class="imgLeftInicio" style="background: url('{{$publication2->image_url}}') no-repeat;background-size: cover; background-position: center !important;"></div>
                             <div class="descripcionImagenLeft">
-                                <b class="text-light">{{$publication2->editor_email}}</b> - {{$publication2->created_at}}
+                                <b class="text-light">{{$publication2->editor_email}}</b> - {{$publication2->created_at->format('j F, Y')}}
                             </div>
                         <div class="tituloLeftInicio">
                              {{$publication2->title}}
@@ -30,7 +30,7 @@
                     <a href="{{route('publicacion')}}" class="enlacePublicacion">
                         <div class="imgLeftInicio" style="background: url('{{$publication3->image_url}}') no-repeat;background-size: cover; background-position: center !important;"></div>
                             <div class="descripcionImagenLeft">
-                                <b class="text-light">{{$publication3->editor_email}}</b> - {{$publication3->created_at}}
+                                <b class="text-light">{{$publication3->editor_email}}</b> - {{$publication3->created_at->format('j F, Y')}}
                             </div>
                         <div class="tituloLeftInicio">
                             {{$publication3->title}}
@@ -60,8 +60,8 @@
                         </div>
                     </a>
                 </div>
-                <a href="#" target="_blank">
-                    <img src="https://www.yonosoydiario.com/media/banners/bannercovid19ynsD.gif" alt="anuncio" class="w-100 movil mt-3 border-bottom pb-3">
+                <a href="{{$banner->url}}" target="_blank">
+                    <img src="{{$banner->image_url}}" alt="anuncio" class="w-100 movil mt-3 border-bottom pb-3">
                 </a>
             </div>
             <!-- columna derecha -->
@@ -95,8 +95,8 @@
                         </script>
                     </div>
                 </div>
-                <a href="#" target="_blank">
-                    <img src="https://www.yonosoydiario.com/media/banners/bannercovid19ynsD.gif" alt="anuncio" class="w-100 ordenador">
+                <a href="{{$banner->url}}" target="_blank">
+                    <img src="{{$banner->image_url}}" alt="anuncio" class="w-100 ordenador">
                 </a>
             </div>
         </div>

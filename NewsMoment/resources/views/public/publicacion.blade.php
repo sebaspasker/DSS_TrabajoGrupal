@@ -12,19 +12,15 @@
 			<div class="row m-0">
 				<div class="col-12 p-0">
 					<a href="{{route('categoria')}}" class="categoriaEtiqueta">
-					Política<span class="icon-chevron-right"></span>
+					{{ $publication->category }}<span class="icon-chevron-right"></span>
 					</a>
 				</div>
 			</div>
 			<div class="tituloPublicacion">
-                Unidas Podemos no tolerará el “pinkwashing” de Barcala con el Plan LGTBI 
-                y le exige “romper con la ultraderecha” para aplicarlo
+                {{ $publication->title }}
             </div>
 			<div class="subtituloPublicacion">
-                La coalición critica “la falta de palabra” de la concejala Mari Carmen Sánchez 
-                al no facilitar el documento ni a las entidades sociales ni a los grupos políticos, 
-                como se comprometió, antes de su aprobación en la junta de gobierno y critica 
-                que nazca sin presupuesto con la complacencia del Partido Socialista
+               {{ $publication->subtitle }}
             </div>
 			<!-- 
 				autor de la publicasión
@@ -39,9 +35,9 @@
 				</div>
 			</a>
 			<div class="fechaPublicacion">
-				Abr. 21, 2021, 3:06 p.m. 
+				{{ $publication->created_at->format('j F, Y')}}
 				<label class="visitasPublicacion mt-2 ml-3">
-					100 <span class="icon-eye ml-1"></span>
+					{{ $publication->views_counter }} <span class="icon-eye ml-1"></span>
 				</label>
 			</div>
 		</div>
@@ -73,7 +69,7 @@
 							imagen de la publicación 
 						-->
 						<div class="col-12 p-0">
-							<div class="imagenPublicacion mb-1" style="background: url('https://ep01.epimg.net/politica/imagenes/2016/06/29/actualidad/1467185738_087126_1467185863_noticia_normal_recorte1.jpg') no-repeat;background-size: cover; background-position: center !important;"></div>
+							<div class="imagenPublicacion mb-1" style="background: url('{{ $publication->image_url }}') no-repeat;background-size: cover; background-position: center !important;"></div>
 							<!-- source de la publicacion -->
                             <p class="text-right mb-0 fuenteImg text-light">Fuente de la imagen</p> 
 						</div>

@@ -29,7 +29,7 @@
 									{{$publication->subtitle}}
 								</div>
 								<div class="descripcionImagenLeft">
-									<b class="text-light">{{$publication->editor_email}}</b> - {{$publication->created_at}}
+									<b class="text-light">{{$publication->editor_email}}</b> - {{$publication->created_at->format('j F, Y')}}
 								</div>
 							</div>
 						</div>
@@ -37,10 +37,7 @@
 				</div>
 			@endforeach
 
-
-
-			<div class="col-12">
-
+			<div class="col-12  p-0 m-0">
 				{{ $publications->links() }}
 			</div>
 		</div>
