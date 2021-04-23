@@ -19,7 +19,9 @@
                             </div>
                         <div class="tituloLeftInicio">
 														{{ $pub_params['publication2']['title'] }}
-                        </div>
+                            Unidas Podemos no tolerará el “pinkwashing” de Barcala con el Plan LGTBI 
+                            y le exige “romper con la ultraderecha” para aplicarlo
+                        </div> 
                         <div class="subtituloLeftInicio movil">
 														{{ $pub_params['publication2']['subtitle'] }}
                         </div>
@@ -60,10 +62,6 @@
                         </div>
                     </a>
                 </div>
-                <a href="#" target="_blank">
-                    <img src="https://www.yonosoydiario.com/media/banners/bannercovid19ynsD.gif" alt="anuncio" class="w-100 movil mt-3 border-bottom pb-3">
-                </a>
-            </div>
             <!-- columna derecha -->
             <div class="col-md-3 border-sm-left order-3">
                 <div class="rightInicio  border-bottom">

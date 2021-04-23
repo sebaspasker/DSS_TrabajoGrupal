@@ -136,7 +136,6 @@ class PublicationController extends Controller
 		return $publications;
 	}
 
-
 	/**
 	 * Get x last publications id
 	 * @val number 
@@ -152,5 +151,24 @@ class PublicationController extends Controller
 		}
 
 		return $x_publication;
+	}
+
+	public function home() {
+		$publications = Publication::orderBy('id', 'desc')->limit(3)->get();
+
+		$info = [
+			'publication1' => $publications[0],
+			'publication2' => $publications[1],
+			'publication3' => $publications[2],
+		];
+
+		return view('public/home', $info);
+	}
+
+
+
+	public function ultimos() {
+		$publications = Publication::orderBy('id', 'desc')->paginate(10);
+		return view('public/ultimos', ['publications' => $publications]);
 	}
 }
