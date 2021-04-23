@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use App\Http\Controllers\UtilController;
 
 class CategorySeeder extends Seeder
 {
@@ -12,15 +13,15 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-		 $faker = Faker::create();
-	
-			for ($i=0; $i < 25; $i++)
+		 $categories = ['CATALÁN', 'VALENCIA', 'CULTURA', 'PODER', 'POLÍTICA', 'LUJO'];
+		 $images = ['catalan', 'valencia', 'cultura', 'poder', 'política', 'lujo'];
+			for ($i=0; $i < count($categories); $i++)
 			{
 				\DB::table('categories')->insert(array(
-					'name' => "Category$i",
-					'slugname' => $faker->firstNameFemale,
-					'imagen' => "Image$i"
+					'name' => "$categories[$i]",
+					'slugname' => UtilController::slugify($categories[$i]),
+					'imagen' => "static/img/categories/$images[$i].jpg",
 				));
-				}
+			}
     }
 }

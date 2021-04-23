@@ -13,18 +13,20 @@ class BannerSeeder extends Seeder
     public function run()
     {
 		 $faker = Faker::create();
+		 /*
 	
 			for ($i=0; $i < 25; $i++)
 			{
 				\DB::table('banners')->insert(array(
-					'title' => $faker-> firstNameFemale,
-					'url' => $faker-> firstNameFemale,
-					'image_url' => $faker-> firstNameFemale,
+					'title' => "BANNER$i",
+					'url' => "URL$i",
+					'image_url' => "IMAGE_URL$i",
 					'ranking_type' => random_int(0, 100),
 					'is_active' => false,
 					'views_counter' => random_int(0, 100),
 					'company_name' => "_company$i",
 				));
 			}
+			*/
 		}
 }

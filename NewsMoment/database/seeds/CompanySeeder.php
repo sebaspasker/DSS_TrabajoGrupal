@@ -11,13 +11,15 @@ class CompanySeeder extends Seeder
      */
     public function run()
     {
-			for ($i=0; $i < 25; $i++)
-			{
-				\DB::table('companies')->insert(array(
-					'name' => "_company$i",
-					'image_url' => "_image$i",
-					'is_active' => false,
-				));
+			$companies = ['Árboles Ferrol', 'S.A. Artisan', 'S.L. Cars', 'Pipe the Line', 'S.S.S.A.A.A'];
+			$images = ['image_company1','image_company2','image_company3','image_company4','image_company5'];
+			for($i=0; $i< count($companies); $i++) {
+			\DB::table('companies')->insert(array(
+				'name' => "$companies[$i]",
+				'image_url' => "$images[$i]",
+				'is_active' => true,
+			));
+			
 			}
-    }
+		}
 }
