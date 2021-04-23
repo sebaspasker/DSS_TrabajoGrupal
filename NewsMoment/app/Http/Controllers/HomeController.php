@@ -21,11 +21,14 @@ class HomeController extends Controller
 			$editor2 = User::where('email', $publications[1]->editor_email)->first();
 			$editor3 = User::where('email', $publications[2]->editor_email)->first();
 
-			if($publications[0]['created_at'] != null) $date1 = UtilController::getCreatedAtAttribute($publications[0]['created_at']);
+			if($publications[0]['created_at'] != null) 
+				$date1 = UtilController::getCreatedAtAttribute($publications[0]['created_at']);
 			else $date1 = "";
-			if($publications[1]['created_at'] != null) $date2 = UtilController::getCreatedAtAttribute($publications[1]['created_at']);
+			if($publications[1]['created_at'] != null) 
+				$date2 = UtilController::getCreatedAtAttribute($publications[1]['created_at']);
 			else $date2 = "";
-			if($publications[2]['created_at'] != null) $date3 = UtilController::getCreatedAtAttribute($publications[2]['created_at']);
+			if($publications[2]['created_at'] != null)
+			 	$date3 = UtilController::getCreatedAtAttribute($publications[2]['created_at']);
 			else $date3 = "";
 			$pub_params = [
 				'publication1' => $publications[0],

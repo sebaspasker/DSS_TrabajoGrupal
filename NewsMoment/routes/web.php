@@ -18,7 +18,8 @@ Parte publica que ve todo el mundo
 /* Route::view('/', 'public/home')->name('home'); */
 Route::get('/', 'HomeController')->name('home');
 // ULTIMOS
-Route::view('ultimos', 'public/ultimos')->name('ultimos');
+/* Route::view('ultimos', 'public/ultimos')->name('ultimos'); */
+Route::get('ultimos/{pag?}', 'UltimosController')->name('ultimos');
 // BUSCAR
 Route::view('buscar', 'public/buscar')->name('buscar');
 // CATEGORIA
