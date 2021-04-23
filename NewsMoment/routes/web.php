@@ -4,7 +4,7 @@
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
+
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
@@ -15,9 +15,9 @@
 Parte publica que ve todo el mundo
 */
 // INICIO
-Route::view('/', 'public/home')->name('home');
+Route::get('/', 'PublicationController@home')->name('home');
 // ULTIMOS
-Route::view('ultimos', 'public/ultimos')->name('ultimos');
+Route::get('ultimos', 'PublicationController@ultimos')->name('ultimos');
 // BUSCAR
 Route::view('buscar', 'public/buscar')->name('buscar');
 // CATEGORIA

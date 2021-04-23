@@ -132,9 +132,32 @@ class PublicationController extends Controller
 			$publications = Publication::where('category_name', 'LIKE', "%$category_name%")->get();
 			if($publications == null) return false;
 		} catch(exception $e) {
-			print("EXCEPTION: $e->getMessage()");
+			//print("EXCEPTION: $e->getMessage()");
 			return false;
 		}
 		return $publications;
 	}
+
+
+
+	public function home() {
+		$publications = Publication::orderBy('id', 'desc')->limit(3)->get();
+
+		$info = [
+			'publication1' => $publications[0],
+			'publication2' => $publications[1],
+			'publication3' => $publications[2],
+		];
+
+		return view('public/home', $info);
+	}
+
+
+
+	public function ultimos() {
+		$publications = Publication::orderBy('id', 'desc')->paginate(10);
+		return view('public/ultimos', ['publications' => $publications]);
+	}
+
+
 }
