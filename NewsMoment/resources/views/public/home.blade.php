@@ -13,55 +13,57 @@
                 <!-- ejemplo de publicación 1 -->
                 <div class="leftInicio border-bottom">
                     <a href="{{route('publicacion')}}" class="enlacePublicacion">
-                        <div class="imgLeftInicio" style="background: url({{ $pub_params['publication2']['image_url'] }}) no-repeat;background-size: cover; background-position: center !important;"></div>
+                        <div class="imgLeftInicio" style="background: url('{{$publication2->image_url}}') no-repeat;background-size: cover; background-position: center !important;"></div>
                             <div class="descripcionImagenLeft">
-                                <b class="text-light">{{ $pub_params['editor1'] }}<!--Raúl Sigüenza--></b> - {{ $pub_params['date2'] }}
+                                <b class="text-light">{{$publication2->editor_email}}</b> - {{$publication2->created_at}}
                             </div>
                         <div class="tituloLeftInicio">
-														{{ $pub_params['publication2']['title'] }}
-                            Unidas Podemos no tolerará el “pinkwashing” de Barcala con el Plan LGTBI 
-                            y le exige “romper con la ultraderecha” para aplicarlo
+                             {{$publication2->title}}
                         </div> 
-                        <div class="subtituloLeftInicio movil">
-														{{ $pub_params['publication2']['subtitle'] }}
+                        <div class="subtituloLeftInicio">
+                            {{$publication2->subtitle}}
                         </div>
                     </a>
                 </div>
                 <!-- ejemplo de publicación 2 -->
                 <div class="leftInicio border-only-sm-bottom mb-md-0 pb-md-0">
                     <a href="{{route('publicacion')}}" class="enlacePublicacion">
-                        <div class="imgLeftInicio" style="background: url({{ $pub_params['publication3']['image_url'] }}) no-repeat;background-size: cover; background-position: center !important;"></div>
+                        <div class="imgLeftInicio" style="background: url('{{$publication3->image_url}}') no-repeat;background-size: cover; background-position: center !important;"></div>
                             <div class="descripcionImagenLeft">
-                                <b class="text-light">{{ $pub_params['editor3'] }}</b> - {{ $pub_params['date3'] }}
+                                <b class="text-light">{{$publication3->editor_email}}</b> - {{$publication3->created_at}}
                             </div>
                         <div class="tituloLeftInicio">
-														{{ $pub_params['publication3']['title'] }}
+                            {{$publication3->title}}
                         </div>
-                        <div class="subtituloLeftInicio movil">
-														{{ $pub_params['publication3']['subtitle'] }}
+                        <div class="subtituloLeftInicio">
+                            {{$publication3->subtitle}}
                         </div>
                     </a>
                 </div>
             </div>
             <!-- 
             columna central 
-            -->
+            -->      
             <div class="col-md-6 pb-4  order-md-2 order-1 mb-md-0 pb-md-0">
                 <div class="centerInicio border-only-sm-bottom pb-md-0 pb-4">
                     <a href="{{route('publicacion')}}" class="enlacePublicacion">
                         <div class="imgCenterInicio mb-3"
-                            style="background: url({{ url($pub_params['publication1']['image_url']) }}) no-repeat;background-size: cover; background-position: center !important;">
+                            style="background: url('{{$publication1->image_url}}') no-repeat;background-size: cover; background-position: center !important;">
                         </div>
                         <div class="descripcionImagenLeft text-center">
-                            <b class="text-light"> {{ $pub_params['editor1'] }}</b> - {{ $pub_params['date1'] }}</div>
+                            <b class="text-light">{{$publication1->editor_email}}</b> - {{$publication1->created_at->format('j F, Y')}}</div>
                         <div class="tituloCenterInicio">
-														{{ $pub_params['publication1']['title'] }}
+                            {{$publication1->title}}
                         </div>
                         <div class="subtituloCenterInicio">
-														{{ $pub_params['publication1']['subtitle'] }}
+                            {{$publication1->subtitle}}
                         </div>
                     </a>
                 </div>
+                <a href="#" target="_blank">
+                    <img src="https://www.yonosoydiario.com/media/banners/bannercovid19ynsD.gif" alt="anuncio" class="w-100 movil mt-3 border-bottom pb-3">
+                </a>
+            </div>
             <!-- columna derecha -->
             <div class="col-md-3 border-sm-left order-3">
                 <div class="rightInicio  border-bottom">

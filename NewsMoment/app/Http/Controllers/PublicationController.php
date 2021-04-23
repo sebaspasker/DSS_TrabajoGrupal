@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Publication;
 use App\Category;
+use App\Banner;
 use Exception;
 
 class PublicationController extends Controller
@@ -155,11 +156,13 @@ class PublicationController extends Controller
 
 	public function home() {
 		$publications = Publication::orderBy('id', 'desc')->limit(3)->get();
+		$banner = Banner::take(rand(1,5))->get();
 
 		$info = [
 			'publication1' => $publications[0],
 			'publication2' => $publications[1],
 			'publication3' => $publications[2],
+			'banner' => $banner,
 		];
 
 		return view('public/home', $info);
@@ -168,7 +171,20 @@ class PublicationController extends Controller
 
 
 	public function ultimos() {
-		$publications = Publication::orderBy('id', 'desc')->paginate(10);
+		$publications = Publication::orderBy('id', 'desc')->paginate(4);
 		return view('public/ultimos', ['publications' => $publications]);
 	}
+
+
+	public function buscar(Request $request) {
+		$query = $request->get('q');
+
+		$info = [
+			'publications' => Publication::where('title', 'LIKE', "%$query%")->paginate(4),
+			'query' => $query,
+		];
+
+		return view('public/buscar', $info);
+	}
+
 }

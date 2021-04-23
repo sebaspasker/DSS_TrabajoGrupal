@@ -1297,6 +1297,21 @@ footer a:hover {
     margin-bottom: 10px;
 }
 
+.page-item.active .page-link{
+    background-color: #ff7c60 !important;
+    border-color: #ff7c60 !important;
+    color: #fff !important
+}
+
+
+.pagination span,
+.page-item a{
+    background-color: #1d1d1d!important;
+    border-color: #000!important;
+    color: #fff!important
+}
+
+
 @media (max-width: 900px) {
     .contenedorPrincipal {
         margin-top: 70px;

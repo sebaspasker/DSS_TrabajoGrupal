@@ -19,7 +19,7 @@
 					<a class="enlace" href="{{ route('publicacion') }}">
 						<div class="row m-0">
 							<div class="col-5 p-0">
-								<div class="imagenUltimos" style="background: url('https://ep01.epimg.net/politica/imagenes/2016/06/29/actualidad/1467185738_087126_1467185863_noticia_normal_recorte1.jpg') no-repeat;background-size: cover; background-position: center !important;"></div>
+								<div class="imagenUltimos" style="background: url('{{$publication->image_url}}') no-repeat;background-size: cover; background-position: center !important;"></div>
 							</div>
 							<div class="col-7 pl-4 pr-0">
 								<div class="tituloPublicacionUltimos">

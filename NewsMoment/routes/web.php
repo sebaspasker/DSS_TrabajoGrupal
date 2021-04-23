@@ -19,7 +19,7 @@ Route::get('/', 'PublicationController@home')->name('home');
 // ULTIMOS
 Route::get('ultimos', 'PublicationController@ultimos')->name('ultimos');
 // BUSCAR
-Route::view('buscar', 'public/buscar')->name('buscar');
+Route::get('buscar', 'PublicationController@buscar')->name('buscar');
 // CATEGORIA
 Route::view('categoria', 'public/categoria')->name('categoria');
 // PUBLICACION
