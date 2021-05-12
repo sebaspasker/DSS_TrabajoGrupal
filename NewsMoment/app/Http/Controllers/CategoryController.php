@@ -38,7 +38,7 @@ class CategoryController extends Controller
     {
         $category = new Category();
         $category->name=$request->get('name');
-        $category->slugname=$request->get('slugname');
+        $category->slugname=sanearstring($request->get('name'));
         $category->image=$request->get('image');
 
         $category->save();
@@ -118,7 +118,7 @@ function sanear_string($string){
         $category = Category::find($id);
         // $category = new Category();
         $category->name = $request->get('name');
-        $category->slugname = $request->get('sanear_string(name)');
+        $category->slugname = sanearstring($request->get('name'));
         $category->image = $request->get('image');
         $category->save();
         return redirect('/category');
