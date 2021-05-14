@@ -30,7 +30,8 @@ Route::view('categoria', 'public/categoria')->name('categoria');
 // LOGIN
 Route::view('login', 'public/login')->name('login');
 
-
+//BANNER
+Route::resource('banner', 'BannerController');
 
 
 /*
