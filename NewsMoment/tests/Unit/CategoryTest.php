@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use Tests\TestCase; 
 use App\Category;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Deprecated\CategoryController;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CategoryTest extends TestCase

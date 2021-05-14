@@ -2,10 +2,15 @@
 
 namespace Tests\Unit;
 
+/***
+ *
+ * DEPRECATED
+ */
+
 /* use PHPUnit\Framework\TestCase; */
 use Tests\TestCase; 
 use App\User;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Deprecated\UserController;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserTest extends TestCase

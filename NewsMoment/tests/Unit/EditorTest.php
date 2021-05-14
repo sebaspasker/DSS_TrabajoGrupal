@@ -6,7 +6,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Editor;
 use App\User;
-use App\Http\Controllers\EditorController;
+use App\Http\Controllers\Deprecated\EditorController;
 use Exception;
 
 class EditorTest extends TestCase
