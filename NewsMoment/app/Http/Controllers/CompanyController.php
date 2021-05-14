@@ -36,6 +36,8 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, ['name'=>'required|unique|max:35',
+                                    'image_url'=>'mimes:jpg,png']);
         $company = new Company();
         $company->name=$request->get('name');
         $company->is_active=true;
@@ -78,6 +80,8 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, ['name'=>'required|unique|max:35',
+                                    'image_url'=>'mimes:jpg,png']);
         $company = Company::find($id);
 
         $company->name=$request->get('name');

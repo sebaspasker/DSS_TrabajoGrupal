@@ -36,6 +36,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, ['name'=>'required|unique|max:35',
+                                    'image_url'=>'mimes:jpg,png']);
         $category = new Category();
         $category->name=$request->get('name');
         $category->slugname=sanearstring($request->get('name'));
@@ -114,7 +116,10 @@ function sanear_string($string){
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, ['name'=>'required|unique|max:35',
+                                    'image'=>'mimes:jpg,png']);
         $category = Category::find($id);
         // $category = new Category();
         $category->name = $request->get('name');

@@ -82,6 +82,13 @@ class PublicationController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, ['title'=>'required|max:35',
+                                    'subtitle'=>'required|max:50',
+                                    'source'=>'required|max:100',
+                                    'body'=>'required|max:255',
+                                    'image_url'=>'mimes:jpg,png',
+                                    'video_url'=>'mimes:mp4,avi',
+                                    'category'=>'required|exists:category']);
         $publication = new Publication();
         $publication->slugname=sanearstring($request->get('title'));
         $publication->title=$request->get('title');
@@ -92,7 +99,7 @@ class PublicationController extends Controller
         $publication->body=$request->get('body');
         $publication->category=$request->get('category');
         $publication->active=true;
-        if($request->get('subtitle')!=NULL)
+        if($request->get('video_url')!=NULL)
             $publication->has_video=true;
         else
             $publication->has_video=false;
@@ -111,6 +118,9 @@ class PublicationController extends Controller
     public function show($id)
     {
         $publication=Publication::find($id);
+        $publication->views_counter=$publication->views_counter+1;
+        $publication->save();
+
         return view('publication.index')->with('publication', $publication);
     }
 
@@ -135,6 +145,11 @@ class PublicationController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, ['title'=>'required|max:35',
+                                    'subtitle'=>'required|max:50',
+                                    'source'=>'required|max:100',
+                                    'body'=>'required|max:255',
+                                    'category'=>'required|exists:category']);
         $publication=Publication::find($id);
         $publication->slugname=sanearstring($request->get('title'));
         $publication->title=$request->get('title');
