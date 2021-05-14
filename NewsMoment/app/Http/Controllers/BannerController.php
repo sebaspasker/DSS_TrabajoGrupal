@@ -9,122 +9,53 @@ use Exception;
 
 class BannerController extends Controller
 {
-	/**
-	 * @var Banner Model
-	 */
-	public $banner;
-
-
-	/**
-	 * @var Company Model
-	 */
-	public $company;
-
-	function __construct() {
-		$this->banner = new Banner();
-		$this->company = new Company();
-	}
-
-	/** Insert a banner
-	 * @val in_banner Banner model
-	 * @return bool 
-	 */
-	public function insert_banner($in_banner = null) {
-		if($in_banner != null) $this->banner = $in_banner;
-
-		try {
-			if(empty($this->banner->company_name)) throw new Exception("Company name can't be empty");
-			if(empty($this->banner->title)) throw new Exception("Title can't be empty");
-			// Insert banner
-			$this->banner->save();
-		} catch(exception $e) {
-			return false;
+	public function index()
+		{
+			$banners=Banner::orderBy('id','ASC');
+			return view('Banner.index',compact('banners'));
 		}
 
-		return true;
-	}
 
-	/**
-	 * Delete a banner
-	 * @val in_banner Banner model
-	 * @return bool
-	 */
-	public function delete_banner($in_banner = null) {
-			if($in_banner != null) $title = $in_banner->title;
-			else $title = $this->banner->title;
-
-		try {
-			$old_banner = Banner::where('title', $title)->first();
-			if($old_banner == null) throw new Exception("None banner to delete");
-			else $old_banner->delete(); // Delete banner
-		} catch (Exception $e) {
-			return false;
+		public function create()
+		{
+			return view('Banner.create');
 		}
 
-	return true;
 
-	}
+		public function store(Request $request)
+		{
+			$this->validate($request,['title'=>'required','url'=>'required','imagen'=>'required','company_name'=>'required','ranking_type'=>'required','is_active'= true]);
+			Banner::create($request->all());
+			return redirect()->route('banner.index')->with('success','Banner creado correctamente');
 
-	/**
-	 * Modify a banner
-	 * @val in_banner Banner Model
-	 * @return bool
-	 */
-	public function modify_banner($in_banner = null) {
-		if($in_banner != null) $this->banner = $in_banner;
-
-		try {
-			// Search banner in database
-			$old_banner = Banner::where('title', $this->banner->title)->first();
-			if($old_banner == null) throw new Exception("None banner to modify");
-			else {
-				// Modify values
-				if($old_banner->url != $this->banner->url) 
-					$old_banner->url = $this->banner->url;
-
-				if($old_banner->ranking_type != $this->banner->ranking_type) 
-					$old_banner->ranking_type = $this->banner->ranking_type;
-
-				if($old_banner->views_counter != $this->banner->views_counter) 
-					$old_banner->views_counter = $this->banner->views_counter;
-
-				if($old_banner->is_active != $this->banner->is_active) 
-					$old_banner->is_active = $this->banner->is_active;
-
-				if($old_banner->image_url != $this->banner->image_url) 
-					$old_banner->image_url = $this->banner->image_url;
-				$old_banner->save(); // Save values in banner
-			}
-		} catch (Exception $e) {
-			return false;	
+	
 		}
 
-		return true;
-	}
-
-	/**
-	 * List banners search
-	 * @val in_banner Banner Model
-	 * @val company_name 
-	 * @return bool or array
-	 */
-	public function list_banners($in_banner = null, $title = "") {
-		if($title == "") {
-			if($in_banner != null) $title = $in_banner->title;
-			else $title = $this->banner->title;
+	   
+		public function show($id)
+		{
+			$banners=Banner::find($id);
+			return view('banners.show',compact('banners'));
 		}
 
-		try {
-			// Search banners
-			$banners = Banner::where('title', 'LIKE', "%$title%")->get();
-			if($banners == null) return false;
-			else {
-				return $banners;
-			}
-		} catch(exception $e) {
-			return false;
+
+		public function edit($id){
+			$banners = banners::find($id);
+			return view('banners.edit',compact('banners'));
 		}
 
-		return false;
-	}
+
+
+		public function update(Request $request, $id){
+			$this->validate($request,['title'=>'required','url'=>'required','imagen'=>'required','company_name'=>'required','ranking_type'=>'required','is_active'= true]);
+			Banner::find($id)->update($request->all());
+			return redirect()->route('banner.index')->with('success','Banner actualizado correctamente');
+		}
+
+	   
+		public function destroy($id)
+		{
+			Banner::find($id)->delete();
+			return redirect()->route('banners.index')->with('success','Banner eliminado correctamente');
+		}
 }
