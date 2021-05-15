@@ -25,10 +25,24 @@ class BannerController extends Controller
 		public function store(Request $request)
 		{
 			$this->validate($request,['title'=>'required','url'=>'required','imagen'=>'required','company_name'=>'required','ranking_type'=>'required','is_active'= true]);
-			Banner::create($request->all());
-			return redirect()->route('banner.index')->with('success','Banner creado correctamente');
-
-	
+			$count =Banner::where('title',$request->title)->count();
+			$count2 =Banner::where('company_name',$request->company_name)->count();
+			if($count<=0)
+			{
+				return redirect()->route('banner.index')->withErrors('El título introducido ya existe en la BD');
+			}
+			else
+			{
+				if($banner2==0)
+				{
+					return redirect()->route('banner.index')->withErrors('La compañía introducida no existe');
+				}
+				else
+				{
+					Banner::create($request->all());
+					return redirect()->route('banner.index')->with('success','Banner creado correctamente');
+				}
+			}
 		}
 
 	   
@@ -48,8 +62,24 @@ class BannerController extends Controller
 
 		public function update(Request $request, $id){
 			$this->validate($request,['title'=>'required','url'=>'required','imagen'=>'required','company_name'=>'required','ranking_type'=>'required','is_active'= true]);
-			Banner::find($id)->update($request->all());
-			return redirect()->route('banner.index')->with('success','Banner actualizado correctamente');
+			
+			$count =Banner::where('title',$request->title)->count();
+			$count2 =Banner::where('company_name',$request->company_name)->count();
+			if($count<=0)
+			{
+				return redirect()->route('banner.index')->withErrors('El título introducido ya existe en la BD');
+			}
+			else
+			{
+				if($banner2==0)
+				{
+					return redirect()->route('banner.index')->withErrors('La compañía introducida no existe');
+				}
+				else
+				{
+					Banner::find($id)->update($request->all());
+					return redirect()->route('banner.index')->with('success','Banner actualizado correctamente');
+				}
 		}
 
 	   

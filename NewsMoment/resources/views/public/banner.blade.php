@@ -10,6 +10,12 @@
 	<input type="text" name = "company_name" placeholder="Nombre de la empresa">
 	<br>
 	<button> Enviar</button>
+	<br>
+	<button> Modificar</button>
+	<br>
+	<button> Borrar</button>
+	<br>
+	<button> Mostrar</button>
 
 
 </form>
