@@ -11,11 +11,15 @@ class CategoryController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $categories=Category::all();
-        return view('category.index')->with('categories', $categories);
+     */ 
+    public function index(){
+        $categories = Category::all();
+
+        $info = [
+            'categories' => $categories,
+		];
+
+		return view('manager/categorias', $info);
     }
 
     /**
@@ -39,11 +43,11 @@ class CategoryController extends Controller
         $this->validate($request, ['name'=>'required|unique|max:35',
                                     'image_url'=>'mimes:jpg,png']);
         $category = new Category();
-        $category->name=$request->get('name');
-        $category->slugname=sanearstring($request->get('name'));
+        $category->name = $request->get('name');
+        $category->slugname = sanearstring($request->get('name'));
         $category->image=$request->get('image');
-
         $category->save();
+        
         return redirect('/category');
     }
 
@@ -53,8 +57,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id){
         $category=Category::find($id);
         return view('category.index')->with('category', $category);
     }
