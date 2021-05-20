@@ -2,89 +2,147 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
 use Illuminate\Http\Request;
-use Exception;
+use App\Category;
 
 class CategoryController extends Controller
 {
-	private $category;
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */ 
+    public function index(){
+        $categories = Category::all();
 
-	
-	private function insert_data_category($name, $slugname, $imagen) : Category {
-		$category = new Category();
+        $info = [
+            'categories' => $categories,
+		];
 
-		if($name != "") {
-			$category->name = $name;
-		}
+		return view('manager/categorias', $info);
+    }
 
-		if($slugname != "") {
-			$category->slugname = $slugname;
-		}
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('category.create');
+    }
 
-		if($imagen != "") {
-			$category->imagen = $imagen;
-		}
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $this->validate($request, ['name'=>'required|unique|max:35',
+                                    'image_url'=>'mimes:jpg,png']);
+        $category = new Category();
+        $category->name = $request->get('name');
+        $category->slugname = sanearstring($request->get('name'));
+        $category->image=$request->get('image');
+        $category->save();
+        
+        return redirect('/category');
+    }
 
-		return $category;
-	}
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id){
+        $category=Category::find($id);
+        return view('category.index')->with('category', $category);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id){
+        $category = Category::find($id);
+        return view('category.edit')->with('categories', $category);
+    }
 
 
-	public function insert_category($in_category = null, $name = "", $slugname = "", $imagen = "") : bool {
-		if($in_category != null) $category = $in_category;
-		else $category = $this->insert_data_category($name, $slugname, $imagen);
-			
-		try {
-			if(empty($category->name)) throw new Exception("Name can't be empty");
-			$category->save();
-		} catch(exception $e) {
-			return false;
-		}
-
-		return true;
-	}
 
 
-	
-	public function delete_category($in_category = null, $name = "") : bool {
-		if(!empty($in_category->name)) $name = $in_category->name;
-		try {
-			$old_category = Category::where('name', $name)->first();
-			if ($old_category == null) throw new Exception('None category to delete');
-			else $old_category->delete();
-		} catch(exception $e) {
-			return false;
-		}
+function sanear_string($string){
+    $string = trim($string); 
+    $string = str_replace(
+        array('á', 'à', 'ä', 'â', 'ª', 'Á', 'À', 'Â', 'Ä'),
+        array('a', 'a', 'a', 'a', 'a', 'A', 'A', 'A', 'A'),
+        $string
+    );
+    $string = str_replace(
+        array('é', 'è', 'ë', 'ê', 'É', 'È', 'Ê', 'Ë'),
+        array('e', 'e', 'e', 'e', 'E', 'E', 'E', 'E'),
+        $string
+    );
+    $string = str_replace(
+        array('í', 'ì', 'ï', 'î', 'Í', 'Ì', 'Ï', 'Î'),
+        array('i', 'i', 'i', 'i', 'I', 'I', 'I', 'I'),
+        $string
+    );
+    $string = str_replace(
+        array('ó', 'ò', 'ö', 'ô', 'Ó', 'Ò', 'Ö', 'Ô'),
+        array('o', 'o', 'o', 'o', 'O', 'O', 'O', 'O'),
+        $string
+    );
+    $string = str_replace(
+        array('ú', 'ù', 'ü', 'û', 'Ú', 'Ù', 'Û', 'Ü'),
+        array('u', 'u', 'u', 'u', 'U', 'U', 'U', 'U'),
+        $string
+    );
+    $string = str_replace(
+        array('ñ', 'Ñ', 'ç', 'Ç'),
+        array('n', 'N', 'c', 'C',),
+        $string
+    ); 
+    return $string;
+}
 
-		return true;
-	}
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, ['name'=>'required|unique|max:35',
+                                    'image'=>'mimes:jpg,png']);
+        $category = Category::find($id);
+        // $category = new Category();
+        $category->name = $request->get('name');
+        $category->slugname = sanearstring($request->get('name'));
+        $category->image = $request->get('image');
+        $category->save();
+        return redirect('/category');
+    }
 
-	public function modify_category($in_category = null, $name = "", $slugname = "", $imagen = "") : bool {
-		if($in_category != null) $category = $in_category;
-		else $category = $this->insert_data_category($name, $slugname, $imagen);
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $category=Category::find($id);
+        $category->delete();
 
-		try {
-			$old_category = new Category();
-			$old_category = Category::where('name', $category->name)->first();
-			if($old_category == null) throw new Exception("None category to modify");
-			else {
-				$old_category->imagen = $category->imagen;
-				$old_category->slugname = $category->slugname;
-				$old_category->save();
-			}
-		} catch (Exception  $e) {
-			return false;
-		}
-
-		return true;
-	}
-
-	public function list_category($in_category = null, $name = "") {
-		if($in_category != null) $name = $in_category->name;
-
-		$categories = Category::where('name', 'LIKE', "%$name%")->get();
-		if($categories == null) return false;
-		return $categories;
-	}
+        return redirect('/category');
+    }
 }

@@ -47,9 +47,13 @@ Route::view('manager/empresas', 'manager/empresas')->name('manager_empresas');
 Route::view('manager/empresa/nueva', 'manager/nueva_empresa')->name('manager_nueva_empresa');
 
 // categorias
-Route::view('manager/categorias', 'manager/categorias')->name('manager_categorias');
+//Route::view('manager/categorias', 'manager/categorias')->name('manager_categorias');
+
+
 // nueva categoria
 Route::view('manager/categoria/nueva', 'manager/nueva_categoria')->name('manager_nueva_categoria');
 
 
 
+// listado categorias
+Route::get('manager/categorias', 'CategoryController@index')->name('manager_categorias');
