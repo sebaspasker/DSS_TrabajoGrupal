@@ -15,7 +15,12 @@ class CompanyController extends Controller
     public function index()
     {
         $companies=Company::all();
-        return view('company.index')->with('companies', $companies);
+
+        $info = [
+            'companies' => $companies,
+		];
+
+        return view('manager/companies',$info);
     }
 
     /**
@@ -25,7 +30,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view('company.create');
+        return view('manager/company_nueva');
     }
 
     /**
@@ -36,15 +41,18 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['name'=>'required|unique|max:35',
-                                    'image_url'=>'mimes:jpg,png']);
+        $this->validate($request, ['name'=>'required|max:35',
+                                    'image_url'=>'required|image']);
         $company = new Company();
         $company->name=$request->get('name');
         $company->is_active=true;
-        $company->image_url=$request->get('image_url');
+        $company->image_url=$request->file('image_url');
+        $nombreimagen=time().".".$company->image_url->getClientOriginalExtension();
+        $destino=public_path("static/img/companies/");
+        $company->image_url->move($destino, $nombreimagen);
 
         $company->save();
-        return redirect('/company');
+        return redirect('manager/companies');
     }
 
     /**
@@ -55,8 +63,13 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        $company=Company::find($id);
-        return view('company.index')->with('company', $company);
+        $companies=Company::find($id);
+
+        $info = [
+            'companies' => $companies,
+		];
+
+        return view('manager/company')->with('companies', $info);
     }
 
     /**
@@ -67,8 +80,13 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        $company=Company::find($id);
-        return view('company.edit')->with('companies', $company);
+        $companies=Company::find($id);
+
+        $info = [
+            'companies' => $companies,
+		];
+
+        return view('manager/company_editar')->with('companies', $info);
     }
 
     /**
@@ -80,15 +98,19 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, ['name'=>'required|unique|max:35',
-                                    'image_url'=>'mimes:jpg,png']);
+        $this->validate($request, ['name'=>'required|max:35',
+                                    'image_url'=>'image']);
         $company = Company::find($id);
 
         $company->name=$request->get('name');
-        $company->image_url=$request->get('image_url');
+        $company->is_active=true;
+        $company->image_url= $request->file('image_url');
+        $nombreimagen=time().".".$company->image_url->getClientOriginalExtension();
+        $destino=public_path("static/img/companies/");
+        $company->image_url->move($destino, $nombreimagen);
 
         $company->save();
-        return redirect('/company');
+        return redirect('manager/companies');
     }
 
     public function update_to_false($id)
@@ -98,7 +120,7 @@ class CompanyController extends Controller
         $company->is_active=false;
 
         $company->save();
-        return redirect('/company');
+        return redirect('manager/companies');
     }
 
 
@@ -109,7 +131,7 @@ class CompanyController extends Controller
         $company->is_active=true;
 
         $company->save();
-        return redirect('/company');
+        return redirect('manager/companies');
     }
 
     /**
@@ -123,6 +145,6 @@ class CompanyController extends Controller
         $company=Company::find($id);
         $company->delete();
         
-        return redirect('/company');
+        return redirect('manager/companies');
     }
 }
