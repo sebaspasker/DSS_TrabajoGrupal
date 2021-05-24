@@ -71,7 +71,7 @@ class BannerController extends Controller
 			}
 			else
 			{
-				if($banner2==0)
+				if($count2==0)
 				{
 					return redirect()->route('banner.index')->withErrors('La compañía introducida no existe');
 				}
