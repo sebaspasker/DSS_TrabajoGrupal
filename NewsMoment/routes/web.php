@@ -30,8 +30,33 @@ Route::view('categoria', 'public/categoria')->name('categoria');
 // LOGIN
 Route::view('login', 'public/login')->name('login');
 
-//BANNER
-Route::resource('banner', 'BannerController');
+
+
+
+// BANNER
+
+// Index de BANNER
+Route::get('manager/banner_index', 'BannerController@index')->name('banner.index');
+
+// Create de BANNER
+Route::get('manager/banner_nuevo', 'BannerController@create')->name('banner.create');
+
+// Store de BANNER
+Route::get('manager/banner_nuevo', 'BannerController@create')->name('banner.create');
+
+// Show de BANNER
+Route::get('manager/banner/{banner}', 'BannerController@show')->name('banner.show');
+
+// Edit de Banner
+Route::get('manager/banners_edit/{banner}', 'BannerController@edit')->name('banner.edit');
+
+// Update de Banner
+Route::put('manager/banners_edit/{banner}', 'BannerController@update')->name('banner.update');
+
+// Delete de Banner
+Route::delete('manager/banners_edit/{banner}', 'BannerController@destroy')->name('banner.delete');
+
+
 
 
 /*
