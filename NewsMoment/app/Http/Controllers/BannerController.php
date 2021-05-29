@@ -9,122 +9,127 @@ use Exception;
 
 class BannerController extends Controller
 {
-	/**
-	 * @var Banner Model
-	 */
-	public $banner;
-
-
-	/**
-	 * @var Company Model
-	 */
-	public $company;
-
-	function __construct() {
-		$this->banner = new Banner();
-		$this->company = new Company();
-	}
-
-	/** Insert a banner
-	 * @val in_banner Banner model
-	 * @return bool 
-	 */
-	public function insert_banner($in_banner = null) {
-		if($in_banner != null) $this->banner = $in_banner;
-
-		try {
-			if(empty($this->banner->company_name)) throw new Exception("Company name can't be empty");
-			if(empty($this->banner->title)) throw new Exception("Title can't be empty");
-			// Insert banner
-			$this->banner->save();
-		} catch(exception $e) {
-			return false;
+	public function index()
+		{
+			$banners = Banner::all();
+			
+			$info = [
+            'banners' => $banners,
+			];
+			
+			return view('manager/banner_index',$info);
 		}
 
-		return true;
-	}
 
-	/**
-	 * Delete a banner
-	 * @val in_banner Banner model
-	 * @return bool
-	 */
-	public function delete_banner($in_banner = null) {
-			if($in_banner != null) $title = $in_banner->title;
-			else $title = $this->banner->title;
-
-		try {
-			$old_banner = Banner::where('title', $title)->first();
-			if($old_banner == null) throw new Exception("None banner to delete");
-			else $old_banner->delete(); // Delete banner
-		} catch (Exception $e) {
-			return false;
+		public function create()
+		{
+			return view('manager/banner_nuevo');
 		}
 
-	return true;
 
-	}
-
-	/**
-	 * Modify a banner
-	 * @val in_banner Banner Model
-	 * @return bool
-	 */
-	public function modify_banner($in_banner = null) {
-		if($in_banner != null) $this->banner = $in_banner;
-
-		try {
-			// Search banner in database
-			$old_banner = Banner::where('title', $this->banner->title)->first();
-			if($old_banner == null) throw new Exception("None banner to modify");
-			else {
-				// Modify values
-				if($old_banner->url != $this->banner->url) 
-					$old_banner->url = $this->banner->url;
-
-				if($old_banner->ranking_type != $this->banner->ranking_type) 
-					$old_banner->ranking_type = $this->banner->ranking_type;
-
-				if($old_banner->views_counter != $this->banner->views_counter) 
-					$old_banner->views_counter = $this->banner->views_counter;
-
-				if($old_banner->is_active != $this->banner->is_active) 
-					$old_banner->is_active = $this->banner->is_active;
-
-				if($old_banner->image_url != $this->banner->image_url) 
-					$old_banner->image_url = $this->banner->image_url;
-				$old_banner->save(); // Save values in banner
+		public function store(Request $request)
+		{
+			$this->validate($request,['title'=>'required|unique:banners','url'=>'required','image_url'=>'required','company_name'=>'required','ranking_type'=>'required']);
+			
+			$banners = new Banner();
+			$banners->title = $request->get('title');
+			$banners->url = $request->get('url');
+			$banners->image_url = $request->file('image_url');
+			$banners->company_name = $request->get('company_name');
+			$banners->ranking_type = $request->get('ranking_type');
+			$banners->is_active = true;
+			
+			
+			//$nombreimagen=time().".".$banners->image_url->getClientOriginalExtension();
+			//$destino=public_path("static/img/banners/");
+			//$banners->image_url->move($destino, $nombreimagen);
+			
+			$count = Banner::where('title',$request->title)->count();
+			$count2 = Banner::where('company_name',$request->company_name)->count();
+			if($count<=0)
+			{
+				return redirect()->route('manager/banner_index')->withErrors('El título introducido ya existe en la BD');
 			}
-		} catch (Exception $e) {
-			return false;	
-		}
-
-		return true;
-	}
-
-	/**
-	 * List banners search
-	 * @val in_banner Banner Model
-	 * @val company_name 
-	 * @return bool or array
-	 */
-	public function list_banners($in_banner = null, $title = "") {
-		if($title == "") {
-			if($in_banner != null) $title = $in_banner->title;
-			else $title = $this->banner->title;
-		}
-
-		try {
-			// Search banners
-			$banners = Banner::where('title', 'LIKE', "%$title%")->get();
-			if($banners == null) return false;
-			else {
-				return $banners;
+			else
+			{
+				if($count2==0)
+				{
+					return redirect()->route('manager/banner_index')->withErrors('La compañía introducida no existe');
+				}
+				else
+				{
+					$banners->save();
+					return redirect()->route('manager/banner_index')->with('success','Banner creado correctamente');
+				}
 			}
-		} catch(exception $e) {
-			return false;
 		}
 
-		return false;
-	}
+	   
+		public function show($id)
+		{
+			$banners = Banner::find($id);
+			
+			$info = [
+            'banners' => $banners,
+			];
+			
+			return view('manager/banner_show')->with('banners',$info);
+		}
+
+
+		public function edit($id){
+			
+			$banners = Banner::find($id);
+			
+			$info = [
+            'banners' => $banners,
+			];
+			
+			return view('manager/banners_edit')->with('banners',$info);
+		}
+
+
+
+		public function update(Request $request, $id){
+			$this->validate($request,['title'=>'required|unique:banners','url'=>'required','image_url'=>'required','company_name'=>'required','ranking_type'=>'required']);
+			
+			$banners = Banner::find($id);
+			$banners->title = $request->get('title');
+			$banners->url = $request->get('url');
+			$banners->image_url = $request->file('image_url');
+			$banners->company_name = $request->get('company_name');
+			$banners->ranking_type = $request->get('ranking_type');
+			$banners->is_active = true;
+			
+			
+			//$nombreimagen=time().".".$banners->image_url->getClientOriginalExtension();
+			//$destino=public_path("static/img/banners/");
+			//$banners->image_url->move($destino, $nombreimagen);
+			
+			$count = Banner::where('title',$request->title)->count();
+			$count2 = Banner::where('company_name',$request->company_name)->count();
+			if($count<=0)
+			{
+				return redirect()->route('manager/banner_index')->withErrors('El título introducido ya existe en la BD');
+			}
+			else
+			{
+				if($count2==0)
+				{
+					return redirect()->route('manager/banner_index')->withErrors('La compañía introducida no existe');
+				}
+				else
+				{
+					$banners->save();
+					return redirect()->route('manager/banner_index')->with('success','Banner creado correctamente');
+				}
+		}
+
+	   
+		public function destroy($id)
+		{
+			$banners = Banner::find($id);
+			$banners->delete();
+			return redirect('manager/banner_index')->with('success','Banner eliminado correctamente');
+		}
 }
