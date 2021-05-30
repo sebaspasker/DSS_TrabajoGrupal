@@ -8,6 +8,8 @@
     @endforeach
         <label for="">Nombre: </label>
         <input placeholder="Nombre" type="text" name="name">
+        <label for="">Imagen: </label>
+        <input placeholder="Imagen" type="file" name="image_url">
     </div>
     <div>
         <input type="Submit" value="Aceptar">

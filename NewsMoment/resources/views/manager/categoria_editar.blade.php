@@ -16,6 +16,7 @@
         <input type="Submit" value="Aceptar">
     </div>
 </form>
+
 <form action="{{route('category.delete', $category->id)}}" method="POST">
 @csrf
 @method('delete')

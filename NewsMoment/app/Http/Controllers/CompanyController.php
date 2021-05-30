@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Company;
+use App\Banner;
+use DB;
 
 class CompanyController extends Controller
 {
@@ -41,15 +43,20 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['name'=>'required|max:35',
-                                    'image_url'=>'required|image']);
+        $this->validate($request, ['name'=>'required|unique:companies,name|max:35',
+                                    'image_url'=>'image|nullable']);
         $company = new Company();
         $company->name=$request->get('name');
         $company->is_active=true;
-        $company->image_url=$request->file('image_url');
-        $nombreimagen=time().".".$company->image_url->getClientOriginalExtension();
-        $destino=public_path("static/img/companies/");
-        $company->image_url->move($destino, $nombreimagen);
+        if($request->file('image_url')!=NULL)
+        {
+            $company->image_url=$request->file('image_url');
+            $nombreimagen=time().".".$company->image_url->getClientOriginalExtension();
+            $destino=public_path("static/img/companies/");
+            $company->image_url->move($destino, $nombreimagen);
+        }
+        else
+            $request->image_url=="";
 
         $company->save();
         return redirect('manager/companies');
@@ -98,16 +105,20 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, ['name'=>'required|max:35',
-                                    'image_url'=>'image']);
+        $this->validate($request, ['name'=>'required|unique:companies,name|max:35',
+                                    'image_url'=>'image|nullable']);
         $company = Company::find($id);
-
         $company->name=$request->get('name');
         $company->is_active=true;
-        $company->image_url= $request->file('image_url');
-        $nombreimagen=time().".".$company->image_url->getClientOriginalExtension();
-        $destino=public_path("static/img/companies/");
-        $company->image_url->move($destino, $nombreimagen);
+        if($request->file('image_url')!=NULL)
+        {
+            $company->image_url= $request->file('image_url');
+            $nombreimagen=time().".".$company->image_url->getClientOriginalExtension();
+            $destino=public_path("static/img/companies/");
+            $company->image_url->move($destino, $nombreimagen);
+        }
+        else
+            $request->file('image_url')=="";
 
         $company->save();
         return redirect('manager/companies');
@@ -142,9 +153,14 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        $company=Company::find($id);
-        $company->delete();
-        
+        DB::transaction(function() use ($id)
+        {
+            $company=Company::find($id);
+            $banners=Banner::where('company_name', '$company->name');
+            $banners->delete();
+            $company->delete();
+        });
         return redirect('manager/companies');
+        
     }
 }

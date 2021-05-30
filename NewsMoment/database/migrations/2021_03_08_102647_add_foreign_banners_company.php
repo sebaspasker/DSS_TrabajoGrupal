@@ -15,7 +15,7 @@ class AddForeignBannersCompany extends Migration
     {
         Schema::table('banners', function (Blueprint $table) {
 					$table->string('company_name');
-					$table->foreign('company_name')->references('name')->on('companies');
+					$table->foreign('company_name')->references('name')->on('companies')->onDelete('cascade');
         });
     }
 

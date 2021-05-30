@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use App\Publication;
+use DB;
 
 class CategoryController extends Controller
 {
@@ -75,15 +77,20 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['name'=>'required|unique:categories|max:35',
-                                    'imagen'=>'required|image']);
+        $this->validate($request, ['name'=>'required|unique:categories,name|max:35',
+                                    'imagen'=>'image|nullable']);
         $category = new Category();
         $category->name = $request->get('name');
         $category->slugname = $this->sanear_string($request->get('name'));
-        $category->imagen= $request->file('imagen');
-        $nombreimagen=time().".".$category->imagen->getClientOriginalExtension();
-        $destino=public_path("static/img/categories/");
-        $category->imagen->move($destino, $nombreimagen);
+        if($request->file('imagen')!=NULL)
+        {
+            $category->imagen= $request->file('imagen');
+            $nombreimagen=time().".".$category->imagen->getClientOriginalExtension();
+            $destino=public_path("static/img/categories/");
+            $category->imagen->move($destino, $nombreimagen);
+        }
+        else
+            $category->imagen = "";
         $category->save();
 
         return redirect('/manager/categorias');
@@ -131,15 +138,20 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-       $this->validate($request, ['name'=>'required|unique:categories|max:35',
-                                   'imagen'=>'image']);
+       $this->validate($request, ['name'=>'required|unique:categories,name|max:35',
+                                   'imagen'=>'image|nullable']);
         $category = Category::find($id);
         $category->name = $request->get('name');
         $category->slugname = $this->sanear_string($request->get('name'));
-        $category->imagen= $request->file('imagen');
-        $nombreimagen=time().".".$category->imagen->getClientOriginalExtension();
-        $destino=public_path("static/img/categories/");
-        $category->imagen->move($destino, $nombreimagen);
+        if($request->file('imagen')!=NULL)
+        {
+            $category->imagen= $request->file('imagen');
+            $nombreimagen=time().".".$category->imagen->getClientOriginalExtension();
+            $destino=public_path("static/img/categories/");
+            $category->imagen->move($destino, $nombreimagen);
+        }
+        else
+            $category->imagen = "";
         $category->save();
         return redirect('/manager/categorias');
     }
@@ -152,9 +164,13 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category=Category::find($id);
-        $category->delete();
-
+        DB::transaction(function() use ($id)
+        {
+            $category=Category::find($id);
+            $publications=Publication::where('category', '$category->name');
+            $publications->delete();
+            $category->delete();
+        });
         return redirect('/manager/categorias');
     }
 }
