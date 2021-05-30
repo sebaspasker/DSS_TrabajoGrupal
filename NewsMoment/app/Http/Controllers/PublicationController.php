@@ -7,7 +7,6 @@ use App\Publication;
 use App\Company;
 use App\Category;
 use App\Banner;
-use App\Publication;
 
 class PublicationController extends Controller
 {
@@ -159,7 +158,7 @@ class PublicationController extends Controller
             'publications' => $publications,
 		];
 
-        return view('manager/publicacion')->with('publications', $info);
+        return view('manager/publication_editar')->with('publications', $info);
     }
 
     /**
@@ -176,7 +175,7 @@ class PublicationController extends Controller
             'publications' => $publications,
 		];
 
-        return view('manager/publicacion_editar')->with('publications', $info);
+        return view('manager/publicaciones')->with('publications', $info);
     }
 
     /**

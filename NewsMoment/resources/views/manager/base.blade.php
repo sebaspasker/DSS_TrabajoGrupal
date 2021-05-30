@@ -36,7 +36,7 @@
                 <a href="#"><small>Ajustes</small></a>
             </div>
             <div class="col-12 p-0 mt-3">
-                <a href="{{ route('manager_publicaciones') }}" class="enlace">
+                <a href="{{ route('publicacion.index') }}" class="enlace">
                     <div class="nav-element" id="publicaciones">
                         <span class="icon-newspaper"></span> Publicaciones
                     </div>
@@ -50,7 +50,7 @@
                 </a>
             </div>
             <div class="col-12 p-0">
-                <a href="{{ route('manager_categorias') }}" class="enlace">	
+                <a href="{{ route('category.index') }}" class="enlace">	
                     <div class="nav-element" id="categorias">
                         <span class="icon-label"></span> Categorías
                     </div>
