@@ -216,7 +216,7 @@ class CategoryTest extends TestCase
 	}
 
 	private function delete_list_setup() {
-		$category_exist = Category::where('name', 'Politica')->first();
+		$category_exist = Category::where('name', 'Eyou')->first();
 		if($category_exist != null) { 
 		 	$category_exist->delete(); 
 		} 
@@ -236,17 +236,17 @@ class CategoryTest extends TestCase
 		$this->delete_list_setup();
 		// Create 3 new users
 		$category1 = new Category();
-		$category1->name = "Universidad Politica";
+		$category1->name = " Eyou";
 		$category1->slugname = "enlace6";
 		$category1->imagen = "imagen6";
 		$category1->save();
 		$category2 = new Category();
-		$category2->name = "Universidad Covid";
+		$category2->name = " Covid";
 		$category2->slugname = "enlace7";
 		$category2->imagen = "imagen7";
 		$category2->save();
 		$category3 = new Category();
-		$category3->name = "Universidad Flores";
+		$category3->name = " Flores";
 		$category3->slugname = "enlace8";
 		$category3->imagen = "imagen8";
 		$category3->save();

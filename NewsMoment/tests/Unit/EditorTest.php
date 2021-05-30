@@ -18,6 +18,10 @@ class EditorTest extends TestCase
 		if($user_editor != null) {
 			$user_editor->delete();
 		}
+		$user_editor = User::where('email', 'email_user_editor@gmail.com')->first();
+		if($user_editor != null) {
+			$user_editor->delete();
+		}
 		$user_editor = new User();
 		$user_editor->name = "Juan De la Vega";
 		$user_editor->password = "Juan123";
