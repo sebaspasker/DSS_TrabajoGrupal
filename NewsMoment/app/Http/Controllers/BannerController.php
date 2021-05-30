@@ -108,28 +108,26 @@ class BannerController extends Controller
 			
 			$count = Banner::where('title',$request->title)->count();
 			$count2 = Banner::where('company_name',$request->company_name)->count();
-			if($count<=0)
-			{
+			if($count<=0){
 				return redirect()->route('manager/banner_index')->withErrors('El título introducido ya existe en la BD');
 			}
-			else
-			{
-				if($count2==0)
-				{
+			else{
+				if($count2==0){
 					return redirect()->route('manager/banner_index')->withErrors('La compañía introducida no existe');
 				}
-				else
-				{
+				else{
 					$banners->save();
 					return redirect()->route('manager/banner_index')->with('success','Banner creado correctamente');
 				}
+			}
 		}
 
 	   
-		public function destroy($id)
+		private function destroy($id)
 		{
 			$banners = Banner::find($id);
 			$banners->delete();
 			return redirect('manager/banner_index')->with('success','Banner eliminado correctamente');
 		}
+		
 }
