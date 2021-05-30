@@ -148,17 +148,24 @@ class PublicationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $publications=Publication::find($id);
-        $publications->views_counter+=1;
-        $publications->save();
+    public function show($id){
 
-        $info = [
-            'publications' => $publications,
+
+        $publication = Publication::find($id);
+        $publication->views_counter+=1;
+        $publication->save();
+		$banner = Banner::where('ranking_type', 1)->take(2)->get();
+		$categoria = Category::where('name', $publication->category)->take(1)->get();
+
+		$info = [
+			'publication' => $publication,
+			'banner1' => $banner[0],
+			'banner2' => $banner[1],
+			'categoria' => $categoria[0],
+			'categorias' => Category::all(),
 		];
 
-        return view('manager/publication_editar')->with('publications', $info);
+		return view('public/publicacion', $info);
     }
 
     /**
@@ -249,12 +256,11 @@ class PublicationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id){
         $publication=Publication::find($id);
         $publication->delete();
 
-        return redirect('/manager/publicaciones');
+        return redirect('/manager'); 
     }
 
     public function home()
@@ -406,10 +412,14 @@ class PublicationController extends Controller
 		return $x_publication;
 	}
 
+
+
 	public function ultimos() {
 		$publications = Publication::orderBy('id', 'desc')->paginate(3);
 		return view('public/ultimos', ['publications' => $publications, 'categorias' => Category::all(),]);
 	}
+
+
 
 	public function buscar(Request $request)
     {
@@ -422,6 +432,8 @@ class PublicationController extends Controller
 
 		return view('public/buscar', $info);
 	}
+
+
 
 	public function publicacion($id) {
 		$publication = Publication::find($id);
@@ -438,4 +450,6 @@ class PublicationController extends Controller
 
 		return view('public/publicacion', $info);
 	}
+
+
 }

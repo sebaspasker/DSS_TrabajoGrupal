@@ -46,7 +46,13 @@
 						</div>
 						<!-- TODO relacionar con destructor -->
 						<div class="eliminarDocumento text-right">
-							<a href="{{ route('publicacion.delete', $publicacion->id) }}" role="button" class="btn btn-sm btn-danger "><span class="icon-bin2"></span></a>
+							
+							<form method="POST" action="{{ route('publicacion.delete', $publicacion->id) }}">
+								@csrf
+								@method('delete')
+								<button type="submit" class="btn btn-sm btn-danger "><span class="icon-bin2"></span></button>
+							</form>
+							
 						</div>
 					</div>
 				</a>

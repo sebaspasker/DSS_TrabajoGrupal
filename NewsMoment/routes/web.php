@@ -22,7 +22,7 @@ Route::get('ultimos', 'PublicationController@ultimos')->name('ultimos');
 // BUSCAR
 Route::get('buscar', 'PublicAuxController@buscar')->name('buscar');
 // PUBLICACION
-Route::get('publicacion/{id}', 'PublicationController@publicacion')->name('publicacion');
+Route::get('publicacion/{id}', 'PublicationController@show')->name('publicacion');
 
 
 
@@ -54,7 +54,7 @@ Route::get('manager/banners_edit/{banner}', 'BannerController@edit')->name('bann
 // Update de Banner
 Route::put('manager/banners_edit/{banner}', 'BannerController@update')->name('banner.update');
 // Delete de Banner
-Route::delete('manager/banners_edit/{banner}', 'BannerController@destroy')->name('banner.delete');
+Route::delete('manager/banners_eliminar/{banner}', 'BannerController@destroy')->name('banner.delete');
 
 
 
@@ -141,7 +141,7 @@ Route::get('manager/publicacion_editar/{publicacion}', 'PublicationController@ed
 // Update: actualizar publicacion
 Route::put('manager/publicacion_editar/{publicacion}', 'PublicationController@update')->name('publicacion.update');
 // Delete: eliminar publicacion
-Route::delete('manager/publicacion_editar/{publicacion}', 'PublicationController@destroy')->name('publicacion.delete');
+Route::delete('manager/publicacion_eliminar/{publicacion}', 'PublicationController@destroy')->name('publicacion.delete');
 
 
 

@@ -5,14 +5,13 @@
 
 @section('cuerpo')
 
-<div class="row m-0">
+<div class="row m-0"> 
 	<div class="col-12 p-0 bg-white rounded shadow-sm">
 		<!-- title -->
 		<h1 class="pb-sm-2 pt-2 mb-4 pb-3 px-3 mt-3">
 			Todas tus banners
 			<a role="button" href="{{ route('banner.create')}}" class="btn btn-primary btn-sm float-right mt-1" style="font-size: .675rem;">Nueva</a>
 		</h1>
-		<!-- categorias -->
 		<div class="row m-0 pb-3">
             @foreach ($banners as $banner)
                 <!-- banner -->
@@ -22,7 +21,13 @@
                             <p class="tituloCategoria">{{$banner->title}}</p>
                             <p class="blogCategoria">{{$banner->company_name}}</p>
                         </div>
-                        <a role="button" href="#" class="btn btn-danger btn-sm buttonCategoria"><span class="icon-bin2"></span></a>
+
+                        <form method="POST" action="{{ route('banner.delete', $banner->id) }}">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger btn-sm buttonCategoria"><span class="icon-bin2"></span></button>
+						</form>
+							
                     </a>
                 </div>
             @endforeach

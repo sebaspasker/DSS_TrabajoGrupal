@@ -61,16 +61,15 @@ class BannerController extends Controller
 		return $string;
 	}
 
-	public function store(Request $request)
-	{
+	public function store(Request $request){
 		$this->validate($request,['title'=>'required|unique:banners|max:50',
 								'url'=>'required',
-								'image_url'=> 'image_url|nullable',
+								'image_url'=> 'image|nullable',
 								'company_name'=>'required',
 								'ranking_type'=>'required']);
 
 		$banners = new Banner();
-		$banners->title = $this->sanearstring($request->get('title'));
+		$banners->title = $request->get('title');
 		$banners->url = $request->get('url');
 		$banners->company_name = $request->get('company_name');
 		$banners->ranking_type = $request->get('ranking_type');
@@ -91,7 +90,7 @@ class BannerController extends Controller
 
 		$banners->save();
 
-		return redirect('/manager/banner_index');
+		return redirect('/manager/banners');
 
 	}
 
@@ -124,17 +123,17 @@ class BannerController extends Controller
 
 		$this->validate($request,['title'=>'required|unique:banners|max:50',
 								'url'=>'required',
-								'image_url'=> 'image_url|nullable',
+								'image_url'=> 'image|nullable',
 								'company_name'=>'required',
 								'ranking_type'=>'required']);
 
 		$banners = new Banner();
-		$banners->title = $this->sanearstring($request->get('title'));
+		$banners->title = $request->get('title');
 		$banners->url = $request->get('url');
 		$banners->company_name = $request->get('company_name');
 		$banners->ranking_type = $request->get('ranking_type');
 		$banners->is_active = true;
-		$banners->views_counter = 0;
+		$banners->views_counter = 0; 
 
 		if($request->file('image_url') != NULL)
 		{
@@ -150,12 +149,12 @@ class BannerController extends Controller
 
 		$banners->save();
 
-		return redirect('/manager/banner_index');
+		return redirect('/manager/banners');
+	}
 
-	public function destroy($id)
-	{
+	public function destroy($id){
 		$banners = Banner::find($id);
 		$banners->delete();
-		return redirect('manager/banner_index');
+		return redirect('manager/banners');
 	}
 }
