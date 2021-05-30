@@ -18,11 +18,8 @@
 				<!--- head -->
 				<div class="col-12 p-0">
 					<select name="categoria" required class="btn-outline-primary custom-select" style="width:120px"id="inputGroupSelect01">
-						@foreach ($categorias as $categoria)
-							<option value="{{ $categoria->id }}">
-								{{ $categoria->name }}
+							<option value="0">
 							</option>
-						@endforeach
 					</select>
 				</div>
 				<div class="col-12 p-0">
