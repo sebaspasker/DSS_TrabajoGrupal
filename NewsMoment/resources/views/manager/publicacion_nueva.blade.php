@@ -5,6 +5,10 @@
 
 @section('cuerpo')
 <form method="POST" enctype="multipart/form-data">
+@csrf
+	<!-- TODO hacer que funcione -->
+	<!-- TODO redireccionar correctamente al post de crear nuevo usuario -->
+	@csrf
 	<div class="row m-0">
 		<!-- botón de volver a atrás -->
 		<div class="col-12 p-0 mb-2">
@@ -14,16 +18,19 @@
 			<div class="row m-0">
 				<!--- head -->
 				<div class="col-12 p-0">
-					<select name="categoria" required class="btn-outline-primary custom-select" style="width:120px"id="inputGroupSelect01">
-                        <option value="0">Política</option>
-                        <option value="0">Coronavirus</option>
+					<select name="category" required class="btn-outline-primary custom-select" style="width:120px"id="inputGroupSelect01">
+						@foreach ($categorias as $categoria)
+							<option value="{{ $categoria->name }}">
+								{{ $categoria->name }}
+							</option>
+						@endforeach
 					</select>
 				</div>
 				<div class="col-12 p-0">
 					<textarea name="title" required rows="1" class="tituloPublicacion border-0" placeholder="Titulo de la publicación"></textarea>
 				</div>
 				<div class="col-12 p-0">
-					<textarea name="sub_title" required id="" rows="1" class="subtituloPublicacion border-0" placeholder="Subtitulo de la publicación"></textarea>
+					<textarea name="subtitle" required id="" rows="1" class="subtituloPublicacion border-0" placeholder="Subtitulo de la publicación"></textarea>
 				</div>
 				<div class="col-12 px-0 pb-4 mb-4 border-bottom">
 					<div class="fechaPublicacion">Aquí se mostrará la fecha</div>
@@ -33,7 +40,7 @@
 				<div class="col-12 p-0">
 					<div class="publicacionImg bg-light">
 						<div id="bluh" style="background: #f2f2f2"></div>
-						<input  type="file" required name="imagen" accept="image/*" class="clearablefileinput" id="id_imagen" value="">
+						<input  type="file" required name="image_url" accept="image/*" class="clearablefileinput" id="id_imagen" value="">
 					</div>
 				</div>
 				<!-- 
@@ -48,7 +55,7 @@
 						<label for="noButton">NO</label>
 					</div>
 					<div class="mt-4 pt-4 border-top" id="videoIdentificador">
-						<input type="text" name="video" class="form-control" placeholder="Identificador de video" value="">
+						<input type="text" name="video_url" class="form-control" placeholder="Identificador de video" value="">
 					</div>
 				</div>
 				<!-- source -->

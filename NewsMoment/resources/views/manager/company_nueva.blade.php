@@ -6,6 +6,7 @@
 @section('cuerpo')
 
 <form method="POST" enctype="multipart/form-data">
+@csrf
 	<div class="row m-0">
 		<!-- botón de volver a atrás -->
 		<div class="col-12 p-0 mb-2">
@@ -19,12 +20,12 @@
 				<div class="col-12 p-0">
 					<div class="bannerCreationImg bg-light shadowHover">
 						<div id="bluh" style="background: url('') no-repeat;background-size: cover; background-position: center !important;"></div>
-						<input  type="file" required name="imagen" accept="image/*" class="clearablefileinput" id="id_imagen" value="">
+						<input  type="file" required name="image_url" accept="image/*" class="clearablefileinput" id="id_imagen" value="">
 					</div>
 				</div>
 				<!-- name -->
 				<div class="col-12 p-0">
-                    <input type="text" name="nombre" class="form-control mt-3" placeholder="Nombre de la empresa" value="">
+                    <input type="text" name="name" class="form-control mt-3" placeholder="Nombre de la empresa" value="">
 				</div>
 				<!-- footer -->
 				<div class="col-12 p-0 mt-3 text-right">

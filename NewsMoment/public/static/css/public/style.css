@@ -2,7 +2,7 @@
 = GLOBALES
 --------------------------------- */
 
-html,
+html, 
 body{
     background-color: #121212 !important;
 }
@@ -1334,3 +1334,9 @@ footer a:hover {
         display: none;
     }
 }
+
+
+
+/* --------------------------------
+=  CONTACTO
+--------------------------------- */

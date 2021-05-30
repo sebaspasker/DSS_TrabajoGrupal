@@ -12,7 +12,7 @@
             <div class="col-md-3 border-sm-right order-md-1 order-2">
                 <!-- ejemplo de publicación 1 -->
                 <div class="leftInicio border-bottom">
-                    <a href="{{route('publicacion')}}" class="enlacePublicacion">
+                    <a href="{{ route('publicacion', $publication2->id) }}" class="enlacePublicacion">
                         <div class="imgLeftInicio" style="background: url('{{$publication2->image_url}}') no-repeat;background-size: cover; background-position: center !important;"></div>
                             <div class="descripcionImagenLeft">
                                 <b class="text-light">{{$publication2->editor_email}}</b> - {{$publication2->created_at->format('j F, Y')}}
@@ -27,7 +27,7 @@
                 </div>
                 <!-- ejemplo de publicación 2 -->
                 <div class="leftInicio border-only-sm-bottom mb-md-0 pb-md-0">
-                    <a href="{{route('publicacion')}}" class="enlacePublicacion">
+                    <a href="{{ route('publicacion', $publication3->id) }}" class="enlacePublicacion">
                         <div class="imgLeftInicio" style="background: url('{{$publication3->image_url}}') no-repeat;background-size: cover; background-position: center !important;"></div>
                             <div class="descripcionImagenLeft">
                                 <b class="text-light">{{$publication3->editor_email}}</b> - {{$publication3->created_at->format('j F, Y')}}
@@ -46,7 +46,7 @@
             -->      
             <div class="col-md-6 pb-4  order-md-2 order-1 mb-md-0 pb-md-0">
                 <div class="centerInicio border-only-sm-bottom pb-md-0 pb-4">
-                    <a href="{{route('publicacion')}}" class="enlacePublicacion">
+                    <a href="{{ route('publicacion', $publication1->id) }}" class="enlacePublicacion">
                         <div class="imgCenterInicio mb-3"
                             style="background: url('{{$publication1->image_url}}') no-repeat;background-size: cover; background-position: center !important;">
                         </div>

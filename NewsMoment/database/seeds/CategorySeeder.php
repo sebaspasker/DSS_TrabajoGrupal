@@ -20,7 +20,7 @@ class CategorySeeder extends Seeder
 				\DB::table('categories')->insert(array(
 					'name' => "$categories[$i]",
 					'slugname' => UtilController::slugify($categories[$i]),
-					'imagen' => "static/img/categories/$images[$i].jpg",
+					'imagen' => "/static/img/categories/$images[$i].jpg",
 				));
 			}
     }

@@ -5,7 +5,9 @@
 
 @section('cuerpo')
 
-<form method="POST" enctype="multipart/form-data">
+<form method="POST">
+@csrf
+@method('put')
 	<div class="row m-0">
 		<!-- botón de volver a atrás -->
 		<div class="col-12 p-0 mb-2">
@@ -18,17 +20,17 @@
 				<small class="text-secondary mb-1" style="font-size: 10px">Pulsa encima para cambiar</small>
 				<div class="col-12 p-0">
 					<div class="bannerCreationImg bg-light shadowHover">
-						<div id="bluh" style="background: url('') no-repeat;background-size: cover; background-position: center !important;"></div>
-						<input  type="file" required name="imagen" accept="image/*" class="clearablefileinput" id="id_imagen" value="">
+						<div id="bluh" style="background: url('{{$company->image_url}}') no-repeat; background-size: cover; background-position: center"></div>
+						<input  type="file" name="image_url" accept="image/*" class="clearablefileinput" id="id_imagen" value="">
 					</div>
 				</div>
 				<!-- name -->
 				<div class="col-12 p-0">
-                    <input type="text" name="nombre" class="form-control mt-3" placeholder="Nombre de la empresa" value="">
+                    <input type="text" name="name" value="{{$company->name}}"class="form-control mt-3" placeholder="Nombre de la empresa" value="">
 				</div>
 				<!-- footer -->
 				<div class="col-12 p-0 mt-3 text-right">
-					<button type="submit" class="btn btn-primary">Crear Empresa</button>
+					<button type="submit" class="btn btn-primary">Modificar Empresa</button>
 				</div>
 			</div>
 		</div>
