@@ -13,8 +13,9 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-		 $categories = ['CATALÁN', 'VALENCIA', 'CULTURA', 'PODER', 'POLÍTICA', 'LUJO'];
-		 $images = ['catalan', 'valencia', 'cultura', 'poder', 'política', 'lujo'];
+		 $categories = ['CATALÁN', 'VALENCIA', 'CULTURA', 'PODER', 'POLÍTICA', 'LUJO', 'ESPAÑA', 'ECONOMÍA'];
+		 $images = ['catalan', 'valencia', 'cultura', 'poder', 'política', 'lujo', 'espana', 'economia'];
+
 			for ($i=0; $i < count($categories); $i++)
 			{
 				\DB::table('categories')->insert(array(
