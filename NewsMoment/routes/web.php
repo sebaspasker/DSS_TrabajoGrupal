@@ -14,6 +14,7 @@
 /*
 Parte publica que ve todo el mundo
 */
+
 // INICIO
 Route::get('/', 'PublicationController@home')->name('home');
 // ULTIMOS
@@ -28,9 +29,9 @@ Route::get('publicacion', 'PublicationController@publicacion')->name('publicacio
 Route::view('categoria', 'public/categoria')->name('categoria');
 
 // LOGIN
-Route::view('login', 'public/login')->name('login');
-
-
+use App\Http\Controllers\Auth\LoginController;
+Route::get('login', [LoginController::class, 'get_login'])->name('login');
+Route::post('login', [LoginController::class, 'post_login'])->name('login');
 
 
 /*

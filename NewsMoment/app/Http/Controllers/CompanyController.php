@@ -86,6 +86,7 @@ class CompanyController extends Controller
 
         $company->name=$request->get('name');
         $company->image_url=$request->get('image_url');
+				$company->is_active=true;
 
         $company->save();
         return redirect('/company');

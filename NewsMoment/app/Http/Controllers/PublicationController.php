@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Company;
 use App\Category;
 use App\Banner;
+use App\Publication;
 
 class PublicationController extends Controller
 {
@@ -239,5 +240,18 @@ class PublicationController extends Controller
 		];
 
 		return view('public/buscar', $info);
+	}
+
+	public function publicacion() {
+		$publications = Publication::orderBy('id', 'desc')->limit(1)->get();
+		$banner = Banner::where('ranking_type', 1)->take(2)->get();
+
+		$info = [
+			'publication' => $publications[0],
+			'banner1' => $banner[0],
+			'banner2' => $banner[1],
+		];
+
+		return view('public/publicacion', $info);
 	}
 }
