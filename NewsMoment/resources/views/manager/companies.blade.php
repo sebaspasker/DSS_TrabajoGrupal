@@ -6,8 +6,6 @@
 @section('cuerpo')
 
 
-
-
 <div class="row m-0">
 	<div class="col-12 p-0 bg-white rounded shadow-sm">
 		<!-- title -->
@@ -20,7 +18,7 @@
             @foreach ($companies as $company)
                 <!-- empresaa -->
                 <div class="col-lg-3 col-6 px-lg-3 marginBotonEmpresa mt-md-2 mb-md-3">
-                    <a href="#" class="enlace">
+                    <a href="{{ route('company.edit', $company->id)}}" class="enlace">
                         <div class="empresaDash px-3 pt-4 pb-3">
                             <p class="nombreEmpresa">{{$company->name}}</p>
                             <div class="" style="background: url('{{$company->image_url}}') no-repeat;background-size: cover; background-position: center !important;"></div>

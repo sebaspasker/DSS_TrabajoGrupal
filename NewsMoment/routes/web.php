@@ -24,9 +24,6 @@ Route::get('buscar', 'PublicAuxController@buscar')->name('buscar');
 // PUBLICACION
 Route::get('publicacion/{id}', 'PublicationController@show')->name('publicacion');
 
-
-
-
 // CATEGORIA
 Route::get('categoria/{id}', 'PublicAuxController@categoria')->name('categoria');
 // LOGIN
@@ -60,10 +57,6 @@ Route::delete('manager/banners_eliminar/{banner}', 'BannerController@destroy')->
 
 
 
-// nueva categoria
-Route::view('manager/categoria/nueva', 'manager/nueva_categoria')->name('manager_nueva_categoria');
-
-
 //Category
 
 // Create: crear nueva categoria
@@ -82,8 +75,8 @@ Route::put('manager/categoria_editar/{category}', 'CategoryController@update')->
 Route::delete('manager/categoria_editar/{category}', 'CategoryController@destroy')->name('category.delete');
 
 
-//Company
 
+//Company
 // Index: listado company
 Route::get('manager/companies', 'CompanyController@index')->name('company.index');
 // Create: crear nueva company
