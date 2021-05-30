@@ -14,7 +14,7 @@
 			Todas tus publicaciones
 			<a role="button" href="{{ route('publicacion.create') }}" class="btn btn-primary btn-sm float-right mt-1" style="font-size: .675rem;">Nueva</a>
 		</h1>
-		<!-- top -->
+		<!-- top -->  
 		<div class="row m-0">
 			<div class="col-12  pb-0 mt-4 pl-2 pr-2 mb-0 border-bottom ">
 				<div class="listadoDocumentos">
@@ -58,6 +58,10 @@
 				</a>
 			</div>
 		@endforeach
+
+		<div class="col-12  mt-3 p-0 m-0">
+				{{ $publications->links() }}
+			</div>
 	</div>
 </div>
 

@@ -84,9 +84,19 @@ class PublicAuxController extends Controller{
 
 
 
-	public function publicacion($id) {
-		$publication = Publication::find($id);
-		$banner = Banner::where('ranking_type', 1)->take(2)->get();
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id){
+
+
+        $publication = Publication::find($id);
+        $publication->views_counter+=1;
+        $publication->save();
+		$banner = Banner::where('ranking_type', 1)->inRandomOrder()->get();
 		$categoria = Category::where('name', $publication->category)->take(1)->get();
 
 		$info = [
@@ -98,7 +108,7 @@ class PublicAuxController extends Controller{
 		];
 
 		return view('public/publicacion', $info);
-	}
+    }
 
 
 }

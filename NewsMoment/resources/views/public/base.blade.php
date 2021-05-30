@@ -30,7 +30,7 @@
                 <a id="activarBuscador">
                     <span class="icon-search"></span>
                 </a>
-                <a href="{{ route('home') }}" class="ordenador">
+                <a href="{{ route('inicio') }}" class="ordenador">
                     Inicio
                 </a>
                 <a href="{{ route('ultimos') }}" class="ordenador">
@@ -47,7 +47,7 @@
             <div class="container">
                 <div class="row m-0 py-md-5 py-4">
                     <div class="col-12 mb-4 movil">
-                        <a href="{{ route('home') }}" role="button" class="btn btn-sm btn-primary  float-left">Inicio</a>
+                        <a href="{{ route('inicio') }}" role="button" class="btn btn-sm btn-primary  float-left">Inicio</a>
                         <a href="{{ route('ultimos') }}" role="button" class="btn btn-sm btn-primary  float-left ml-3">Últimos</a>
                     </div>
                     <div class="col-md-3 col-6 mb-md-0 mb-5">
@@ -72,7 +72,7 @@
     <!-- logotipos centrales del nav-->
     <img src="/static/img/favicon.png" alt="NM" class="minicon">
     <div class="centerNav">
-        <a href="{{ route('home') }}" id="darkLogo">
+        <a href="{{ route('inicio') }}" id="darkLogo">
             <img src="/static/img/logoLetrasDark.png" alt="">
         </a>
     </div>

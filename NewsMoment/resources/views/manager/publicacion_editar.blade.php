@@ -6,7 +6,6 @@
 @section('cuerpo')
 <form method="POST" enctype="multipart/form-data" >
 @method('put')
-@csrf
 	<!-- TODO hacer que funcione -->
 	<!-- TODO redireccionar correctamente al post de crear nuevo usuario -->
 	@csrf
@@ -28,6 +27,7 @@
 							>
 								{{ $categoria->name }}
 							</option>
+						@endforeach
 					</select>
 				</div>
 				<div class="col-12 p-0">

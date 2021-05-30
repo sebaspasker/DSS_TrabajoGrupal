@@ -15,7 +15,7 @@
 Parte publica que ve todo el mundo
 */
 // INICIO
-Route::get('', 'PublicAuxController@home')->name('home');
+Route::get('', 'PublicAuxController@home')->name('inicio');
 // ULTIMOS
 Route::get('ultimos', 'PublicAuxController@ultimos')->name('ultimos');
 // BUSCAR

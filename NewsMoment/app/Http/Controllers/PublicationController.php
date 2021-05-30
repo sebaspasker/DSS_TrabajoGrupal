@@ -36,7 +36,7 @@ class PublicationController extends Controller
      */
     public function index()
     {
-        $publications=Publication::where('active', '1')->get();
+        $publications=Publication::where('active', '1')->orderBy('id', 'desc')->paginate(5);
 
         $info = [
             'publications' => $publications,
@@ -161,31 +161,7 @@ class PublicationController extends Controller
         return redirect('/manager');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id){
 
-
-        $publication = Publication::find($id);
-        $publication->views_counter+=1;
-        $publication->save();
-		$banner = Banner::where('ranking_type', 1)->inRandomOrder()->get();
-		$categoria = Category::where('name', $publication->category)->take(1)->get();
-
-		$info = [
-			'publication' => $publication,
-			'banner1' => $banner[0],
-			'banner2' => $banner[1],
-			'categoria' => $categoria[0],
-			'categorias' => Category::all(),
-		];
-
-		return view('public/publicacion', $info);
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -212,30 +188,22 @@ class PublicationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, ['title'=>'required|titlemax:35',
+        $this->validate($request, ['title'=>'required|max:35',
                                     'subtitle'=>'required|max:50',
                                     'source'=>'required|max:100',
                                     'body'=>'required|max:255',
                                     'image_url'=>'image|nullable',
                                     'video_url'=>'max:50',
-                                    'category'=>'required|exists:categories,name',
-                                    'has_video'=> 'required',
-                                    //'editor_email'=>'required|email|exists:editors,email'
-                                    ]);
+                                    'category'=>'required|exists:categories,name']);
         $publication=Publication::find($id);
         $publication->slugname=$this->sanear_string($request->get('title'));
         $publication->title=$request->get('title');
         $publication->subtitle=$request->get('subtitle');
         $publication->source=$request->get('source');
         $publication->category=$request->get('category');
-         if($request->get('has_video') == true){
-            $publication->has_video= 1;
-        }
-        else{
-            $publication->has_video= 0;
-        }
 
-        if($request->file('image_url')!=NULL){
+        if($request->file('image_url')!=NULL)
+        {
             $publication->image_url= $request->file('image_url');
             $nombreimagen=time().".".$publication->image_url->getClientOriginalExtension();
             $destino=public_path("static/img/publication/");
@@ -243,15 +211,20 @@ class PublicationController extends Controller
             $publication->image_url= "/static/img/publication/" . $nombreimagen;
         }
 
-        if($request->get('video_url')!=NULL){
+        if($request->get('video_url')!=NULL)
+        {
             $publication->video_url= $request->get('video_url');
+            $publication->has_video=true;
         }
-
+        else
+        {
+            $publication->video_url= "";
+            $publication->has_video=false;
+        }
         $publication->body=$request->get('body');
 
         $publication->save();
-
-        return redirect('/manager');
+        return redirect('/manager/publicaciones');
     }
 
 
