@@ -110,7 +110,7 @@ class PublicationController extends Controller
                                     'source'=>'required|max:100',
                                     'body'=>'required|max:255',
                                     'image_url'=>'image|nullable',
-                                    'video_url'=>'mimes:mp4,avi|nullable',
+                                    'video_url'=>'max:50',
                                     'category'=>'required|exists:categories,name',
                                     'editor_email'=>'required|email|exists:editors,email']);
         $publication = new Publication();
@@ -127,20 +127,16 @@ class PublicationController extends Controller
             $nombreimagen=time().".".$publication->image_url->getClientOriginalExtension();
             $destino=public_path("static/img/publication/");
             $publication->image_url->move($destino, $nombreimagen);
+            $publication->image_url= "/static/img/publication/" . $nombreimagen;
         }
         else
             $publication->image_url= "";
 
-        if($request->file('video_url')!=NULL)
-        {
-            $publication->video_url= $request->file('video_url');
-            $nombrevideo=time().".".$publication->video_url->getClientOriginalExtension();
-            $destino=public_path("static/img/publication/");
-            $publication->video_url->move($destino, $nombrevideo);
+        if($request->get('video_url')!=NULL){
+            $publication->video_url= $request->get('video_url');
             $publication->has_video=true;
         }
-        else
-        {
+        else{
             $publication->video_url= "";
             $publication->has_video=false;
         }
@@ -150,7 +146,7 @@ class PublicationController extends Controller
         $publication->views_counter=0;
 
         $publication->save();
-        return redirect('/manager/publicaciones');
+        return redirect('/manager');
     }
 
     /**
@@ -210,7 +206,7 @@ class PublicationController extends Controller
                                     'source'=>'required|max:100',
                                     'body'=>'required|max:255',
                                     'image_url'=>'image|nullable',
-                                    'video_url'=>'mimes:mp4,avi|nullable',
+                                    'video_url'=>'max:50',
                                     'category'=>'required|exists:categories,name',
                                     'editor_email'=>'required|email|exists:editors,email']);
         $publication=Publication::find($id);
@@ -227,16 +223,14 @@ class PublicationController extends Controller
             $nombreimagen=time().".".$publication->image_url->getClientOriginalExtension();
             $destino=public_path("static/img/publication/");
             $publication->image_url->move($destino, $nombreimagen);
+            $publication->image_url= "/static/img/publication/" . $nombreimagen;
         }
         else
             $publication->image_url= "";
 
-        if($request->file('video_url')!=NULL)
+        if($request->get('video_url')!=NULL)
         {
-            $publication->video_url= $request->file('video_url');
-            $nombrevideo=time().".".$publication->video_url->getClientOriginalExtension();
-            $destino=public_path("static/img/publication/");
-            $publication->video_url->move($destino, $nombrevideo);
+            $publication->video_url= $request->get('video_url');
             $publication->has_video=true;
         }
         else

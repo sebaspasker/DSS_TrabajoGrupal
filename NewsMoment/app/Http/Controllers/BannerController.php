@@ -82,6 +82,8 @@ class BannerController extends Controller
 			$nombreimagen=time().".".$banners->image_url->getClientOriginalExtension();
 			$destino=public_path("static/img/banner/");
 			$banners->image_url->move($destino, $nombreimagen);
+
+            $banners->image_url= "/static/img/banner/" . $nombreimagen;
 		}
 		else
 		{
@@ -141,6 +143,8 @@ class BannerController extends Controller
 			$nombreimagen=time().".".$banners->image_url->getClientOriginalExtension();
 			$destino=public_path("static/img/banner/");
 			$banners->image_url->move($destino, $nombreimagen);
+
+            $banners->image_url= "/static/img/banner/" . $nombreimagen;
 		}
 		else
 		{
