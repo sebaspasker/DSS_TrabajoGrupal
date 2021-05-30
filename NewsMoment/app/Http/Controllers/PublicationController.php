@@ -167,7 +167,7 @@ class PublicationController extends Controller
         $publication = Publication::find($id);
         $publication->views_counter+=1;
         $publication->save();
-		$banner = Banner::where('ranking_type', 1)->take(2)->get();
+		$banner = Banner::where('ranking_type', 1)->inRandomOrder()->get();
 		$categoria = Category::where('name', $publication->category)->take(1)->get();
 
 		$info = [
@@ -454,23 +454,6 @@ class PublicationController extends Controller
 		return view('public/buscar', $info);
 	}
 
-
-
-	public function publicacion($id) {
-		$publication = Publication::find($id);
-		$banner = Banner::where('ranking_type', 1)->take(2)->get();
-		$categoria = Category::where('name', $publication->category)->take(1)->get();
-
-		$info = [
-			'publication' => $publication,
-			'banner1' => $banner[0],
-			'banner2' => $banner[1],
-			'categoria' => $categoria[0],
-			'categorias' => Category::all(),
-		];
-
-		return view('public/publicacion', $info);
-	}
 
 
 }

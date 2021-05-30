@@ -44,10 +44,10 @@
 
                     <select name="ranking_type" required class="btn-outline-primary custom-select mt-3" style="width:120px"id="inputGroupSelect01">
                         <option value="1">
-                            Banner largo inicio
+                            Banner pequeño
                         </option>
                         <option value="2">
-                            Banner pequeño publicación
+                            Banner grande
                         </option>
 					</select>
 				</div>

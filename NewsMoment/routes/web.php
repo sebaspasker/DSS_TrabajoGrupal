@@ -8,7 +8,7 @@
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
-|
+| 
 */
 
 /*
@@ -36,8 +36,6 @@ Route::get('contacto', 'PublicAuxController@contacto')->name('contacto');
 Route::get('informacion', 'PublicAuxController@informacion')->name('informacion');
 
 
-
-
 // BANNER
 // Index de BANNER
 Route::get('manager/banners', 'BannerController@index')->name('banner.index');
@@ -55,10 +53,7 @@ Route::put('manager/banners_edit/{banner}', 'BannerController@update')->name('ba
 Route::delete('manager/banners_eliminar/{banner}', 'BannerController@destroy')->name('banner.delete');
 
 
-
-
-//Category
-
+//CATEGORY
 // Create: crear nueva categoria
 Route::get('manager/categoria_nueva', 'CategoryController@create')->name('category.create');
 // Index: listado categorias
@@ -76,7 +71,7 @@ Route::delete('manager/categoria_editar/{category}', 'CategoryController@destroy
 
 
 
-//Company
+// COMPANY
 // Index: listado company
 Route::get('manager/companies', 'CompanyController@index')->name('company.index');
 // Create: crear nueva company
@@ -95,7 +90,6 @@ Route::delete('manager/company_editar/{company}', 'CompanyController@destroy')->
 
 
 //PUBLICACIONES
-
 // Index: listado publicacion
 Route::get('manager', 'PublicationController@index')->name('publicacion.index');
 // Create: crear nueva publicacion

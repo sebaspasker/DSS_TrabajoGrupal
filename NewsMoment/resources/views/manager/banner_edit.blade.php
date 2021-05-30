@@ -53,14 +53,14 @@
 									selected
 							@endif
                         >
-                            Banner largo inicio
+                            Banner pequeño
                         </option>
                         <option value="2"
                              @if($banner->ranking_type == 2)
 									selected
 							@endif
                         >
-                            Banner pequeño publicación
+                            Banner grande
                         </option>
 					</select>
 				</div>
