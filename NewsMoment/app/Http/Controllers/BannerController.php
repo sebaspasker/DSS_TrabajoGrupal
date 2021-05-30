@@ -66,23 +66,29 @@ class BannerController extends Controller
 	{
 		$this->validate($request,['title'=>'required|unique:banners|max:50',
 								'url'=>'required',
-								'image_url'=>'required|image_url',
+								'image_url'=> 'image_url|nullable',
 								'company_name'=>'required',
 								'ranking_type'=>'required']);
 		
 		$banners = new Banner();
 		$banners->title = $this->sanearstring($request->get('title'));
 		$banners->url = $request->get('url');
-		$banners->image_url = $request->file'image_url');
 		$banners->company_name = $request->get('company_name');
 		$banners->ranking_type = $request->get('ranking_type');
 		$banners->is_active = true;
 		$banners->views_counter = 0;
 		
-		
-		$nombreimagen=time().".".$banners->image_url->getClientOriginalExtension();
-		$destino=public_path("static/img/banner/");
-		$banners->image_url->move($destino, $nombreimagen);
+		if($request->file('image_url') != NULL)
+		{
+			$banners->image_url = $request->file('image_url');
+			$nombreimagen=time().".".$banners->image_url->getClientOriginalExtension();
+			$destino=public_path("static/img/banner/");
+			$banners->image_url->move($destino, $nombreimagen);
+		}
+		else
+		{
+			$banners->image_url = "";
+		}
 		
 		$banners->save();
 		
@@ -120,28 +126,33 @@ class BannerController extends Controller
 		
 		$this->validate($request,['title'=>'required|unique:banners|max:50',
 								'url'=>'required',
-								'image_url'=>'required|image_url',
+								'image_url'=> 'image_url|nullable',
 								'company_name'=>'required',
 								'ranking_type'=>'required']);
 		
 		$banners = new Banner();
 		$banners->title = $this->sanearstring($request->get('title'));
 		$banners->url = $request->get('url');
-		$banners->image_url = $request->file'image_url');
 		$banners->company_name = $request->get('company_name');
 		$banners->ranking_type = $request->get('ranking_type');
 		$banners->is_active = true;
 		$banners->views_counter = 0;
 		
-		
-		$nombreimagen=time().".".$banners->image_url->getClientOriginalExtension();
-		$destino=public_path("static/img/banner/");
-		$banners->image_url->move($destino, $nombreimagen);
+		if($request->file('image_url') != NULL)
+		{
+			$banners->image_url = $request->file('image_url');
+			$nombreimagen=time().".".$banners->image_url->getClientOriginalExtension();
+			$destino=public_path("static/img/banner/");
+			$banners->image_url->move($destino, $nombreimagen);
+		}
+		else
+		{
+			$banners->image_url = "";
+		}
 		
 		$banners->save();
 		
 		return redirect('/manager/banner_index');
-	}
 	
 	public function destroy($id)
 	{
