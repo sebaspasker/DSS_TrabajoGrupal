@@ -9,6 +9,12 @@ use Exception;
 
 class BannerController extends Controller
 {
+
+	    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+	
 	public function index()
 	{
 		$banners = Banner::all();

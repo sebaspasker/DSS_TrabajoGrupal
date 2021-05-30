@@ -20,6 +20,14 @@ class UserSeeder extends Seeder
 				'email' => "juan_carlos@gmail.com",
 				'password' => "password"));
 
+
+				\DB::table('users')->insert(array(
+				'name' => "Paco",
+				'email' => "h@h.com",
+				'password' => "pop123123",
+				'is_admin' => true));
+				
+
 			for ($i=0; $i < 25; $i++)
 			{
 				$email = "email$i@email.com";

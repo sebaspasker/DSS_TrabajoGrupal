@@ -29,7 +29,7 @@ class PublicAuxController extends Controller{
 
 
 
-
+ 
 
 	public function buscar(Request $request) {
 		$query = $request->get('q');
@@ -74,5 +74,31 @@ class PublicAuxController extends Controller{
 
 		return view('public/categoria', $info);
 	}
+
+
+	public function ultimos() {
+		$publications = Publication::orderBy('id', 'desc')->paginate(3);
+		return view('public/ultimos', ['publications' => $publications, 'categorias' => Category::all(),]);
+	}
+
+
+
+
+	public function publicacion($id) {
+		$publication = Publication::find($id);
+		$banner = Banner::where('ranking_type', 1)->take(2)->get();
+		$categoria = Category::where('name', $publication->category)->take(1)->get();
+
+		$info = [
+			'publication' => $publication,
+			'banner1' => $banner[0],
+			'banner2' => $banner[1],
+			'categoria' => $categoria[0],
+			'categorias' => Category::all(),
+		];
+
+		return view('public/publicacion', $info);
+	}
+
 
 }

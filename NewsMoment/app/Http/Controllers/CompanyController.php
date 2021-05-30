@@ -7,8 +7,12 @@ use App\Company;
 use App\Banner;
 use DB;
 
-class CompanyController extends Controller
-{
+
+class CompanyController extends Controller{
+
+    public function __construct(){
+        $this->middleware('admin');
+    }
     /**
      * Display a listing of the resource.
      *
