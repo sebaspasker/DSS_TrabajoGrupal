@@ -88,7 +88,7 @@ class CategoryController extends Controller
             $nombreimagen=time().".".$category->imagen->getClientOriginalExtension();
             $destino=public_path("static/img/categories/");
             $category->imagen->move($destino, $nombreimagen);
-            $category->image_url= "/static/img/categories/" . $nombreimagen;
+            $category->imagen = "/static/img/categories/" . $nombreimagen;
         }
         else
             $category->imagen = "";
