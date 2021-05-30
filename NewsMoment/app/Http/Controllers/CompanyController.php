@@ -54,6 +54,7 @@ class CompanyController extends Controller
             $nombreimagen=time().".".$company->image_url->getClientOriginalExtension();
             $destino=public_path("static/img/companies/");
             $company->image_url->move($destino, $nombreimagen);
+            $company->image_url= "/static/img/companies/" . $nombreimagen;
         }
         else
             $request->image_url=="";
@@ -116,6 +117,7 @@ class CompanyController extends Controller
             $nombreimagen=time().".".$company->image_url->getClientOriginalExtension();
             $destino=public_path("static/img/companies/");
             $company->image_url->move($destino, $nombreimagen);
+            $company->image_url= "/static/img/companies/" . $nombreimagen;
         }
         else
             $request->file('image_url')=="";
