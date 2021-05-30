@@ -28,8 +28,15 @@ class PublicationController extends Controller
      */
     public function index()
     {
-        $publications=Publication::where('active', 'true')->get();
-        return view('publication.index')->with('publication', $publications);
+			// TODO hacer para cada artista
+			// Esto seria para admin
+        $publicationes = Publication::all();
+
+				$info = [
+					'publicaciones' => $publicationes,
+				];
+
+        return view('manager/publicaciones', $info);
     }
 
     public function publications_category($category)

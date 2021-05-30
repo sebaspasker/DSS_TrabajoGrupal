@@ -124,12 +124,13 @@ class BannerController extends Controller
 					return redirect()->route('manager/banner_index')->with('success','Banner creado correctamente');
 				}
 		}
-
+	}
 	   
+		/**
 		public function destroy($id)
 		{
 			$banners = Banner::find($id);
 			$banners->delete();
 			return redirect('manager/banner_index')->with('success','Banner eliminado correctamente');
-		}
+		}**/
 }
