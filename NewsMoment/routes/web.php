@@ -38,6 +38,7 @@ Route::get('contacto', 'PublicAuxController@contacto')->name('contacto');
 // INFORMACION
 Route::get('informacion', 'PublicAuxController@informacion')->name('informacion');
 
+//BANNER
 
 // BANNER
 // Index de BANNER
