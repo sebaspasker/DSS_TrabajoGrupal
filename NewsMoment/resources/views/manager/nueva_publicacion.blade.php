@@ -5,6 +5,9 @@
 
 @section('cuerpo')
 <form method="POST" enctype="multipart/form-data">
+	<!-- TODO hacer que funcione -->
+	<!-- TODO redireccionar correctamente al post de crear nuevo usuario -->
+	@csrf
 	<div class="row m-0">
 		<!-- botón de volver a atrás -->
 		<div class="col-12 p-0 mb-2">
@@ -15,8 +18,11 @@
 				<!--- head -->
 				<div class="col-12 p-0">
 					<select name="categoria" required class="btn-outline-primary custom-select" style="width:120px"id="inputGroupSelect01">
-                        <option value="0">Política</option>
-                        <option value="0">Coronavirus</option>
+						@foreach ($categorias as $categoria)
+							<option value="{{ $categoria->id }}">
+								{{ $categoria->name }}
+							</option>
+						@endforeach
 					</select>
 				</div>
 				<div class="col-12 p-0">

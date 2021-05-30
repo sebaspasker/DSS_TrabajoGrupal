@@ -5,7 +5,7 @@ namespace Tests\Unit;
 use Tests\TestCase; 
 use App\Banner;
 use App\Company;
-use App\Http\Controllers\BannerController;
+use App\Http\Controllers\Deprecated\BannerController;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class BannerTest extends TestCase

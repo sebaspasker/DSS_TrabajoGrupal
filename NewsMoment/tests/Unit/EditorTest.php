@@ -6,7 +6,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Editor;
 use App\User;
-use App\Http\Controllers\EditorController;
+use App\Http\Controllers\Deprecated\EditorController;
 use Exception;
 
 class EditorTest extends TestCase
@@ -15,6 +15,10 @@ class EditorTest extends TestCase
 		parent::setUp();
 
 		$user_editor = User::where('name', 'Juan De la Vega')->first();
+		if($user_editor != null) {
+			$user_editor->delete();
+		}
+		$user_editor = User::where('email', 'email_user_editor@gmail.com')->first();
 		if($user_editor != null) {
 			$user_editor->delete();
 		}

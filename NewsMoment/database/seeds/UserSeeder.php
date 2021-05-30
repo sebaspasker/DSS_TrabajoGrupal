@@ -14,6 +14,11 @@ class UserSeeder extends Seeder
     {
 			$faker = faker::create();
 
+				$email = "email@email.com";
+				\DB::table('users')->insert(array(
+				'name' => "juan",
+				'email' => "juan_carlos@gmail.com",
+				'password' => "password"));
 
 			for ($i=0; $i < 25; $i++)
 			{
