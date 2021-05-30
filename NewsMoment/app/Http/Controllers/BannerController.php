@@ -23,43 +23,9 @@ class BannerController extends Controller
 
 	public function create()
 	{
-		return view('manager/banner_nuevo');
+		return view('manager/banner_nuevo', ['empresas' => Company::all()]);
 	}
 
-	function sanear_string($string){
-		$string = trim($string);
-		$string = str_replace(
-			array('á', 'à', 'ä', 'â', 'ª', 'Á', 'À', 'Â', 'Ä'),
-			array('a', 'a', 'a', 'a', 'a', 'A', 'A', 'A', 'A'),
-			$string
-		);
-		$string = str_replace(
-			array('é', 'è', 'ë', 'ê', 'É', 'È', 'Ê', 'Ë'),
-			array('e', 'e', 'e', 'e', 'E', 'E', 'E', 'E'),
-			$string
-		);
-		$string = str_replace(
-			array('í', 'ì', 'ï', 'î', 'Í', 'Ì', 'Ï', 'Î'),
-			array('i', 'i', 'i', 'i', 'I', 'I', 'I', 'I'),
-			$string
-		);
-		$string = str_replace(
-			array('ó', 'ò', 'ö', 'ô', 'Ó', 'Ò', 'Ö', 'Ô'),
-			array('o', 'o', 'o', 'o', 'O', 'O', 'O', 'O'),
-			$string
-		);
-		$string = str_replace(
-			array('ú', 'ù', 'ü', 'û', 'Ú', 'Ù', 'Û', 'Ü'),
-			array('u', 'u', 'u', 'u', 'U', 'U', 'U', 'U'),
-			$string
-		);
-		$string = str_replace(
-			array('ñ', 'Ñ', 'ç', 'Ç'),
-			array('n', 'N', 'c', 'C',),
-			$string
-		);
-		return $string;
-	}
 
 	public function store(Request $request){
 		$this->validate($request,['title'=>'required|unique:banners|max:50',
@@ -111,13 +77,14 @@ class BannerController extends Controller
 
 	public function edit($id){
 
-		$banners = Banner::find($id);
+		$banner = Banner::find($id);
 
 		$info = [
-		'banners' => $banners,
+			'banner' => $banner,
+			'empresas' => Company::all(),
 		];
 
-		return view('manager/banners_edit')->with('banners',$info);
+		return view('manager/banner_edit', $info);
 	}
 
 
@@ -129,7 +96,7 @@ class BannerController extends Controller
 								'company_name'=>'required',
 								'ranking_type'=>'required']);
 
-		$banners = new Banner();
+		$banners = Banner::find($id);
 		$banners->title = $request->get('title');
 		$banners->url = $request->get('url');
 		$banners->company_name = $request->get('company_name');
@@ -137,18 +104,13 @@ class BannerController extends Controller
 		$banners->is_active = true;
 		$banners->views_counter = 0; 
 
-		if($request->file('image_url') != NULL)
-		{
+		if($request->file('image_url') != NULL){
 			$banners->image_url = $request->file('image_url');
 			$nombreimagen=time().".".$banners->image_url->getClientOriginalExtension();
 			$destino=public_path("static/img/banner/");
 			$banners->image_url->move($destino, $nombreimagen);
 
             $banners->image_url= "/static/img/banner/" . $nombreimagen;
-		}
-		else
-		{
-			$banners->image_url = "";
 		}
 
 		$banners->save();

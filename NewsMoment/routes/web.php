@@ -144,12 +144,3 @@ Route::put('manager/publicacion_editar/{publicacion}', 'PublicationController@up
 Route::delete('manager/publicacion_eliminar/{publicacion}', 'PublicationController@destroy')->name('publicacion.delete');
 
 
-
-/* PUBLICATIONS
-Route::get('manager/publication_index', 'PublicationController@index')->name('publication.index');
-// Publicaciones
-Route::get('manager', 'PublicationManagerController@index')->name('manager_publicaciones');
-// nueva publicacion
-Route::get('manager/publicacion/nueva', 'PublicationManagerController@get_new')->name('manager_nueva_publicacion');
-Route::post('manager/publicacion/post_nueva', 'PublicationManagerController@post_new')->name('manager_post_publicacion');
-*/

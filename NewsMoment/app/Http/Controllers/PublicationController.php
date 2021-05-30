@@ -92,9 +92,8 @@ class PublicationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        return view('manager/publicacion_nueva');
+    public function create(){
+        return view('manager/publicacion_nueva', ['categorias' => Category::all()]);
     }
 
     /**
@@ -112,14 +111,23 @@ class PublicationController extends Controller
                                     'image_url'=>'image|nullable',
                                     'video_url'=>'max:50',
                                     'category'=>'required|exists:categories,name',
-                                    'editor_email'=>'required|email|exists:editors,email']);
+                                    'has_video'=> 'required'
+                                    // 'editor_email'=>'required|email|exists:editors,email'
+                                    ]);
         $publication = new Publication();
         $publication->slugname=$this->sanear_string($request->get('title'));
         $publication->title=$request->get('title');
         $publication->subtitle=$request->get('subtitle');
         $publication->source=$request->get('source');
         $publication->category=$request->get('category');
-        $publication->editor_email=$request->get('editor_email');
+        $publication->editor_email= 'email1@email.com';
+        if($request->get('has_video') == true){
+            $publication->has_video= 1;
+        }
+        else{
+            $publication->has_video= 0;
+        }
+        
 
         if($request->file('image_url')!=NULL)
         {
@@ -134,11 +142,9 @@ class PublicationController extends Controller
 
         if($request->get('video_url')!=NULL){
             $publication->video_url= $request->get('video_url');
-            $publication->has_video=true;
         }
         else{
             $publication->video_url= "";
-            $publication->has_video=false;
         }
 
         $publication->body=$request->get('body');
@@ -181,15 +187,14 @@ class PublicationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $publications=Publication::find($id);
+    public function edit($id){
+        $publication=Publication::find($id);
 
         $info = [
-            'publications' => $publications,
+            'categorias' => Category::all(),
+            'publication' => $publication,
 		];
-
-        return view('manager/publicaciones')->with('publications', $info);
+        return view('manager/publicacion_editar', $info);
     }
 
     /**
@@ -201,47 +206,46 @@ class PublicationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, ['title'=>'required|unique:publications,title|max:35',
+        $this->validate($request, ['title'=>'required|titlemax:35',
                                     'subtitle'=>'required|max:50',
                                     'source'=>'required|max:100',
                                     'body'=>'required|max:255',
                                     'image_url'=>'image|nullable',
                                     'video_url'=>'max:50',
                                     'category'=>'required|exists:categories,name',
-                                    'editor_email'=>'required|email|exists:editors,email']);
+                                    'has_video'=> 'required',
+                                    //'editor_email'=>'required|email|exists:editors,email'
+                                    ]);
         $publication=Publication::find($id);
         $publication->slugname=$this->sanear_string($request->get('title'));
         $publication->title=$request->get('title');
         $publication->subtitle=$request->get('subtitle');
         $publication->source=$request->get('source');
         $publication->category=$request->get('category');
-        $publication->editor_email=$request->get('editor_email');
-
-        if($request->file('image_url')!=NULL)
-        {
+         if($request->get('has_video') == true){
+            $publication->has_video= 1;
+        }
+        else{
+            $publication->has_video= 0;
+        }
+        
+        if($request->file('image_url')!=NULL){
             $publication->image_url= $request->file('image_url');
             $nombreimagen=time().".".$publication->image_url->getClientOriginalExtension();
             $destino=public_path("static/img/publication/");
             $publication->image_url->move($destino, $nombreimagen);
             $publication->image_url= "/static/img/publication/" . $nombreimagen;
         }
-        else
-            $publication->image_url= "";
 
-        if($request->get('video_url')!=NULL)
-        {
+        if($request->get('video_url')!=NULL){
             $publication->video_url= $request->get('video_url');
-            $publication->has_video=true;
         }
-        else
-        {
-            $publication->video_url= "";
-            $publication->has_video=false;
-        }
+
         $publication->body=$request->get('body');
 
         $publication->save();
-        return redirect('/manager/publicaciones');
+
+        return redirect('/manager');
     }
 
 

@@ -33,7 +33,7 @@
         <!-- publicacion -->
 		@foreach($publications as $publicacion)
 			<div class="col-12  px-2 py-3  listado2 shadowHover">
-				<a href="#" class="enlace">
+				<a href="{{ route('publicacion.edit', $publicacion->id) }}" class="enlace">
 					<div class="listadoDocumentos2">
 						<div class="imagenDocumento">
 							<div class="" style="background: url('{{$publicacion->image_url}}') no-repeat;background-size: cover; background-position: center !important;"></div>
@@ -41,7 +41,7 @@
 						<div class="datosDocumento2">
 							<p class="font-weight-bold" style="margin-top: 1px">
 								{{ $publicacion->title }}
-							</p>
+							</p> 
 							<p class="font-weight-lighter" style="font-size: 12px">{{ $publicacion->editor_email }} - {{ $publicacion->created_at }}</p>
 						</div>
 						<!-- TODO relacionar con destructor -->

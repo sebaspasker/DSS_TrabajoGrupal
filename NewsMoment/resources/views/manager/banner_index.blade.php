@@ -16,7 +16,7 @@
             @foreach ($banners as $banner)
                 <!-- banner -->
                 <div class="col-md-4 mb-3">
-                    <a href="#" class="enlace">
+                    <a href="{{ route('banner.edit', $banner->id)}}" class="enlace">
                         <div class="categoriaImg shadowHover" style="background: linear-gradient(to left, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0.8) 100%), url('{{$banner->image_url}}') no-repeat;background-size: cover; background-position: center !important;">
                             <p class="tituloCategoria">{{$banner->title}}</p>
                             <p class="blogCategoria">{{$banner->company_name}}</p>
