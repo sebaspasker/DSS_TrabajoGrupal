@@ -39,7 +39,7 @@
             </div>
             <!-- parte derecha -->
             <div class="rightNav ordenador">
-                <a href="#" role="button" class="btn btn-sm  btn-primary  float-right mr-3">Contacto</a>
+                <a href="{{ route('contacto') }}" role="button" class="btn btn-sm  btn-primary  float-right mr-3">Contacto</a>
             </div>
         </div>
         <!-- menú secundario desplegable  -->
@@ -62,7 +62,7 @@
                     </div>
 
                     <div class="col-md-3 col-6">
-                        <a href="#" class="enlace">
+                        <a href="{{ route('contacto') }}" class="enlace">
                             <div class="col-12 px-0 pb-3">
                                 <p class="tituloSubmenu2">Contacto</p>
                             </div>
@@ -134,10 +134,10 @@
                     <h5 class="font-weight-bold text-uppercase mt-3 mb-4">INFORMACIÓN</h5>
                     <ul class="list-unstyled">
                         <li>
-                            <a href="#">Contacto</a>
+                            <a href="{{ route('contacto')}}">Contacto</a>
                         </li>
                         <li>
-                            <a href="#">Términos y condiciones</a>
+                            <a href="{{ route('informacion')}}">Información</a>
                         </li>
                     </ul>
                 </div>
