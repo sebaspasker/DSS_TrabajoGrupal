@@ -32,17 +32,15 @@ Route::view('login', 'public/login')->name('login');
 
 
 
+//BANNER
 
-// BANNER
-
-// Index de BANNER
 Route::get('manager/banner_index', 'BannerController@index')->name('banner.index');
 
 // Create de BANNER
 Route::get('manager/banner_nuevo', 'BannerController@create')->name('banner.create');
 
 // Store de BANNER
-Route::get('manager/banner_nuevo', 'BannerController@create')->name('banner.create');
+Route::post('manager/banner_nuevo', 'BannerController@store')->name('banner.store');
 
 // Show de BANNER
 Route::get('manager/banner/{banner}', 'BannerController@show')->name('banner.show');
@@ -55,8 +53,6 @@ Route::put('manager/banners_edit/{banner}', 'BannerController@update')->name('ba
 
 // Delete de Banner
 Route::delete('manager/banners_edit/{banner}', 'BannerController@destroy')->name('banner.delete');
-
-
 
 
 /*
