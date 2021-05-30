@@ -56,6 +56,13 @@
                     </div>
                 </a>
             </div>
+            <div class="col-12 p-0">
+                <a href="{{ route('banner.index') }}" class="enlace">	
+                    <div class="nav-element" id="banners">
+                        <span class="icon-images"></span> Banners
+                    </div>
+                </a>
+            </div>
             <div class="col-12 p-0 mb-5">
                 <a class="enlace" href="#">
                     <div class="nav-element">
