@@ -7,59 +7,92 @@ use App\Company;
 use App\Banner;
 use Exception;
 
-class BannerController extends Controller{
-	public function index(){
+class BannerController extends Controller
+{
+	public function index()
+	{
 		$banners = Banner::all();
+
 		$info = [
-			'banners' => $banners,
+		'banners' => $banners,
 		];
-		return view('manager/banner_index', $info);
+
+		return view('manager/banner_index',$info);
 	}
 
 
-	public function create(){
+	public function create()
+	{
 		return view('manager/banner_nuevo');
 	}
 
+	function sanear_string($string){
+		$string = trim($string);
+		$string = str_replace(
+			array('á', 'à', 'ä', 'â', 'ª', 'Á', 'À', 'Â', 'Ä'),
+			array('a', 'a', 'a', 'a', 'a', 'A', 'A', 'A', 'A'),
+			$string
+		);
+		$string = str_replace(
+			array('é', 'è', 'ë', 'ê', 'É', 'È', 'Ê', 'Ë'),
+			array('e', 'e', 'e', 'e', 'E', 'E', 'E', 'E'),
+			$string
+		);
+		$string = str_replace(
+			array('í', 'ì', 'ï', 'î', 'Í', 'Ì', 'Ï', 'Î'),
+			array('i', 'i', 'i', 'i', 'I', 'I', 'I', 'I'),
+			$string
+		);
+		$string = str_replace(
+			array('ó', 'ò', 'ö', 'ô', 'Ó', 'Ò', 'Ö', 'Ô'),
+			array('o', 'o', 'o', 'o', 'O', 'O', 'O', 'O'),
+			$string
+		);
+		$string = str_replace(
+			array('ú', 'ù', 'ü', 'û', 'Ú', 'Ù', 'Û', 'Ü'),
+			array('u', 'u', 'u', 'u', 'U', 'U', 'U', 'U'),
+			$string
+		);
+		$string = str_replace(
+			array('ñ', 'Ñ', 'ç', 'Ç'),
+			array('n', 'N', 'c', 'C',),
+			$string
+		);
+		return $string;
+	}
 
-	public function store(Request $request){
-		$this->validate($request,['title'=>'required|unique:banners','url'=>'required','image_url'=>'required','company_name'=>'required','ranking_type'=>'required']);
+	public function store(Request $request)
+	{
+		$this->validate($request,['title'=>'required|unique:banners|max:50',
+								'url'=>'required',
+								'image_url'=> 'image_url|nullable',
+								'company_name'=>'required',
+								'ranking_type'=>'required']);
 
 		$banners = new Banner();
-		$banners->title = $request->get('title');
+		$banners->title = $this->sanearstring($request->get('title'));
 		$banners->url = $request->get('url');
-		$banners->image_url = $request->file('image_url');
 		$banners->company_name = $request->get('company_name');
 		$banners->ranking_type = $request->get('ranking_type');
-		$banners->views_counter = 0;
 		$banners->is_active = true;
+		$banners->views_counter = 0;
 
-
-		//$nombreimagen=time().".".$banners->image_url->getClientOriginalExtension();
-		//$destino=public_path("static/img/banners/");
-		//$banners->image_url->move($destino, $nombreimagen);
-
-		/*
-		$count = Banner::where('title',$request->title)->count();
-		$count2 = Banner::where('company_name',$request->company_name)->count();
-		if($count<=0)
+		if($request->file('image_url') != NULL)
 		{
-			return redirect()->route('manager/banner_index')->withErrors('El título introducido ya existe en la BD');
+			$banners->image_url = $request->file('image_url');
+			$nombreimagen=time().".".$banners->image_url->getClientOriginalExtension();
+			$destino=public_path("static/img/banner/");
+			$banners->image_url->move($destino, $nombreimagen);
 		}
 		else
 		{
-			if($count2==0)
-			{
-				return redirect()->route('manager/banner_index')->withErrors('La compañía introducida no existe');
-			}
-			else
-			{
-
-			}
+			$banners->image_url = "";
 		}
-		*/
+
 		$banners->save();
-		return redirect()->route('manager/banner_index')->with('success','Banner creado correctamente');
+
+		return redirect('/manager/banner_index');
+
 	}
 
 
@@ -87,45 +120,42 @@ class BannerController extends Controller{
 	}
 
 
-
 	public function update(Request $request, $id){
-		$this->validate($request,['title'=>'required|unique:banners','url'=>'required','image_url'=>'required','company_name'=>'required','ranking_type'=>'required']);
 
-		$banners = Banner::find($id);
-		$banners->title = $request->get('title');
+		$this->validate($request,['title'=>'required|unique:banners|max:50',
+								'url'=>'required',
+								'image_url'=> 'image_url|nullable',
+								'company_name'=>'required',
+								'ranking_type'=>'required']);
+
+		$banners = new Banner();
+		$banners->title = $this->sanearstring($request->get('title'));
 		$banners->url = $request->get('url');
-		$banners->image_url = $request->file('image_url');
 		$banners->company_name = $request->get('company_name');
 		$banners->ranking_type = $request->get('ranking_type');
 		$banners->is_active = true;
+		$banners->views_counter = 0;
 
-
-		//$nombreimagen=time().".".$banners->image_url->getClientOriginalExtension();
-		//$destino=public_path("static/img/banners/");
-		//$banners->image_url->move($destino, $nombreimagen);
-
-		$count = Banner::where('title',$request->title)->count();
-		$count2 = Banner::where('company_name',$request->company_name)->count();
-		if($count<=0){
-			return redirect()->route('manager/banner_index')->withErrors('El título introducido ya existe en la BD');
+		if($request->file('image_url') != NULL)
+		{
+			$banners->image_url = $request->file('image_url');
+			$nombreimagen=time().".".$banners->image_url->getClientOriginalExtension();
+			$destino=public_path("static/img/banner/");
+			$banners->image_url->move($destino, $nombreimagen);
 		}
-		else{
-			if($count2==0){
-				return redirect()->route('manager/banner_index')->withErrors('La compañía introducida no existe');
-			}
-			else{
-				$banners->save();
-				return redirect()->route('manager/banner_index')->with('success','Banner creado correctamente');
-			}
+		else
+		{
+			$banners->image_url = "";
 		}
-	}
 
+		$banners->save();
 
-	private function destroy($id)
+		return redirect('/manager/banner_index');
+
+	public function destroy($id)
 	{
 		$banners = Banner::find($id);
 		$banners->delete();
-		return redirect('manager/banner_index')->with('success','Banner eliminado correctamente');
+		return redirect('manager/banner_index');
 	}
-
 }
