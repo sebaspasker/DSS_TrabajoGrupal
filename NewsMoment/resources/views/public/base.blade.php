@@ -54,7 +54,7 @@
                         <a class="tituloSubmenu">Categorías</a>
                          @foreach ($categorias as $categoria)
                             <a href="{{ route('categoria', $categoria->id)}}" class="enlaceSeccion">{{ $categoria->name }}</a>
-                        @endforeach
+													@endforeach
                     </div>
 
                     <div class="col-md-3 col-6">

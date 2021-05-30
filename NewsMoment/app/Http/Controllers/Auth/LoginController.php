@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use App\Category;
 
 class LoginController extends Controller
 {
@@ -45,7 +46,12 @@ class LoginController extends Controller
 			/* 	return Redirect::to('manager_publicaciones'); */
 			/* } */
 
-			return view('public/login');
+			$categorias = Category::all();
+			$info = [
+				"categorias" => $categorias,
+			];
+
+			return view('public/login', $info);
 		}
 
 		public function post_login(Request $request) {
