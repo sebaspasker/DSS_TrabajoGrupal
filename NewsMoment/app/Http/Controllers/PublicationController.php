@@ -8,9 +8,16 @@ use App\Company;
 use App\Category;
 use App\Banner;
 use App\Editor;
+use Auth;
 
 class PublicationController extends Controller
 {
+
+        public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 	/**
 	 * @var Publication Model
 	 */
@@ -112,7 +119,6 @@ class PublicationController extends Controller
                                     'video_url'=>'max:50',
                                     'category'=>'required|exists:categories,name',
                                     'has_video'=> 'required'
-                                    // 'editor_email'=>'required|email|exists:editors,email'
                                     ]);
         $publication = new Publication();
         $publication->slugname=$this->sanear_string($request->get('title'));
@@ -120,7 +126,7 @@ class PublicationController extends Controller
         $publication->subtitle=$request->get('subtitle');
         $publication->source=$request->get('source');
         $publication->category=$request->get('category');
-        $publication->editor_email= 'email1@email.com';
+        $publication->editor_email = Auth::user()->email;
         if($request->get('has_video') == true){
             $publication->has_video= 1;
         }
@@ -300,11 +306,6 @@ class PublicationController extends Controller
 	}
 
 
-	function __construct() {
-		$this->publication = new Publication();
-		$this->category = new Category();
-	}
-
 	/** Insert a publication
 	 * @val in_publication Publication model
 	 * @return bool
@@ -432,45 +433,4 @@ class PublicationController extends Controller
 
 		return $x_publication;
 	}
-
-
-
-	public function ultimos() {
-		$publications = Publication::orderBy('id', 'desc')->paginate(3);
-		return view('public/ultimos', ['publications' => $publications, 'categorias' => Category::all(),]);
-	}
-
-
-
-	public function buscar(Request $request)
-    {
-		$query = $request->get('q');
-
-		$info = [
-			'publications' => Publication::orWhere('title', 'LIKE', "%$query%")->orWhere('subtitle', 'LIKE', "%$query%")->orWhere('body', 'LIKE', "%$query%")->paginate(3),
-			'query' => $query,
-		];
-
-		return view('public/buscar', $info);
-	}
-
-
-
-	public function publicacion($id) {
-		$publication = Publication::find($id);
-		$banner = Banner::where('ranking_type', 1)->take(2)->get();
-		$categoria = Category::where('name', $publication->category)->take(1)->get();
-
-		$info = [
-			'publication' => $publication,
-			'banner1' => $banner[0],
-			'banner2' => $banner[1],
-			'categoria' => $categoria[0],
-			'categorias' => Category::all(),
-		];
-
-		return view('public/publicacion', $info);
-	}
-
-
 }

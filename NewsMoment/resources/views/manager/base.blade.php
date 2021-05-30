@@ -32,23 +32,33 @@
     <div class="lateralNav shadow-lg">
         <div class="row mx-0 mt-4">
 
-            <div class="fotoPerfil" style="background: url('https://www.isesinstituto.com/sites/default/files/istock-1158245282.jpg') no-repeat;background-size: cover; background-position: center !important;">
-                <a href="#"><small>Ajustes</small></a>
+
+            @if (@auth::user()->is_admin == 1)
+                <div class="col-12 px-3 text-light pb-3 mb-3 border-bottom">
+                    Administrador: {{@auth::user()->name}}
+                </div>
+            @else
+                <div class="col-12 px-3 text-light pb-3 mb-3 border-bottom">
+                    Editor: {{@auth::user()->name}}
+                </div>
+            @endif
+            <div class="col-12 p-0">
+                <a href="{{ route('publicacion.index') }}" class="enlace">
+                    <div class="nav-element" id="ajustes">
+                        <span class="icon-user"></span> Ajustes
+                    </div>
+                </a>
             </div>
-            <div class="col-12 p-0 mt-3">
+
+
+            <div class="col-12 p-0">
                 <a href="{{ route('publicacion.index') }}" class="enlace">
                     <div class="nav-element" id="publicaciones">
                         <span class="icon-newspaper"></span> Publicaciones
                     </div>
                 </a>
             </div>
-            <div class="col-12 p-0">
-                <a href="{{ route('company.index') }}" class="enlace">
-                    <div class="nav-element" id="empresas">
-                        <span class="icon-address-book"></span> Empresas
-                    </div>
-                </a>
-            </div>
+
             <div class="col-12 p-0">
                 <a href="{{ route('category.index') }}" class="enlace">	
                     <div class="nav-element" id="categorias">
@@ -56,19 +66,44 @@
                     </div>
                 </a>
             </div>
-            <div class="col-12 p-0">
-                <a href="{{ route('banner.index') }}" class="enlace">	
-                    <div class="nav-element" id="banners">
-                        <span class="icon-images"></span> Banners
-                    </div>
-                </a>
-            </div>
+
+            @if (@auth::user()->is_admin == 1)
+                <div class="col-12 p-0">
+                    <a href="{{ route('company.index') }}" class="enlace">
+                        <div class="nav-element" id="empresas">
+                            <span class="icon-address-book"></span> Empresas
+                        </div>
+                    </a>
+                </div>
+                <div class="col-12 p-0">
+                    <a href="{{ route('banner.index') }}" class="enlace">	
+                        <div class="nav-element" id="banners">
+                            <span class="icon-images"></span> Banners
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-12 p-0">
+                    <a href="{{ route('register') }}" class="enlace">
+                        <div class="nav-element" id="ajustes">
+                            <span class="icon-users"></span> Nuevo editor
+                        </div>
+                    </a>
+                </div>
+            @endif
+            
+
             <div class="col-12 p-0 mb-5">
-                <a class="enlace" href="#">
+
+                <a class="enlace" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <div class="nav-element">
                         <span class="icon-exit"></span> Cerrar Sesión
                     </div>
                 </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </div>
         </div>
     </div>

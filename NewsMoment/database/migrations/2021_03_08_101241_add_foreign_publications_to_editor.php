@@ -15,7 +15,7 @@ class AddForeignPublicationsToEditor extends Migration
     {
         Schema::table('publications', function (Blueprint $table) {
 					$table->string('editor_email');
-					$table->foreign('editor_email')->references('email')->on('editors');
+					$table->foreign('editor_email')->references('email')->on('users');
         });
     }
 

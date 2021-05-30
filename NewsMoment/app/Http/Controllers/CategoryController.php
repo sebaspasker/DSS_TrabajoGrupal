@@ -7,9 +7,15 @@ use App\Category;
 use App\Publication;
 use DB;
 
+
 class CategoryController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     function sanear_string($string){
         $string = trim($string); 
         $string = str_replace(
