@@ -16,7 +16,7 @@ class CompanySeeder extends Seeder
 			for($i=0; $i< count($companies); $i++) {
 			\DB::table('companies')->insert(array(
 				'name' => "$companies[$i]",
-				'image_url' => "/static/img/categories/$images[$i].jpg",
+				'image_url' => "/static/img/companies/$images[$i].jpg",
 				'is_active' => true,
 			));
 			
