@@ -8,7 +8,7 @@ class Editor extends Model
 {	
 	protected $fillable = [
 		'description', 'profile_image','facebook', 'email',
-		'instagram', 'twitter', 'is_admin', 'is_active',
+		'instagram', 'twitter', 'is_admin', 'is_active', 
 	];
 
 	/**

@@ -18,4 +18,8 @@ class Company extends Model
 	public function get_banners() {
 		return $this->hasMany(Banner::class);
 	}
+
+	public function exist() : bool {
+		return self::where('name', '=', $this->name)->exists();
+	}
 }
