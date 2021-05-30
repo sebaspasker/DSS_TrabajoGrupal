@@ -126,7 +126,7 @@ class CategoryController extends Controller
             'category' => $category,
 		];
 
-        return view('manager/categoria_editar')->with('categories', $info);
+        return view('manager/categoria_editar',$info);
     }
 
 
@@ -139,7 +139,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-       $this->validate($request, ['name'=>'required|unique:categories,name|max:35',
+       $this->validate($request, ['name'=>'required|max:35',
                                    'imagen'=>'image|nullable']);
         $category = Category::find($id);
         $category->name = $request->get('name');
@@ -152,8 +152,7 @@ class CategoryController extends Controller
             $category->imagen->move($destino, $nombreimagen);
             $category->image_url= "/static/img/categories/" . $nombreimagen;
         }
-        else
-            $category->imagen = "";
+
         $category->save();
         return redirect('/manager/categorias');
     }

@@ -18,7 +18,7 @@
             @foreach ($categories as $categorie)
                 <!-- categoria -->
                 <div class="col-md-4 mb-3">
-                    <a href="#" class="enlace">
+                    <a href="{{ route('category.edit', $categorie->id) }}" class="enlace">
                         <div class="categoriaImg shadowHover" style="background: linear-gradient(to left, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0.8) 100%), url('{{ $categorie->imagen }}') no-repeat;background-size: cover; background-position: center !important;">
                             <p class="tituloCategoria">{{ $categorie->name }}</p>
                             <p class="blogCategoria">Noticias</p>
