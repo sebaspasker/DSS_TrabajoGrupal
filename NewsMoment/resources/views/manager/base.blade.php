@@ -43,7 +43,7 @@
                 </a>
             </div>
             <div class="col-12 p-0">
-                <a href="{{ route('manager_empresas') }}" class="enlace">
+                <a href="{{ route('company.index') }}" class="enlace">
                     <div class="nav-element" id="empresas">
                         <span class="icon-address-book"></span> Empresas
                     </div>

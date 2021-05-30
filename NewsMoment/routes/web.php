@@ -38,7 +38,8 @@ Route::get('contacto', 'PublicAuxController@contacto')->name('contacto');
 // INFORMACION
 Route::get('informacion', 'PublicAuxController@informacion')->name('informacion');
 
-//BANNER
+
+
 
 // BANNER
 // Index de BANNER
@@ -59,17 +60,6 @@ Route::delete('manager/banners_eliminar/{banner}', 'BannerController@destroy')->
 
 
 
-
-
-// empresas
-Route::view('manager/empresas', 'manager/empresas')->name('manager_empresas');
-// nueva empresa
-Route::view('manager/empresa/nueva', 'manager/nueva_empresa')->name('manager_nueva_empresa');
-
-// categorias
-//Route::view('manager/categorias', 'manager/categorias')->name('manager_categorias');
-
-
 // nueva categoria
 Route::view('manager/categoria/nueva', 'manager/nueva_categoria')->name('manager_nueva_categoria');
 
@@ -78,51 +68,36 @@ Route::view('manager/categoria/nueva', 'manager/nueva_categoria')->name('manager
 
 // Create: crear nueva categoria
 Route::get('manager/categoria_nueva', 'CategoryController@create')->name('category.create');
-
 // Index: listado categorias
 Route::get('manager/categorias', 'CategoryController@index')->name('category.index');
-
 // Store: guardar nueva categoria
 Route::post('manager/categoria_nueva', 'CategoryController@store')->name('category.store');
-
 // Show: mostrar categoria
 Route::get('manager/categoria/{category}', 'CategoryController@show')->name('category.show');
-
 // Edit: editar categoria
 Route::get('manager/categoria_editar/{category}', 'CategoryController@edit')->name('category.edit');
-
 // Update: actualizar categoria
 Route::put('manager/categoria_editar/{category}', 'CategoryController@update')->name('category.update');
-
 // Delete: eliminar categoria
 Route::delete('manager/categoria_editar/{category}', 'CategoryController@destroy')->name('category.delete');
 
 
 //Company
 
-// Create: crear nueva company
-Route::get('manager/company_nueva', 'CompanyController@create')->name('company.create');
-
 // Index: listado company
 Route::get('manager/companies', 'CompanyController@index')->name('company.index');
-
+// Create: crear nueva company
+Route::get('manager/company_nueva', 'CompanyController@create')->name('company.create');
 // Store: guardar nueva company
 Route::post('manager/company_nueva', 'CompanyController@store')->name('company.store');
-
 // Show: mostrar company
 Route::get('manager/company/{company}', 'CompanyController@show')->name('company.show');
-
 // Edit: editar company
 Route::get('manager/company_editar/{company}', 'CompanyController@edit')->name('company.edit');
-
 // Update: actualizar company
 Route::put('manager/company_editar/{company}', 'CompanyController@update')->name('company.update');
-
 // Delete: eliminar company
 Route::delete('manager/company_editar/{company}', 'CompanyController@destroy')->name('company.delete');
-
-
-
 
 
 
