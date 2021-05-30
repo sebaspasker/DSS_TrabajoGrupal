@@ -1,7 +1,7 @@
 @extends('manager/base')
 
 @section('titulo', 'Manager - NewsMoment')
-@section('styles', '')
+@section('styles', 'nuevoeditor')
 
 @section('cuerpo')
 

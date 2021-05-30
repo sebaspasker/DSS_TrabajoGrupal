@@ -43,7 +43,7 @@
                 </div>
             @endif
             <div class="col-12 p-0">
-                <a href="{{ route('publicacion.index') }}" class="enlace">
+                <a href="{{ route('user.edit') }}" class="enlace">
                     <div class="nav-element" id="ajustes">
                         <span class="icon-user"></span> Ajustes
                     </div>
@@ -85,7 +85,7 @@
 
                 <div class="col-12 p-0">
                     <a href="{{ route('register') }}" class="enlace">
-                        <div class="nav-element" id="ajustes">
+                        <div class="nav-element" id="nuevoeditor">
                             <span class="icon-users"></span> Nuevo editor
                         </div>
                     </a>
