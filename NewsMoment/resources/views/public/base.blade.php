@@ -51,14 +51,10 @@
                         <a href="{{ route('ultimos') }}" role="button" class="btn btn-sm btn-primary  float-left ml-3">Últimos</a>
                     </div>
                     <div class="col-md-3 col-6 mb-md-0 mb-5">
-                        <a class="tituloSubmenu">Noticias</a>
-                        <a href="{{ route('categoria') }}" class="enlaceSeccion">Coronavirus</a>
-                        <a href="{{ route('categoria') }}" class="enlaceSeccion">Política</a>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <a class="tituloSubmenu">Magazine</a>
-                        <a href="#" class="enlaceSeccion">Categoria 1</a>
-                        <a href="#" class="enlaceSeccion">Categoria 2</a>
+                        <a class="tituloSubmenu">Categorías</a>
+                         @foreach ($categorias as $categoria)
+                            <a href="{{ route('categoria', $categoria->id)}}" class="enlaceSeccion">{{ $categoria->name }}</a>
+                        @endforeach
                     </div>
 
                     <div class="col-md-3 col-6">
@@ -66,7 +62,7 @@
                             <div class="col-12 px-0 pb-3">
                                 <p class="tituloSubmenu2">Contacto</p>
                             </div>
-                            <img class="particularImgMenu ml-2" src="static/img/particular.svg" alt="particulares">
+                            <img class="particularImgMenu ml-2" src="/static/img/particular.svg" alt="particulares">
                         </a>
                     </div>
                 </div>
@@ -74,10 +70,10 @@
         </div>
     </nav>
     <!-- logotipos centrales del nav-->
-    <img src="static/img/favicon.png" alt="NM" class="minicon">
+    <img src="/static/img/favicon.png" alt="NM" class="minicon">
     <div class="centerNav">
         <a href="{{ route('home') }}" id="darkLogo">
-            <img src="static/img/logoLetrasDark.png" alt="">
+            <img src="/static/img/logoLetrasDark.png" alt="">
         </a>
     </div>
     <!-- linea que da efecto al nav -->
@@ -114,19 +110,13 @@
                     <p>Creación y divulgación de contenido</p>
                     <a role="button" class="btn btn-sm btn-dark"href="{{ route('login')}}">Manager</a>
                 </div> 
-                <div class="col-md-2 col-6 text-sm-left mb-md-0 mb-4">
-                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">NOTICIAS</h5>
+                <div class="col-md-4 col-6 text-sm-left mb-md-0 mb-4">
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">CATEGORIAS</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#">Categoría 1</a></li>
-                        <li><a href="#">Categoría 2</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-md-2 col-6 text-sm-left mb-md-0 mb-4">
-                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">MAGAZINE</h5>
-                    <ul class="list-unstyled">
-                       <li><a href="#">Categoría 1</a></li>
-                        <li><a href="#">Categoría 2</a></li>
+                        @foreach ($categorias as $categoria)
+                            <li><a href="{{ route('categoria', $categoria->id)}}">{{ $categoria->name }}</a></li>
+                        @endforeach
+                        
                     </ul>
                 </div>
 
@@ -152,6 +142,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <!-- JavaScript propio -->
-    <script src="@yield('nav_js', 'static/js/nav.js')"></script>
+    <script src="@yield('nav_js', '/static/js/nav.js')"></script>
   </body>
 </html>

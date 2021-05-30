@@ -373,10 +373,9 @@ class PublicationController extends Controller
 		return $x_publication;
 	}
 
-	public function ultimos()
-    {
-		$publications = Publication::where('active', 'true')->orderBy('id', 'desc')->paginate(3);
-		return view('public/ultimos', ['publications' => $publications]);
+	public function ultimos() {
+		$publications = Publication::orderBy('id', 'desc')->paginate(3);
+		return view('public/ultimos', ['publications' => $publications, 'categorias' => Category::all(),]);
 	}
 
 	public function buscar(Request $request)
@@ -391,14 +390,17 @@ class PublicationController extends Controller
 		return view('public/buscar', $info);
 	}
 
-	public function publicacion() {
-		$publications = Publication::orderBy('id', 'desc')->limit(1)->get();
+	public function publicacion($id) {
+		$publication = Publication::find($id);
 		$banner = Banner::where('ranking_type', 1)->take(2)->get();
+		$categoria = Category::where('name', $publication->category)->take(1)->get();
 
 		$info = [
-			'publication' => $publications[0],
+			'publication' => $publication,
 			'banner1' => $banner[0],
 			'banner2' => $banner[1],
+			'categoria' => $categoria[0],
+			'categorias' => Category::all(),
 		];
 
 		return view('public/publicacion', $info);

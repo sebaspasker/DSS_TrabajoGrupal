@@ -16,7 +16,7 @@
 			-->
 			@foreach ($publications as $publication)
 				<div class="col-md-8 px-0 pb-4 mb-4">
-					<a class="enlace" href="{{ route('publicacion') }}">
+					<a class="enlace" href="{{ route('publicacion', $publication->id) }}">
 						<div class="row m-0">
 							<div class="col-5 p-0">
 								<div class="imagenUltimos" style="background: url('{{$publication->image_url}}') no-repeat;background-size: cover; background-position: center !important;"></div>

@@ -11,8 +11,8 @@
 		<div class="col-12 cabeceraPublicacion px-0">
 			<div class="row m-0">
 				<div class="col-12 p-0">
-					<a href="{{route('categoria')}}" class="categoriaEtiqueta">
-					{{ $publication->category }}<span class="icon-chevron-right"></span>
+					<a href="{{route('categoria', $categoria->id )}}" class="categoriaEtiqueta">
+					{{ $categoria->name }}<span class="icon-chevron-right"></span>
 					</a>
 				</div>
 			</div>
@@ -102,4 +102,5 @@
     	</div>
 </div>
 @endsection
+    
     

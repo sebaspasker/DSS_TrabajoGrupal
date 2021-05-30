@@ -16,27 +16,30 @@ Parte publica que ve todo el mundo
 */
 
 // INICIO
-Route::get('/', 'PublicAuxController@home')->name('home');
+Route::get('', 'PublicAuxController@home')->name('home');
 // ULTIMOS
 Route::get('ultimos', 'PublicationController@ultimos')->name('ultimos');
 // BUSCAR
 Route::get('buscar', 'PublicAuxController@buscar')->name('buscar');
 // PUBLICACION
-Route::get('publicacion', 'PublicationController@publicacion')->name('publicacion');
+Route::get('publicacion/{id}', 'PublicationController@publicacion')->name('publicacion');
+
+
+
+
 // CATEGORIA
-Route::view('categoria', 'public/categoria')->name('categoria');
+Route::get('categoria/{id}', 'PublicAuxController@categoria')->name('categoria');
 // LOGIN
 use App\Http\Controllers\Auth\LoginController;
 Route::get('login', [LoginController::class, 'get_login'])->name('login');
 Route::post('login', [LoginController::class, 'post_login'])->name('login');
 // CONTACTO
-Route::view('contacto', 'public/contacto')->name('contacto');
+Route::get('contacto', 'PublicAuxController@contacto')->name('contacto');
 // INFORMACION
-Route::view('informacion', 'public/informacion')->name('informacion');
+Route::get('informacion', 'PublicAuxController@informacion')->name('informacion');
 
 
 // BANNER
-
 // Index de BANNER
 Route::get('manager/banner_index', 'BannerController@index')->name('banner.index');
 
