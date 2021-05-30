@@ -14,7 +14,7 @@ class AddForeignPublicationCategory extends Migration
     public function up()
     {
         Schema::table('publications', function (Blueprint $table) {
-					$table->foreign('category')->references('name')->on('categories');
+					$table->foreign('category')->references('name')->on('categories')->onDelete('cascade');
         });
     }
 

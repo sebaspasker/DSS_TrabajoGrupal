@@ -7,6 +7,7 @@ use App\Publication;
 use App\Company;
 use App\Category;
 use App\Banner;
+use App\Editor;
 
 class PublicationController extends Controller
 {
@@ -104,12 +105,12 @@ class PublicationController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['title'=>'required|max:35',
+        $this->validate($request, ['title'=>'required|unique:publications,title|max:35',
                                     'subtitle'=>'required|max:50',
                                     'source'=>'required|max:100',
                                     'body'=>'required|max:255',
-                                    'image_url'=>'required|image',
-                                    'video_url'=>'required|mimes:mp4,avi',
+                                    'image_url'=>'image|nullable',
+                                    'video_url'=>'mimes:mp4,avi|nullable',
                                     'category'=>'required|exists:categories,name',
                                     'editor_email'=>'required|email|exists:editors,email']);
         $publication = new Publication();
@@ -120,22 +121,32 @@ class PublicationController extends Controller
         $publication->category=$request->get('category');
         $publication->editor_email=$request->get('editor_email');
 
-        $publication->image_url= $request->file('image_url');
-        $nombreimagen=time().".".$publication->image_url->getClientOriginalExtension();
-        $destino=public_path("static/img/publication/");
-        $publication->image_url->move($destino, $nombreimagen);
+        if($request->file('image_url')!=NULL)
+        {
+            $publication->image_url= $request->file('image_url');
+            $nombreimagen=time().".".$publication->image_url->getClientOriginalExtension();
+            $destino=public_path("static/img/publication/");
+            $publication->image_url->move($destino, $nombreimagen);
+        }
+        else
+            $publication->image_url= "";
 
-        $publication->video_url= $request->file('video_url');
-        $nombrevideo=time().".".$publication->video_url->getClientOriginalExtension();
-        $destino=public_path("static/img/publication/");
-        $publication->video_url->move($destino, $nombrevideo);
+        if($request->file('video_url')!=NULL)
+        {
+            $publication->video_url= $request->file('video_url');
+            $nombrevideo=time().".".$publication->video_url->getClientOriginalExtension();
+            $destino=public_path("static/img/publication/");
+            $publication->video_url->move($destino, $nombrevideo);
+            $publication->has_video=true;
+        }
+        else
+        {
+            $publication->video_url= "";
+            $publication->has_video=false;
+        }
 
         $publication->body=$request->get('body');
         $publication->active=true;
-        if($request->get('video_url')!=NULL)
-            $publication->has_video=true;
-        else
-            $publication->has_video=false;
         $publication->views_counter=0;
 
         $publication->save();
@@ -194,14 +205,14 @@ class PublicationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, ['title'=>'required|max:35',
+        $this->validate($request, ['title'=>'required|unique:publications,title|max:35',
                                     'subtitle'=>'required|max:50',
                                     'source'=>'required|max:100',
                                     'body'=>'required|max:255',
-                                    'image_url'=>'image',
-                                    'video_url'=>'mimes:mp4,avi',
-                                    'category'=>'required|exists:category',
-                                    'editor_email'=>'required|email|exists:editors']);
+                                    'image_url'=>'image|nullable',
+                                    'video_url'=>'mimes:mp4,avi|nullable',
+                                    'category'=>'required|exists:categories,name',
+                                    'editor_email'=>'required|email|exists:editors,email']);
         $publication=Publication::find($id);
         $publication->slugname=$this->sanear_string($request->get('title'));
         $publication->title=$request->get('title');
@@ -209,19 +220,31 @@ class PublicationController extends Controller
         $publication->source=$request->get('source');
         $publication->category=$request->get('category');
         $publication->editor_email=$request->get('editor_email');
-        $publication->image_url= $request->file('image_url');
-        $nombreimagen=time().".".$publication->image_url->getClientOriginalExtension();
-        $destino=public_path("static/img/publication/");
-        $publication->image_url->move($destino, $nombreimagen);
-        $publication->video_url= $request->file('video_url');
-        $nombrevideo=time().".".$publication->video_url->getClientOriginalExtension();
-        $destino=public_path("static/img/publication/");
-        $publication->video_url->move($destino, $nombrevideo);
-        $publication->body=$request->get('body');
-        if($request->get('video_url')!=NULL)
-            $publication->has_video=true;
+
+        if($request->file('image_url')!=NULL)
+        {
+            $publication->image_url= $request->file('image_url');
+            $nombreimagen=time().".".$publication->image_url->getClientOriginalExtension();
+            $destino=public_path("static/img/publication/");
+            $publication->image_url->move($destino, $nombreimagen);
+        }
         else
+            $publication->image_url= "";
+
+        if($request->file('video_url')!=NULL)
+        {
+            $publication->video_url= $request->file('video_url');
+            $nombrevideo=time().".".$publication->video_url->getClientOriginalExtension();
+            $destino=public_path("static/img/publication/");
+            $publication->video_url->move($destino, $nombrevideo);
+            $publication->has_video=true;
+        }
+        else
+        {
+            $publication->video_url= "";
             $publication->has_video=false;
+        }
+        $publication->body=$request->get('body');
 
         $publication->save();
         return redirect('/manager/publicaciones');
@@ -260,7 +283,7 @@ class PublicationController extends Controller
         $publication=Publication::find($id);
         $publication->delete();
 
-        return redirect('/manager'); 
+        return redirect('/manager');
     }
 
     public function home()
