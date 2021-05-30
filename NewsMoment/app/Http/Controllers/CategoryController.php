@@ -7,6 +7,41 @@ use App\Category;
 
 class CategoryController extends Controller
 {
+
+    function sanear_string($string){
+        $string = trim($string); 
+        $string = str_replace(
+            array('á', 'à', 'ä', 'â', 'ª', 'Á', 'À', 'Â', 'Ä'),
+            array('a', 'a', 'a', 'a', 'a', 'A', 'A', 'A', 'A'),
+            $string
+        );
+        $string = str_replace(
+            array('é', 'è', 'ë', 'ê', 'É', 'È', 'Ê', 'Ë'),
+            array('e', 'e', 'e', 'e', 'E', 'E', 'E', 'E'),
+            $string
+        );
+        $string = str_replace(
+            array('í', 'ì', 'ï', 'î', 'Í', 'Ì', 'Ï', 'Î'),
+            array('i', 'i', 'i', 'i', 'I', 'I', 'I', 'I'),
+            $string
+        );
+        $string = str_replace(
+            array('ó', 'ò', 'ö', 'ô', 'Ó', 'Ò', 'Ö', 'Ô'),
+            array('o', 'o', 'o', 'o', 'O', 'O', 'O', 'O'),
+            $string
+        );
+        $string = str_replace(
+            array('ú', 'ù', 'ü', 'û', 'Ú', 'Ù', 'Û', 'Ü'),
+            array('u', 'u', 'u', 'u', 'U', 'U', 'U', 'U'),
+            $string
+        );
+        $string = str_replace(
+            array('ñ', 'Ñ', 'ç', 'Ç'),
+            array('n', 'N', 'c', 'C',),
+            $string
+        ); 
+        return $string;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +64,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('category.create');
+        return view('manager/categoria_nueva');
     }
 
     /**
@@ -40,15 +75,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['name'=>'required|unique|max:35',
-                                    'image_url'=>'mimes:jpg,png']);
+        $this->validate($request, ['name'=>'required|unique:categories|max:35',
+                                    'imagen'=>'required|image']);
         $category = new Category();
         $category->name = $request->get('name');
-        $category->slugname = sanearstring($request->get('name'));
-        $category->image=$request->get('image');
+        $category->slugname = $this->sanear_string($request->get('name'));
+        $category->imagen= $request->file('imagen');
+        $nombreimagen=time().".".$category->imagen->getClientOriginalExtension();
+        $destino=public_path("static/img/categories/");
+        $category->imagen->move($destino, $nombreimagen);
         $category->save();
-        
-        return redirect('/category');
+
+        return redirect('/manager/categorias');
     }
 
     /**
@@ -59,7 +97,12 @@ class CategoryController extends Controller
      */
     public function show($id){
         $category=Category::find($id);
-        return view('category.index')->with('category', $category);
+
+        $info = [
+            'category' => $category,
+		];
+
+        return view('manager/categoria')->with('categories', $info);
     }
 
     /**
@@ -70,46 +113,13 @@ class CategoryController extends Controller
      */
     public function edit($id){
         $category = Category::find($id);
-        return view('category.edit')->with('categories', $category);
+
+        $info = [
+            'category' => $category,
+		];
+
+        return view('manager/categoria_editar')->with('categories', $info);
     }
-
-
-
-
-function sanear_string($string){
-    $string = trim($string); 
-    $string = str_replace(
-        array('á', 'à', 'ä', 'â', 'ª', 'Á', 'À', 'Â', 'Ä'),
-        array('a', 'a', 'a', 'a', 'a', 'A', 'A', 'A', 'A'),
-        $string
-    );
-    $string = str_replace(
-        array('é', 'è', 'ë', 'ê', 'É', 'È', 'Ê', 'Ë'),
-        array('e', 'e', 'e', 'e', 'E', 'E', 'E', 'E'),
-        $string
-    );
-    $string = str_replace(
-        array('í', 'ì', 'ï', 'î', 'Í', 'Ì', 'Ï', 'Î'),
-        array('i', 'i', 'i', 'i', 'I', 'I', 'I', 'I'),
-        $string
-    );
-    $string = str_replace(
-        array('ó', 'ò', 'ö', 'ô', 'Ó', 'Ò', 'Ö', 'Ô'),
-        array('o', 'o', 'o', 'o', 'O', 'O', 'O', 'O'),
-        $string
-    );
-    $string = str_replace(
-        array('ú', 'ù', 'ü', 'û', 'Ú', 'Ù', 'Û', 'Ü'),
-        array('u', 'u', 'u', 'u', 'U', 'U', 'U', 'U'),
-        $string
-    );
-    $string = str_replace(
-        array('ñ', 'Ñ', 'ç', 'Ç'),
-        array('n', 'N', 'c', 'C',),
-        $string
-    ); 
-    return $string;
-}
 
 
     /**
@@ -121,15 +131,17 @@ function sanear_string($string){
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, ['name'=>'required|unique|max:35',
-                                    'image'=>'mimes:jpg,png']);
+       $this->validate($request, ['name'=>'required|unique:categories|max:35',
+                                   'imagen'=>'image']);
         $category = Category::find($id);
-        // $category = new Category();
         $category->name = $request->get('name');
-        $category->slugname = sanearstring($request->get('name'));
-        $category->image = $request->get('image');
+        $category->slugname = $this->sanear_string($request->get('name'));
+        $category->imagen= $request->file('imagen');
+        $nombreimagen=time().".".$category->imagen->getClientOriginalExtension();
+        $destino=public_path("static/img/categories/");
+        $category->imagen->move($destino, $nombreimagen);
         $category->save();
-        return redirect('/category');
+        return redirect('/manager/categorias');
     }
 
     /**
@@ -143,6 +155,6 @@ function sanear_string($string){
         $category=Category::find($id);
         $category->delete();
 
-        return redirect('/category');
+        return redirect('/manager/categorias');
     }
 }

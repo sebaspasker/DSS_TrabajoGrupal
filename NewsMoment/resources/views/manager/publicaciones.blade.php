@@ -1,3 +1,5 @@
+
+
 @extends('manager/base')
 
 @section('titulo', 'Manager - NewsMoment')
@@ -29,7 +31,7 @@
 			</div>
 		</div>
         <!-- publicacion -->
-				@foreach($publicaciones as $publicacion) 
+				@foreach($publications as $publicacion)
         <div class="col-12  px-2 py-3  listado2 shadowHover">
             <a href="#" class="enlace">
                 <div class="listadoDocumentos2">
@@ -52,6 +54,21 @@
 				@endforeach
 
 
+
+
+				@foreach ($publications as $publication)
+				{{$publication->id}}
+				{{$publication->title}}
+				{{$publication->subtitle}}
+				{{$publication->source}}
+				{{$publication->body}}
+				{{$publication->category}}
+				{{$publication->editor_email}}
+				{{$publication->image_url}}
+				{{$publication->video_url}}
+				{{$publication->active}}
+				{{$publication->views_counter}}<br>
+				@endforeach
 
 
 

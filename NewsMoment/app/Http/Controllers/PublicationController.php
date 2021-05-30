@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Publication;
 use App\Company;
 use App\Category;
 use App\Banner;
@@ -28,27 +29,30 @@ class PublicationController extends Controller
      */
     public function index()
     {
-			// TODO hacer para cada artista
-			// Esto seria para admin
-        $publicationes = Publication::all();
+        $publications=Publication::where('active', '1')->get();
 
-				$info = [
-					'publicaciones' => $publicationes,
-				];
+        $info = [
+            'publications' => $publications,
+		];
 
         return view('manager/publicaciones', $info);
     }
 
     public function publications_category($category)
     {
-        $publications=Publication::where('category', '$category')->get();
-        return view('publication.index')->with('publication', $publications);
+        $publications=Publication::where('category', '$category')->where('active','1')->get();
+
+        $info = [
+            'publications' => $publications,
+		];
+
+        return view('manager/publicaciones_categoria', $info);
     }
 
 
 
     function sanear_string($string){
-        $string = trim($string); 
+        $string = trim($string);
         $string = str_replace(
             array('á', 'à', 'ä', 'â', 'ª', 'Á', 'À', 'Â', 'Ä'),
             array('a', 'a', 'a', 'a', 'a', 'A', 'A', 'A', 'A'),
@@ -78,7 +82,7 @@ class PublicationController extends Controller
             array('ñ', 'Ñ', 'ç', 'Ç'),
             array('n', 'N', 'c', 'C',),
             $string
-        ); 
+        );
         return $string;
     }
 
@@ -90,7 +94,7 @@ class PublicationController extends Controller
      */
     public function create()
     {
-        return view('publication.create');
+        return view('manager/publicacion_nueva');
     }
 
     /**
@@ -105,18 +109,29 @@ class PublicationController extends Controller
                                     'subtitle'=>'required|max:50',
                                     'source'=>'required|max:100',
                                     'body'=>'required|max:255',
-                                    'image_url'=>'mimes:jpg,png',
-                                    'video_url'=>'mimes:mp4,avi',
-                                    'category'=>'required|exists:category']);
+                                    'image_url'=>'required|image',
+                                    'video_url'=>'required|mimes:mp4,avi',
+                                    'category'=>'required|exists:categories,name',
+                                    'editor_email'=>'required|email|exists:editors,email']);
         $publication = new Publication();
-        $publication->slugname=sanearstring($request->get('title'));
+        $publication->slugname=$this->sanear_string($request->get('title'));
         $publication->title=$request->get('title');
         $publication->subtitle=$request->get('subtitle');
         $publication->source=$request->get('source');
-        $publication->image_url=$request->get('image_url');
-        $publication->video_url=$request->get('video_url');
-        $publication->body=$request->get('body');
         $publication->category=$request->get('category');
+        $publication->editor_email=$request->get('editor_email');
+
+        $publication->image_url= $request->file('image_url');
+        $nombreimagen=time().".".$publication->image_url->getClientOriginalExtension();
+        $destino=public_path("static/img/publication/");
+        $publication->image_url->move($destino, $nombreimagen);
+
+        $publication->video_url= $request->file('video_url');
+        $nombrevideo=time().".".$publication->video_url->getClientOriginalExtension();
+        $destino=public_path("static/img/publication/");
+        $publication->video_url->move($destino, $nombrevideo);
+
+        $publication->body=$request->get('body');
         $publication->active=true;
         if($request->get('video_url')!=NULL)
             $publication->has_video=true;
@@ -125,7 +140,7 @@ class PublicationController extends Controller
         $publication->views_counter=0;
 
         $publication->save();
-        return redirect('/publication');
+        return redirect('/manager/publicaciones');
     }
 
     /**
@@ -136,11 +151,15 @@ class PublicationController extends Controller
      */
     public function show($id)
     {
-        $publication=Publication::find($id);
-        $publication->views_counter=$publication->views_counter+1;
-        $publication->save();
+        $publications=Publication::find($id);
+        $publications->views_counter+=1;
+        $publications->save();
 
-        return view('publication.index')->with('publication', $publication);
+        $info = [
+            'publications' => $publications,
+		];
+
+        return view('manager/publicacion')->with('publications', $info);
     }
 
     /**
@@ -151,8 +170,13 @@ class PublicationController extends Controller
      */
     public function edit($id)
     {
-        $publication=Publication::find($id);
-        return view('publication.edit')->with('publications', $publication);
+        $publications=Publication::find($id);
+
+        $info = [
+            'publications' => $publications,
+		];
+
+        return view('manager/publicacion_editar')->with('publications', $info);
     }
 
     /**
@@ -168,23 +192,33 @@ class PublicationController extends Controller
                                     'subtitle'=>'required|max:50',
                                     'source'=>'required|max:100',
                                     'body'=>'required|max:255',
-                                    'category'=>'required|exists:category']);
+                                    'image_url'=>'image',
+                                    'video_url'=>'mimes:mp4,avi',
+                                    'category'=>'required|exists:category',
+                                    'editor_email'=>'required|email|exists:editors']);
         $publication=Publication::find($id);
-        $publication->slugname=sanearstring($request->get('title'));
+        $publication->slugname=$this->sanear_string($request->get('title'));
         $publication->title=$request->get('title');
         $publication->subtitle=$request->get('subtitle');
         $publication->source=$request->get('source');
-        $publication->image_url=$request->get('image_url');
-        $publication->video_url=$request->get('video_url');
-        $publication->body=$request->get('body');
         $publication->category=$request->get('category');
-        if($request->get('subtitle')!=NULL)
+        $publication->editor_email=$request->get('editor_email');
+        $publication->image_url= $request->file('image_url');
+        $nombreimagen=time().".".$publication->image_url->getClientOriginalExtension();
+        $destino=public_path("static/img/publication/");
+        $publication->image_url->move($destino, $nombreimagen);
+        $publication->video_url= $request->file('video_url');
+        $nombrevideo=time().".".$publication->video_url->getClientOriginalExtension();
+        $destino=public_path("static/img/publication/");
+        $publication->video_url->move($destino, $nombrevideo);
+        $publication->body=$request->get('body');
+        if($request->get('video_url')!=NULL)
             $publication->has_video=true;
         else
             $publication->has_video=false;
 
         $publication->save();
-        return redirect('/publication');
+        return redirect('/manager/publicaciones');
     }
 
 
@@ -195,7 +229,7 @@ class PublicationController extends Controller
         $publication->active=false;
 
         $publication->save();
-        return redirect('/publication');
+        return redirect('/manager/publicaciones');
     }
 
 
@@ -206,7 +240,7 @@ class PublicationController extends Controller
         $publication->active=true;
 
         $publication->save();
-        return redirect('/publication');
+        return redirect('/manager/publicaciones');
     }
 
 
@@ -220,8 +254,8 @@ class PublicationController extends Controller
     {
         $publication=Publication::find($id);
         $publication->delete();
-        
-        return redirect('/publication');
+
+        return redirect('/manager/publicaciones');
     }
 
     public function home()
@@ -247,7 +281,7 @@ class PublicationController extends Controller
 
 	/** Insert a publication
 	 * @val in_publication Publication model
-	 * @return bool 
+	 * @return bool
 	 */
 	public function insert_publication($in_publication = null) {
 		if($in_publication != null) $this->publication = $in_publication;
@@ -299,35 +333,35 @@ class PublicationController extends Controller
 			if($old_publication == null) throw new Exception("None publication to modify");
 			else {
 				// Modify values
-				if($old_publication->slugname != $this->publication->slugname) 
+				if($old_publication->slugname != $this->publication->slugname)
 					$old_publication->slugname = $this->publication->slugname;
 
-				if($old_publication->views_counter != $this->publication->views_counter) 
+				if($old_publication->views_counter != $this->publication->views_counter)
 					$old_publication->views_counter = $this->publication->views_counter;
 
-				if($old_publication->active != $this->publication->active) 
+				if($old_publication->active != $this->publication->active)
 					$old_publication->active = $this->publication->active;
 
-				if($old_publication->has_video != $this->publication->has_video) 
+				if($old_publication->has_video != $this->publication->has_video)
 					$old_publication->has_video = $this->publication->has_video;
 
-				if($old_publication->image_url != $this->publication->image_url) 
+				if($old_publication->image_url != $this->publication->image_url)
 					$old_publication->image_url = $this->publication->image_url;
 
-				if($old_publication->video_url != $this->publication->video_url) 
+				if($old_publication->video_url != $this->publication->video_url)
 					$old_publication->video_url = $this->publication->video_url;
 
 
-				if($old_publication->source != $this->publication->source) 
+				if($old_publication->source != $this->publication->source)
 					$old_publication->source = $this->publication->source;
 
-				if($old_publication->subtitle != $this->publication->subtitle) 
+				if($old_publication->subtitle != $this->publication->subtitle)
 					$old_publication->subtitle = $this->publication->subtitle;
 
 				$old_publication->save(); // Save values in publication
 			}
 		} catch (Exception $e) {
-			return false;	
+			return false;
 		}
 
 		return true;
@@ -336,7 +370,7 @@ class PublicationController extends Controller
 	/**
 	 * List publications search
 	 * @val in_publication Publication Model
-	 * @val category_name 
+	 * @val category_name
 	 * @return bool or array
 	 */
 	public function list_publications($in_publication = null, $category_name = "") {
@@ -358,7 +392,7 @@ class PublicationController extends Controller
 
 	/**
 	 * Get x last publications id
-	 * @val number 
+	 * @val number
 	 */
 	public function get_last_publications($category_name = null, $number = 0) {
 		if($category_name == null) $publications = Publication::all();
