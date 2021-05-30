@@ -7,7 +7,6 @@ use App\Publication;
 use App\Company;
 use App\Category;
 use App\Banner;
-use App\Publication;
 
 class PublicationController extends Controller
 {
